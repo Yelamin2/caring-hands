@@ -3,7 +3,7 @@
 function CustomerView(){
 
     return(
-        <>Here is the Customer View</>
+        <> Here is the Customer View </>
     )
 }
 

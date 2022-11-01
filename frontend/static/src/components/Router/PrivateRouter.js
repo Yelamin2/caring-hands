@@ -1,11 +1,12 @@
 
-import { Route, Routes, Link, Navigate} from "react-router-dom";
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({isAuth, children}) => {
-    if (!isAuth) {
-        return <Navigate to="/landing" rplace />;
-    }
-    return children;
- };
+const PrivateRoute = ({ isAuth, children }) => {
+  if (!isAuth) {
+    return <Navigate to="/landing" replace />;
+  }
 
- export default PrivateRoute
+  return children;
+};
+
+export default PrivateRoute;
