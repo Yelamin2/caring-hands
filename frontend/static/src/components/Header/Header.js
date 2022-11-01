@@ -21,8 +21,8 @@ function Header({ isAuth, setIsAuth, navigate }) {
       throw new Error("Network response was not OK.");
     } else {
       setIsAuth(false);
-      Cookies.remove("Authorization");
-      setIsAuth(false);
+      // Cookies.remove("Authorization");
+      Cookies.remove("csrftoken");
       navigate("/home/");
     }
   };

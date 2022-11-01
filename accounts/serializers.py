@@ -6,7 +6,8 @@ from .models import Profile, User
 
 
 from django.contrib.auth import get_user_model
-# from rest_auth.models import TokenModel
+from rest_framework.authtoken.models import Token
+from dj_rest_auth.registration.serializers import RegisterSerializer
 
 from . import models
 
@@ -16,19 +17,20 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields= ('id', 'username', 'first_name', 'last_name', 'customer' , 'provider')
+        fields= ('id', 'username', 'first_name', 'last_name')
 
     
 
 class ProfileSerializer(serializers.ModelSerializer):
+    # username = serializers.ReadOnlyField(source = 'user.username')
 
     class Meta:
         model = Profile
         fields= '__all__'
 
-# class TokenSerializer(serializers.ModelSerializer):
-#     user = UserSerializer()
+class TokenSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
 
-#     class Meta:
-#         model = TokenModel
-#         fields=('key', 'user')
+    class Meta:
+        model = Token
+        fields=('key', 'user')

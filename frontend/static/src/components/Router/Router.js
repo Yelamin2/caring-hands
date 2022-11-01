@@ -15,8 +15,8 @@ function Router(){
         <Routes>
             <Route path="/" element={<App />}>
                 
-                <Route path='home' element={<Landing/>}/>
-                <Route path='Customer' element={<CustomerProfile />}/>
+                <Route path='home' element={<Landing />}/>
+                <Route path='profile' element={<CustomerProfile />}/>
                 <Route path="login" element={<LoginForm />} />
                 <Route path='registeration' element={<Registeration />}/>
                 <Route path='Customer' element={<ProviderView />}/>

@@ -81,7 +81,7 @@ function LoginForm() {
           />
         </Form.Group>
         <span className="d-block text-end mb-3">
-          Need an account? <Link to="/registration/">Register</Link> today!
+          Need an account? <Link to="/registeration/">Register</Link> today!
         </span>
         <Button variant="primary" type="submit">
           Submit
