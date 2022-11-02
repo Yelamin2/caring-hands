@@ -17,12 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields= ('id', 'username', 'first_name', 'last_name')
+        fields= ('id', 'username', 'first_name', 'last_name','customer','provider')
 
     
 
 class ProfileSerializer(serializers.ModelSerializer):
-    # username = serializers.ReadOnlyField(source = 'user.username')
+    username = serializers.ReadOnlyField(source = 'user.username')
 
     class Meta:
         model = Profile

@@ -22,7 +22,6 @@ function Header({ isAuth, setIsAuth, navigate }) {
     } else {
       setIsAuth(false);
       Cookies.remove("Authorization");
-      
       navigate("/home/");
     }
   };
@@ -32,12 +31,14 @@ function Header({ isAuth, setIsAuth, navigate }) {
         <Link className="navbar-expand navbar-nav nav-link" to="/home/">
           Home
         </Link>
-        <Link
+        {isAuth ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"
-          to="/profile/"
+          to="/form/"
         >
           Profile
-        </Link>
+        </Link>):(<Link className="navbar-expand navbar-nav nav-link ms-auto" to="/form/">Profile</Link>)}
+
+       
         {isAuth ? (
           <Button
             variant="link"

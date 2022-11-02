@@ -7,6 +7,7 @@ import CustomerView from '../Screens/Customers/CustomerHome/CustomerView';
 import Spinner from "react-bootstrap/Spinner";
 import LoginForm from '../Auth/LoginForm';
 
+
 function App(props) {
   const [isAuth, setIsAuth] = useState(null);
   const navigate = useNavigate();
