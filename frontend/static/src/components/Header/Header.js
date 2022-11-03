@@ -30,6 +30,18 @@ function Header({ isAuth, setIsAuth, navigate }) {
       <Nav className="ml-auto flex-grow-1">
         <Link className="navbar-expand navbar-nav nav-link" to="/home/">
           Home
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/profile/">
+          Profile
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/registeration/">
+          Registeration
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/Customer/">
+          CustomerV
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/provider/">
+          ProviderView
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/form/">
+          ProfileForm
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
+          ProviderForm
         </Link>
         {isAuth ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"

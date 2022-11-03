@@ -5,12 +5,19 @@ from django.conf import settings
 
 # Create your models here.
 class User(AbstractUser):
-    customer = models.BooleanField(default=False)
+    is_customer = models.BooleanField(default=False)
+    is_provider = models.BooleanField(default=False)
+    address1=models.CharField(max_length=255, null=True)
+    address2=models.CharField(max_length=255, null=True)
+    city =models.CharField(max_length=255, null=True)
+    state=models.CharField(max_length=255, null=True)
+    zip=models.CharField(max_length=10, null=True)
+
     
     
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, blank=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, null=True)
     avatar = models.ImageField(upload_to='profiles/', default='profile/profile.jpg')
     display_name = models.CharField(max_length=255, null=True)
 

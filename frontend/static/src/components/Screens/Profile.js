@@ -12,7 +12,7 @@ function Profile(){
 
     useEffect(() => {
         const fetchUserProfile = async () => {
-            const response = await fetch("/api/v1/users/profiles/");
+            const response = await fetch("/api/v1/users/profiles/user/");
             if (!response.ok){
                 if(!response.status === 404){
                     throw Error("Oops. Something went wrong!");

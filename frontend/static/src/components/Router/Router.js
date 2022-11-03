@@ -21,9 +21,11 @@ function Router(){
                 <Route path='profile' element={<Profile />}/>
                 <Route path="login" element={<LoginForm />} />
                 <Route path='registeration' element={<Registeration />}/>
-                <Route path='Customer' element={<ProviderView />}/>
+                <Route path='Customer' element={<CustomerView />}/>
                 <Route path='form' element={<ProfileForm />}/>
                 <Route path='providerForm' element ={<ProviderForm />}/>
+                <Route path='provider' element={<ProviderView />}/>
+                
 
             </Route>
             <Route

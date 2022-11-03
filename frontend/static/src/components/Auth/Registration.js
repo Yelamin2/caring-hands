@@ -11,9 +11,22 @@ function Registeration() {
     email: "",
     password1: "",
     password2: "",
+    is_customer:true,
+    is_provider:false,
   });
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleCheckbox = () => {
+    setUser((prevState) => ({
+      ...prevState,
+      is_provider: !prevState.is_provider,
+      is_customer: !prevState.is_customer,
+    }));
+    // setIsChecked(!isChecked);
+  };
+  
   const { setIsAuth, navigate } = useOutletContext();
+
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -21,6 +34,10 @@ function Registeration() {
       ...prevState,
       [name]: value,
     }));
+    if(user.is_provider==true){
+      setUser.is_customer=false;
+    }
+    console.log({user});
   };
 
   const handleSubmit = async (e) => {
@@ -72,6 +89,17 @@ function Registeration() {
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" id="formGridCheckbox">
+        <input
+            type="checkbox"
+            id="topping"
+            checked={user.is_provider}
+            name="is_provider"
+            onChange={handleCheckbox}
+          /> I want to be service provider.
+             
+               
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="password1">

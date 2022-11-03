@@ -17,16 +17,19 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields= ('id', 'username', 'first_name', 'last_name','customer','provider')
+        fields= ('id', 'username', 'first_name', 'last_name','address1','address2','city','state','zip','is_customer','is_provider')
+        read_only_fields = ('username', 'is_customer','is_provider')
 
     
 
 class ProfileSerializer(serializers.ModelSerializer):
-    username = serializers.ReadOnlyField(source = 'user.username')
-
+    # user = UserSerializer()
+    # username = serializers.ReadOnlyField(source='user.username')
+    
     class Meta:
         model = Profile
         fields= '__all__'
+        
 
 class TokenSerializer(serializers.ModelSerializer):
     user = UserSerializer()

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -12,14 +12,33 @@ const INITIAL_USER=[{
         address1:"",
         address2:"",
         city:"",
-        syate:"",
+        state:"",
         zip:"",
 
 
     }]
 function ProfileForm(props){
     const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);
+    const[profile , setProfile]= useState({avatar: null});
 
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const response = await fetch("/api/v1/users/profiles/user/");
+            if (!response.ok){
+                if(!response.status === 404){
+                    throw Error("Oops. Something went wrong!");
+                }
+                return;
+            }
+
+            const data = await response.json();
+            setProfile({...data});
+            console.log({profile})
+            
+        };
+        fetchUserProfile();
+    },[]);
+    const {id} =profile;
     const handleInput = (e) => {
         const {name, value} = e.target;
         setProfileDetail((prevProfileDetail) => ({
@@ -31,20 +50,24 @@ function ProfileForm(props){
 
     const handleSubmit= async (e) => {
         e.preventDefault();
+        
         const options = {
-            method: "POST",
+            method: `${id ? "PUT" : "POST"}`,
             headers: {
-                "Content-Type": "application/json; charset=UTF-8 ",
+                // "Content-Type": "application/json; charset=UTF-8 ",
+                "X-CSRFToken": Cookies.get('csrftoken'),   
+               
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch("/api/v1/users/profiles/", options).catch(
+        const response = await fetch(`/api/v1/users/profiles/${id ? "user/" : ""}`, options).catch(
             handleError
           );
           if (!response.ok) {
             throw new Error("Oops. Something went wrong!");
           } else {
             const data = await response.json();
+            console.log("MY DATA",data)
             Cookies.set("Authorization", `Token ${data.key}`);
             props.setAuth(true);
           }
@@ -72,11 +95,13 @@ function ProfileForm(props){
                 required/>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Last name" 
+                
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="text" placeholder="First name" 
                 name= "last_name"
                 value= {profileDetail.last_name}
+                onChange={handleInput}
                 required/>
                 </Form.Group>
             </Row>

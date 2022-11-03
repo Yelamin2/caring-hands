@@ -9,8 +9,9 @@ from django.shortcuts import render, get_object_or_404
 class ProfileListAPIView(generics.ListCreateAPIView):
     queryset = Profile.objects.all()
     serializer_class=ProfileSerializer
-    def perform_create(self, seializer):
-        serializer.save(user.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class ProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Profile.objects.all()
