@@ -14,7 +14,7 @@ function Registeration() {
     is_customer:true,
     is_provider:false,
   });
-  const [isChecked, setIsChecked] = useState(false);
+
 
   const handleCheckbox = () => {
     setUser((prevState) => ({

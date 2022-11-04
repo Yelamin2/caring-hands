@@ -23,7 +23,7 @@ function ProfileForm(props){
 
     useEffect(() => {
         const fetchUserProfile = async () => {
-            const response = await fetch("/api/v1/users/profiles/user/");
+            const response = await fetch("/api/v1/users/users/");
             if (!response.ok){
                 if(!response.status === 404){
                     throw Error("Oops. Something went wrong!");
@@ -39,6 +39,7 @@ function ProfileForm(props){
         fetchUserProfile();
     },[]);
     const {id} =profile;
+    console.log({id})
     const handleInput = (e) => {
         const {name, value} = e.target;
         setProfileDetail((prevProfileDetail) => ({
@@ -50,17 +51,19 @@ function ProfileForm(props){
 
     const handleSubmit= async (e) => {
         e.preventDefault();
+        const {id} =profile;
+        console.log({id})
         
         const options = {
             method: `${id ? "PUT" : "POST"}`,
             headers: {
-                // "Content-Type": "application/json; charset=UTF-8 ",
+                "Content-Type": "application/json; charset=UTF-8 ",
                 "X-CSRFToken": Cookies.get('csrftoken'),   
                
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch(`/api/v1/users/profiles/${id ? "user/" : ""}`, options).catch(
+        const response = await fetch(`/api/v1/users/${id ? "users/" : ""}/users/`, options).catch(
             handleError
           );
           if (!response.ok) {

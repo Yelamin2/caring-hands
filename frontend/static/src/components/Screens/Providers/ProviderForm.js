@@ -44,7 +44,7 @@ function ProviderForm(props){
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch("/api/v1/users/profiles/", options).catch(
+        const response = await fetch("/api/v1/users/users/1/user/", options).catch(
             handleError
           );
           if (!response.ok) {
@@ -129,9 +129,11 @@ function ProviderForm(props){
                 value= {profileDetail.zip}
                 onChange={handleInput}/>
                 </Form.Group>
+                </Row>
+                <Row>
 
                 <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Zip</Form.Label>
+                <Form.Label>License</Form.Label>
                 <Form.Control 
                 name= "license"
                 value= {profileDetail.license}
@@ -139,7 +141,7 @@ function ProviderForm(props){
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Zip</Form.Label>
+                <Form.Label>Registeration</Form.Label>
                 <Form.Control 
                 name= "expiration"
                 value= {profileDetail.expiration}
