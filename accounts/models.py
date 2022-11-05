@@ -8,12 +8,13 @@ from django.conf import settings
 class CustomUser(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_provider = models.BooleanField(default=False)
-    address1=models.CharField(max_length=255, null=True)
-    address2=models.CharField(max_length=255, null=True)
-    city =models.CharField(max_length=255, null=True)
-    state=models.CharField(max_length=255, null=True)
-    zip=models.CharField(max_length=10, null=True)
-    user=models.BigIntegerField
+    first_name=models.CharField(max_length=28, null=True)
+    last_name=models.CharField(max_length=28, null=True)
+    address1=models.CharField(max_length=255, null=True, blank=True)
+    address2=models.CharField(max_length=255, null=True, blank=True)
+    city =models.CharField(max_length=255, null=True, blank=True)
+    state=models.CharField(max_length=255, null=True, blank=True)
+    zip=models.CharField(max_length=10, null=True, blank=True)
 # (settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     def __str__(self):
         return self.username

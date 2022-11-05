@@ -18,12 +18,15 @@ const INITIAL_USER=[{
 
     }]
 function ProfileForm(props){
-    const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);
-    const[profile , setProfile]= useState({avatar: null});
+    const [viewDetail, setViewDetail]=useState({INITIAL_USER});
+    const[profile , setProfile]= useState({INITIAL_USER});
+    const [profileDetail, setProfileDetail]=useState(INITIAL_USER);
+
+
 
     useEffect(() => {
         const fetchUserProfile = async () => {
-            const response = await fetch("/api/v1/users/users/");
+            const response = await fetch("/dj-rest-auth/user/");
             if (!response.ok){
                 if(!response.status === 404){
                     throw Error("Oops. Something went wrong!");
@@ -33,29 +36,55 @@ function ProfileForm(props){
 
             const data = await response.json();
             setProfile({...data});
-            console.log({profile})
+          
             
         };
         fetchUserProfile();
     },[]);
-    const {id} =profile;
-    console.log({id})
-    const handleInput = (e) => {
-        const {name, value} = e.target;
-        setProfileDetail((prevProfileDetail) => ({
-            ...prevProfileDetail, 
+    
+    console.log('This logged user from profileform', {profile})
+    var {user} ={}
+    if (profile.id != undefined){
+        user = profile.id;
+        
+            const fetchUser= async () => {
+                const response = await fetch(`/api/v1/users/detail/${user ? "user/" : ""}`);
+                if (!response.ok){
+                    if(!response.status === 404){
+                        throw Error("Oops. Something went wrong!");
+                    }
+                    return;
+                }
+    
+                const data = await response.json();
+                setViewDetail(...data);
+                console.log({data});
+                
+            };
+         
+        
+    }
+    console.log('This is detailed user data', {viewDetail})
+    console.log("user",{user});
+        
+
+    
+
+
+    function handleInput(e) {
+        const { name, value } = e.target;
+        setProfileDetail((profileDetail) => ({
+            ...profileDetail,
             [name]: value,
         }));
-    };
+    }
     const handleError = (err) => console.warn(err);
 
     const handleSubmit= async (e) => {
         e.preventDefault();
-        const {id} =profile;
-        console.log({id})
         
         const options = {
-            method: `${id ? "PUT" : "POST"}`,
+            method: `${user ? "PUT" : "POST"}`,
             headers: {
                 "Content-Type": "application/json; charset=UTF-8 ",
                 "X-CSRFToken": Cookies.get('csrftoken'),   
@@ -63,7 +92,7 @@ function ProfileForm(props){
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch(`/api/v1/users/${id ? "users/" : ""}/users/`, options).catch(
+        const response = await fetch(`/api/v1/users/detail/${user}/user/`, options).catch(
             handleError
           );
           if (!response.ok) {
@@ -86,7 +115,7 @@ function ProfileForm(props){
     return (
 
         <>
-        <div>{<Profile />}</div>
+        {/* <div>{<Profile />}</div> */}
         <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">

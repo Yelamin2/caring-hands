@@ -9,6 +9,8 @@ function Registeration() {
   const [user, setUser] = useState({
     username: "",
     email: "",
+    first_name:"",
+    last_name:"",
     password1: "",
     password2: "",
     is_customer:true,
@@ -84,6 +86,30 @@ function Registeration() {
           placeholder="Enter email"
           name="email"
           value={user.email}
+          onChange={handleInput}
+        />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="first_name">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter first name"
+          name="first_name"
+          value={user.first_name}
+          onChange={handleInput}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="last_name">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter last name"
+          name="last_name"
+          value={user.last_name}
           onChange={handleInput}
         />
         <Form.Text className="text-muted">

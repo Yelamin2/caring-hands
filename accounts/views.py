@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Profile, CustomUser
 from .serializers import ProfileSerializer, CustomUserDetailSerializer, CustomRegisterSerializer
-from .permissions import UserPermissions
+from .permissions import UserPermissions, ProfilePermissions
 from django.shortcuts import render, get_object_or_404
 
 class ProfileListAPIView(generics.ListCreateAPIView):
@@ -16,19 +16,21 @@ class ProfileListAPIView(generics.ListCreateAPIView):
 class ProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Profile.objects.all()
     serializer_class=ProfileSerializer
-    permission_classes = (UserPermissions,)
+    permission_classes = (ProfilePermissions,)
 
     def get_object(self):
         return get_object_or_404(Profile, user=self.request.user)
 
-class UserDetailAPIView(generics.RetrieveUpdateAPIView):
-    queryset =CustomUser.objects.all()
+class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.all()
     serializer_class=CustomUserDetailSerializer
-    
     permission_classes=(UserPermissions,)
 
-    # def get_object(self):
-    #     return get_object_or_404(Profile, user=self.request.user)
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    
 
 class UserListAPIView(generics.ListAPIView):
     queryset = CustomUser.objects.all()
