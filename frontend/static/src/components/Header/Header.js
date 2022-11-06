@@ -11,9 +11,10 @@ function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
 
   const[loggedUser, setLoggedUser]= useState({username:""});
    
-  useEffect(() => {
+  const getUser = () => {
+    
     const checkUser = async () => {
-      console.log("Fetch request for Header")
+      console.log("Fetch request for Header");
       const response2 = await fetch("/dj-rest-auth/user/");
       if (!response2.ok) {
         console.log("Not Auth");
@@ -23,10 +24,16 @@ function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
         setLoggedUser({...data}) ;  
         console.log("Yes Auth");  
       };
+      
             
     };
-    checkUser();
-  }, []);  
+    checkUser(); 
+  };  
+
+  useEffect(()=>{
+    
+    getUser();
+  }, [getUser]);
     // const getLoggedUser = async() => { 
       
     //   const response2 = await fetch("/dj-rest-auth/user/").catch(

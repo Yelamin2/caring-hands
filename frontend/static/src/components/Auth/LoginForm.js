@@ -78,6 +78,8 @@ function LoginForm() {
     console.log("NEW USER FORM LOGIN",newUser);
 
     if (newUser != undefined){
+      {<Header newUser={newUser}/>};
+      
             
       if(newUser.is_provider==true){
         navigate('/provider/');        
@@ -137,6 +139,7 @@ function LoginForm() {
         </Button>
       </Form>
       <div></div>
+      export {newUser};
       </>
     );
     
