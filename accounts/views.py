@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+
 from rest_framework import generics
 from .models import Profile, CustomUser
 from .serializers import ProfileSerializer, CustomUserDetailSerializer, CustomRegisterSerializer
@@ -32,7 +33,7 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         serializer.save(user=self.request.user)
     
 
-class UserListAPIView(generics.ListAPIView):
+class UserListAPIView(generics.ListCreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class=CustomUserDetailSerializer
 

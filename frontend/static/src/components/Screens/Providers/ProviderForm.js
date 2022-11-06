@@ -20,8 +20,6 @@ const INITIAL_USER=[{
         zip:"",
         license:"",
         expiration:Date,
-
-
     }]
 function ProviderForm(props){
     const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);

@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { useOutletContext, Link } from "react-router-dom";
+import { useState, useCallback, useEffect } from "react";
+import { useOutletContext, Link , Outlet} from "react-router-dom";
 import { handleError } from "../../utils/errorHandler";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Cookies from "js-cookie";
+import Container from 'react-bootstrap/Container';
+import Header from '../Header/Header';
+import { useNavigate } from 'react-router-dom';
+import App from "../App/App";
 
 function LoginForm() {
     const [user, setUser] = useState({
@@ -11,8 +15,9 @@ function LoginForm() {
       email: "",
       password: "",
     });
+    const[newUser, setNewUser]= useState();
   
-    const { setIsAuth, navigate } = useOutletContext();
+    const { setIsAuth, navigate} = useOutletContext();
   
     const handleInput = (e) => {
       const { name, value } = e.target;
@@ -21,7 +26,7 @@ function LoginForm() {
         [name]: value,
       }));
     };
-  
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       const options = {
@@ -42,11 +47,55 @@ function LoginForm() {
         const data = await response.json();
         Cookies.set("Authorization", `Token ${data.key}`);
         setIsAuth(true);
-        navigate("/");
       }
-    };
+     
+      setTimeout(500);      
+        // const options2 = {
+        //   method: "GET",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     "X-CSRFToken": Cookies.get("csrftoken"),
+        //   },
+        //   body: JSON.stringify(user),
+        // }; 
+        const response2 = await fetch("/dj-rest-auth/user/").catch(
+          handleError
+        );
+        if (!response2.ok) {
+          console.log("fetch failed")
+          throw new Error("Network response was not OK.");
+        } else {
+          console.log("Login ok");
+
+          const data = await response2.json();
+          Cookies.set("Authorization", `Token ${data.key}`);
+          setIsAuth(true);
+          setNewUser({...data});
+        } 
+      
+        };
+      
+    console.log("NEW USER FORM LOGIN",newUser);
+
+    if (newUser != undefined){
+            
+      if(newUser.is_provider==true){
+        navigate('/provider/');        
+      }
+      else if(newUser.is_customer==true){
+        navigate('/customer/');
+      } else {
+        navigate('/home/');
+      }
+      // <Outlet context={newUser} />
+       const headerProps = {
+        newUser,      
+      };
+      // window.location.reload(false);    
+     }
   
     return (
+      <>     
       <Form onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
@@ -87,9 +136,10 @@ function LoginForm() {
           Submit
         </Button>
       </Form>
+      <div></div>
+      </>
     );
+    
   }
   
-
-
 export default LoginForm

@@ -15,14 +15,11 @@ const INITIAL_USER=[{
         state:"",
         zip:"",
 
-
     }]
 function ProfileForm(props){
     const [viewDetail, setViewDetail]=useState({INITIAL_USER});
-    const[profile , setProfile]= useState({INITIAL_USER});
+    const[profile , setProfile]= useState({});
     const [profileDetail, setProfileDetail]=useState(INITIAL_USER);
-
-
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -35,9 +32,7 @@ function ProfileForm(props){
             }
 
             const data = await response.json();
-            setProfile({...data});
-          
-            
+            setProfile({...data});            
         };
         fetchUserProfile();
     },[]);
@@ -55,22 +50,16 @@ function ProfileForm(props){
                     }
                     return;
                 }
-    
                 const data = await response.json();
                 setViewDetail(...data);
                 console.log({data});
                 
             };
-         
-        
+             
     }
     console.log('This is detailed user data', {viewDetail})
     console.log("user",{user});
-        
-
-    
-
-
+     
     function handleInput(e) {
         const { name, value } = e.target;
         setProfileDetail((profileDetail) => ({
@@ -92,25 +81,18 @@ function ProfileForm(props){
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch(`/api/v1/users/detail/${user}/user/`, options).catch(
+        const response = await fetch("/dj-rest-auth/user/", options).catch(
             handleError
           );
           if (!response.ok) {
             throw new Error("Oops. Something went wrong!");
           } else {
             const data = await response.json();
-            console.log("MY DATA",data)
+            console.log("MY DATA",data);
             Cookies.set("Authorization", `Token ${data.key}`);
             props.setAuth(true);
           }
         };
-        
-    
-
-
-
-
-
 
     return (
 

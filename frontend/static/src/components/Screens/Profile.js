@@ -19,7 +19,6 @@ function Profile(){
                 }
                 return;
             }
-
             const data = await response.json();
             setProfile({...data});
             setPreview(data.avatar);
@@ -43,7 +42,6 @@ function Profile(){
         formData.append("avatar", file);
 
         const {id} = profile;
-
         const options = {
             method: `${id ? "PUT" : "POST"}`,
             headers: {
@@ -61,13 +59,11 @@ function Profile(){
     };
 
     return(
-
         <> 
         <Card style={{ width: '18rem' }}>
             <div className= "image-container">
             <Card.Img variant="top" src={preview} />
             <input type="file" name="avatar" onChange={handleImage} />
-
             </div>
         <Card.Body>
             <Card.Title>{profile.username?.toUpperCase()}</Card.Title>

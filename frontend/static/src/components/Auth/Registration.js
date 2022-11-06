@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import { handleError } from "../../utils/errorHandler";
 import Button from "react-bootstrap/Button";
@@ -16,7 +16,7 @@ function Registeration() {
     is_customer:true,
     is_provider:false,
   });
-
+  const[newUser, setNewUser]= useState();
 
   const handleCheckbox = () => {
     setUser((prevState) => ({
@@ -56,16 +56,34 @@ function Registeration() {
     const response = await fetch("/dj-rest-auth/registration/", options).catch(
       handleError
     );
-    if (!response.ok) {
+    if (!response.ok) {console.log("Something wrong");
       throw new Error("Network response was not OK.");
     } else {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       setIsAuth(true);
-      navigate("/profile/");
+      
     }
   };
+  setTimeout(1000);
+  console.log("now registered", {setIsAuth});
 
+  const fetchUserProfile = async () => {
+      const response = await fetch("/dj-rest-auth/user/");
+      if (!response.ok){
+          if(!response.status === 404){
+              throw Error("Oops. Something went wrong!");
+          }else {
+        const data = await response.json();
+        setNewUser({...data});
+        console.log(newUser);
+        navigate("/profile/"); 
+      }       
+  };}
+  fetchUserProfile();
+ 
+  console.log("newUser",{newUser});
+  
   return (
     <Form onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
       <Form.Group className="mb-3" controlId="username">

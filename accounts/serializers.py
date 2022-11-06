@@ -23,7 +23,7 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
         model = CustomUser
         id =serializers.PKOnlyObject
         fields= ('id', 'username', 'first_name', 'last_name','address1','address2','city','state','zip','is_customer','is_provider')
-        read_only_fields = ('username', 'is_customer','is_provider',)
+        read_only_fields = ('id','username', 'is_customer','is_provider',)
         # read_only_fields = ('id','username')
 
     

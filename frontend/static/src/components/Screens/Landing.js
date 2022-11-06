@@ -9,14 +9,11 @@ function Landing(){
 
     return (
         <div>
-        This is the Landing Page for the Application Homepage
-       
-        
+        This is the Landing Page for the Application Homepage        
         <Carousel>
         <Carousel.Item>
             <img
-            className="d-block w-100"
-        
+            className="d-block w-100"        
             src={people1}
             alt="First slide"
             />
@@ -31,7 +28,6 @@ function Landing(){
             src={nurse2}
             alt="Second slide"
             />
-
             <Carousel.Caption>
             <h3>Second slide label</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -43,7 +39,6 @@ function Landing(){
             src={ball3}
             alt="Third slide"
             />
-
             <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>
