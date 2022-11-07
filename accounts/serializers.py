@@ -26,6 +26,8 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
         read_only_fields = ('id','username', 'is_customer','is_provider',)
         # read_only_fields = ('id','username')
 
+        
+
     
 
 class ProfileSerializer(serializers.ModelSerializer):

@@ -1,4 +1,8 @@
-const providers=[{
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+
+
+const INITIAL_PROVIDER=[{
     name: "1ST CHOICE HOME CARE OF SC",
     address1:"439 CONGAREE RD ",
     address2:"STE 13 A",
@@ -42,17 +46,7 @@ const providers=[{
     expiration:"05/31/2023  "
 
 },
-{
-    name: " ",
-    address1:"  ",
-    address2:" ",
-    city:"Greenville",
-    state:"SC",
-    zip:"",
-    license:" ",
-    expiration:" "
 
-},
 {
     name: " CIRCLE OF LIFE DIVINE CARE SERVICES LLC",
     address1:" 1200 WOODRUFF RD  ",
@@ -107,4 +101,34 @@ const providers=[{
     license:"IHCP-0538 ",
     expiration:"03/31/2023  "
 
-}]
+}];
+function ProviderList(){
+
+    const[providerList, setProviderList] = useState(INITIAL_PROVIDER);
+
+    const handleClick= ((e)=> {
+        e.preventDefault()
+        console.log(providerList);
+    });
+
+    const providersHTML = providerList.map((provider, index) =>(
+        <li key ={index}>
+            <p>{provider.name}</p>
+            <p>{provider.address1}</p>
+            <p>{provider.address2}</p>
+            <p>{provider.city}</p>
+            <p>{provider.zip}</p>
+            <button onClick={handleClick}>Select</button>
+        </li>
+    ))
+
+    return(
+        <>
+        <Form>
+        {providerList.length >0 && <lu >{providersHTML}</lu>}
+        </Form>
+        </>
+    )
+}
+
+export default ProviderList

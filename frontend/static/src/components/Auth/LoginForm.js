@@ -78,7 +78,7 @@ function LoginForm() {
     console.log("NEW USER FORM LOGIN",newUser);
 
     if (newUser != undefined){
-      {<Header newUser={newUser}/>};
+      
       
             
       if(newUser.is_provider==true){
@@ -95,6 +95,7 @@ function LoginForm() {
       };
       // window.location.reload(false);    
      }
+  
   
     return (
       <>     
@@ -139,7 +140,7 @@ function LoginForm() {
         </Button>
       </Form>
       <div></div>
-      export {newUser};
+      
       </>
     );
     

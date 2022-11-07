@@ -110,7 +110,7 @@ function Registeration() {
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="first_name">
+      {/* <Form.Group className="mb-3" controlId="first_name">
         <Form.Label>First Name</Form.Label>
         <Form.Control
           type="text"
@@ -133,7 +133,7 @@ function Registeration() {
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
-      </Form.Group>
+      </Form.Group> */}
       <Form.Group className="mb-3" id="formGridCheckbox">
         <input
             type="checkbox"

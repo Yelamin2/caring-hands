@@ -10,6 +10,7 @@ import ProfileForm from '../Screens/ProfileForm';
 import Profile from "../Screens/Profile";
 import ProviderView from "../Screens/Providers/ProviderHome/ProviderView";
 import ProviderForm from "../Screens/Providers/ProviderForm";
+import ProviderList from "../Screens/Customers/providerList";
 
 function Router(){
     return(
@@ -25,6 +26,7 @@ function Router(){
                 <Route path='form' element={<ProfileForm />}/>
                 <Route path='providerForm' element ={<ProviderForm />}/>
                 <Route path='provider' element={<ProviderView />}/>
+                <Route path = 'list' element = {<ProviderList/>}/>
             </Route>
             <Route
           path="*"

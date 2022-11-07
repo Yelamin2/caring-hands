@@ -95,6 +95,8 @@ function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
           ProfileForm
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
           ProviderForm
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/list/">
+          list
         </Link>
         {isAuth ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"
