@@ -8,9 +8,11 @@ import { format, compareAsc } from 'date-fns';
 import Button from "react-bootstrap/esm/Button";
 import Container from 'react-bootstrap/Container';
 
-const hours =['01','02','03','04','05','06','07','08','09','10','11','12'];
-const minutes =['00', '15','30' ,'45'];
-const amPm= ["AM", 'PM'];
+
+
+const hours =['--','01','02','03','04','05','06','07','08','09','10','11','12'];
+const minutes =['--','00', '15','30' ,'45'];
+const amPm= ['--',"AM", 'PM'];
 const weekDays = ["Monday", 'Tuseday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
 
 function CustomerView(){
@@ -18,7 +20,7 @@ function CustomerView(){
   const [endTime, setEndTime] = useState(new Date());
   const option= [];
 
-  const [schedule, setSchedule]= useState();
+  const [schedule, setSchedule]= useState([]);
   // providerList.map((provider, index) =>(
 
   const handleSubmit = (e) => {
@@ -26,26 +28,48 @@ function CustomerView(){
     console.log({displayHTML},option );};
 
   const handleChange = (e) => {
-    getOptionLabel=(option) => option.year.toString();
-    console.log(e.target.name, option);
+    // getOptionLabel=(option) => option.year.toString();
+    console.log(e.target.name, e.target.value);
   };
   
   const handleChecked = (e) => {
     if(e.target.checked){
-      console.log(e.target.value);
-    }
+      console.log(e.target.value );
+    
+  }}
+
+  const handleTime = (e) => {
+
   }
 
-  const displayHTML =  weekDays.map((days, index)=> (
+  const handleDay = (e) => {
+    const day = e.target.name; // e.g. 'Monday'
+    const scheduleCopy = [...schedule];
+    const indexOfDay = schedule.findIndex(i => i.day === day);
+    console.log('indexOfDay', indexOfDay);
+    if(indexOfDay !== -1) {
+      scheduleCopy.splice(indexOfDay, 1);
+    } else {
+      scheduleCopy.push({
+        day: `${day}`,
+        start: null,
+        end: null,
+      });
+    }
+    setSchedule(scheduleCopy);
+  }
+
+  const displayHTML =  weekDays.map((day, index)=> (
     <Form.Group controlId="formGridState" key={index}>
         <Row lg={4} sm={4}>
           <Col lg={2} sm={12}>
                 <Form.Check
-                label={days}
-                value={days}
-                name="group1"
+                label={day}
+                value={day}
+                name={day}
                 type="checkbox"
-                onChange={handleChecked }
+                checked={schedule.findIndex(i => i.day === day) !== -1}
+                onChange={handleDay}
                 id={`2`}
                 />
                 </Col>
@@ -56,24 +80,25 @@ function CustomerView(){
                 <Form.Label>Start Time</Form.Label>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose..." >{
+                <Form.Select defaultValue="Choose..." onChange={handleChange}>{
                 hours.map((hour, index)=> (
-                <option  key={index} value={hour} name="hour" getOptionLabel={(option) => option.label}>{hour}</option>
+                <option  key={(index+7)} value={hour} name="hour" onChange={handleChange}>{hour}</option>
                 ))}
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
+                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 minutes.map((minutes, index)=> (
-                <option key={index} value={minutes} name="minute" onChange={handleChange}>{minutes}</option>
+                <option key={(index+25)} value={minutes} name="minute" onChange={handleChange}>{minutes}</option>
                 ))
                 }
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
+                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 amPm.map((amPm, index)=> (
-                <option key={index}>{amPm}</option>
+                <option key={(index+36)}>{amPm}</option>
+                
                 ))
                 }
                 </Form.Select>
@@ -86,24 +111,24 @@ function CustomerView(){
                 <Form.Label>End Time</Form.Label>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{
+                <Form.Select onChange={handleChange} defaultValue="Choose...">{
                 hours.map((hour, index)=> (
-                <option key={index}>{hour}</option>
+                <option key={(index+7)}>{hour}</option>
                 ))}
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
+                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 minutes.map((minutes, index)=> (
-                <option key={index}>{minutes}</option>
+                <option key={(index+25)}>{minutes}</option>
                 ))
                 }
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
+                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 amPm.map((amPm, index)=> (
-                <option key={index}>{amPm}</option>
+                <option key={(index+32)}>{amPm}</option>
                 ))
                 }
                 </Form.Select>
@@ -124,8 +149,9 @@ function CustomerView(){
       <ThemeProvider breakpoints={['lg',' md','xs']} miniBreakpoint="sm">
       <Container fluid>
         
-      {/* <Form  onSubmit={handleSubmit}> */}
-        {displayHTML}
+      <Form  onSubmit={handleSubmit}>
+        <Row>
+        {displayHTML}</Row>
       {/* <Form.Group controlId="formGridState">
         <Row lg={4} sm={4}>
           <Col lg={2} sm={12}>
@@ -199,90 +225,13 @@ function CustomerView(){
             </Col>
         </Row>
         </Form.Group> */}
-        <Form >{() =>  weekDays.map((days, index)=> (
-    <Form.Group controlId="formGridState" key={index}>
-        <Row lg={4} sm={4}>
-          <Col lg={2} sm={12}>
-                <Form.Check
-                label={days}
-                value={days}
-                name="group1"
-                type="checkbox"
-                onChange={handleChecked }
-                id={`2`}
-                />
-                </Col>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
 
-          <Col lg={5} sm={4} >
-            <Row lg={4} sm={12} >
-                <Col lg={3} xs={3}>
-                <Form.Label>Start Time</Form.Label>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose..." >{
-                hours.map((hour, index)=> (
-                <option  key={index} value={hour} name="hour" getOptionLabel={(option) => option.label}>{hour}</option>
-                ))}
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
-                minutes.map((minutes, index)=> (
-                <option key={index} value={minutes} name="minute" onChange={handleChange}>{minutes}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
-                amPm.map((amPm, index)=> (
-                <option key={index}>{amPm}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={5} sm={4}>
-            <Row lg={6} sm={12}>
-                <Col lg={3} xs={3}>
-                <Form.Label>End Time</Form.Label>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{
-                hours.map((hour, index)=> (
-                <option key={index}>{hour}</option>
-                ))}
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
-                minutes.map((minutes, index)=> (
-                <option key={index}>{minutes}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose...">{ 
-                amPm.map((amPm, index)=> (
-                <option key={index}>{amPm}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-              </Row>
-            </Col>
-        </Row>
-        </Form.Group>))}
-        </Form>
-
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-      
-    
-        {/* // </Form> */}
+          </Form>
+       
+   
         </Container>
       </ThemeProvider>
     </>

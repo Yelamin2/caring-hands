@@ -15,6 +15,9 @@ class CustomUser(AbstractUser):
     city =models.CharField(max_length=255, null=True, blank=True)
     state=models.CharField(max_length=255, null=True, blank=True)
     zip=models.CharField(max_length=10, null=True, blank=True)
+    expiration=models.DateField(null=True, blank=True)
+    company_name=models.CharField(max_length=255, null=True, blank=True)
+    license=models.CharField(max_length=30, null=True, blank=True)
 # (settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     def __str__(self):
         return self.username

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 
 const INITIAL_PROVIDER=[{
+    id:1,
     name: "1ST CHOICE HOME CARE OF SC",
     address1:"439 CONGAREE RD ",
     address2:"STE 13 A",
@@ -14,6 +16,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:2,
     name: "A INTEGRITY HOME CARE SERVICE",
     address1:"109-A PILGRIM RD ",
     address2:" ",
@@ -25,6 +28,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:3,
     name: "BLESSED WITH GOODNESS LLC ",
     address1:"716 E FAIRFIELD RD   ",
     address2:"UNIT 120 ",
@@ -36,6 +40,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:4,
     name: "ALLEGIANT QUALITY HOME CARE LLC ",
     address1:" 210 WEST STONE AVE  ",
     address2:"UNIT UL1 ",
@@ -48,6 +53,7 @@ const INITIAL_PROVIDER=[{
 },
 
 {
+    id:5,
     name: " CIRCLE OF LIFE DIVINE CARE SERVICES LLC",
     address1:" 1200 WOODRUFF RD  ",
     address2:"A-3 STE 138 ",
@@ -59,6 +65,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:6,
     name: "PRIME HOME CARE SERVICES ",
     address1:"105 ARBORDALE LN ",
     address2:"",
@@ -70,6 +77,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:7,
     name: "PALMETTO HOME CARE SERVICE ",
     address1:" 879 NE MAIN ST",
     address2:" UNIT B",
@@ -81,6 +89,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:8,
     name: "CAPITAL HEALTH SERVICE ",
     address1:"526 S MAIN ST ",
     address2:"",
@@ -92,6 +101,7 @@ const INITIAL_PROVIDER=[{
 
 },
 {
+    id:9,
     name: "IN LOVING HANDS HOME CARE AGENCY ",
     address1:"314 W GEORGIA RD ",
     address2:"",
@@ -102,32 +112,55 @@ const INITIAL_PROVIDER=[{
     expiration:"03/31/2023  "
 
 }];
-function ProviderList(){
+function ProviderList(props){
 
     const[providerList, setProviderList] = useState(INITIAL_PROVIDER);
+    const [addProvider, setAddProvider]= useState();
+    const[provider, setProvider]= useState([]);
 
-    const handleClick= ((e)=> {
-        e.preventDefault()
-        console.log(providerList);
-    });
+    const handleClick =(e)=> {
+        e.preventDefault();
+        setAddProvider((prevState) =>
+        ({
+            ...prevState,
+            name: providerList.name,
+        }));
+        console.log('working',addProvider)
+    }
+    
+    // {
+    //     console.log("I clicked" ,provider)
+    //     // e.preventDefault();
+    //     setAddProvider((addProvider) => ({...addProvider,
+    //         name: provider.name,
+    //         address1:provider.address1,
+    //         address2:provider.address2,
+    //         city:provider.city,
+    //         state:provider.state,
+    //         zip:provider.zip,
+    //     }));
+    //     // setAddProvider({...addProvider,[e.target.name]:e.target.value});
+    //     console.log("Addprovider",addProvider);
+    // };
 
-    const providersHTML = providerList.map((provider, index) =>(
-        <li key ={index}>
-            <p>{provider.name}</p>
-            <p>{provider.address1}</p>
-            <p>{provider.address2}</p>
-            <p>{provider.city}</p>
-            <p>{provider.zip}</p>
-            <button onClick={handleClick}>Select</button>
-        </li>
+    const providersHTML = providerList.map((provider,id) =>(
+        <Col>
+        <li key ={id}>
+            <p value={provider.name} name="name" >{provider.name}</p>
+            <p >{provider.address1} {provider.address2}</p>
+            <p></p>
+            <p>{provider.city}  {provider.zip}</p>
+            <p></p>
+            <button onClick={handleClick} type="submit" as="input">Select</button>
+        </li></Col>
     ))
 
     return(
-        <>
-        <Form>
-        {providerList.length >0 && <lu >{providersHTML}</lu>}
-        </Form>
-        </>
+     
+       <>
+         <ul >{providersHTML}</ul>
+       </>
+    
     )
 }
 

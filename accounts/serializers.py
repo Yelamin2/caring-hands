@@ -22,7 +22,8 @@ class CustomUserDetailSerializer(UserDetailsSerializer):
     class Meta(UserDetailsSerializer.Meta):
         model = CustomUser
         id =serializers.PKOnlyObject
-        fields= ('id', 'username', 'first_name', 'last_name','address1','address2','city','state','zip','is_customer','is_provider')
+        fields= ('id', 'username', 'first_name', 'last_name','address1','address2','city','state',
+        'zip','is_customer','is_provider','company_name','license','expiration')
         read_only_fields = ('id','username', 'is_customer','is_provider',)
         # read_only_fields = ('id','username')
 
@@ -43,6 +44,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class TokenSerializer(serializers.ModelSerializer):
     user = CustomUserDetailSerializer()
+    # is_customer=CustomUserDetailSerializer() 
+    # is_provider= CustomUserDetailSerializer()
 
     class Meta:
         model = Token

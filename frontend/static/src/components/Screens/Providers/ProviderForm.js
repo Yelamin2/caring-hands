@@ -1,8 +1,5 @@
 
-
-
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -11,44 +8,121 @@ import Cookies from "js-cookie";
 import Profile from "../Profile";
 
 const INITIAL_USER=[{
-        first_name: "",
-        last_name: "",
-        address1:"",
-        address2:"",
-        city:"",
-        syate:"",
-        zip:"",
-        license:"",
-        expiration:Date,
+    company_name:"",
+    first_name: "",
+    last_name: "",
+    address1:"",
+    address2:"",
+    city:"",
+    syate:"",
+    zip:"",
+    license:"",
+    expiration:Date,
     }]
 function ProviderForm(props){
-    const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);
+    // const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);
 
-    const handleInput = (e) => {
-        const {name, value} = e.target;
-        setProfileDetail((prevProfileDetail) => ({
-            ...prevProfileDetail, 
+    // const handleInput = (e) => {
+    //     const {name, value} = e.target;
+    //     setProfileDetail((prevProfileDetail) => ({
+    //         ...prevProfileDetail, 
+    //         [name]: value,
+    //     }));
+    // };
+    // const handleError = (err) => console.warn(err);
+
+    // const handleSubmit= async (e) => {
+    //     e.preventDefault();
+    //     const options = {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json; charset=UTF-8 ",
+    //         },
+    //         body: JSON.stringify(profileDetail),
+    //     };
+    //     const response = await fetch("/dj-rest-auth/user/", options).catch(
+    //         handleError
+    //       );
+    //       if (!response.ok) {
+    //         throw new Error("Oops. Something went wrong!");
+    //       } else {
+    //         const data = await response.json();
+    //         Cookies.set("Authorization", `Token ${data.key}`);
+    //         props.setAuth(true);
+    //       }
+    //     };
+    const [viewDetail, setViewDetail]=useState({INITIAL_USER});
+    const[profile , setProfile]= useState({});
+    const [profileDetail, setProfileDetail]=useState(INITIAL_USER);
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            const response = await fetch("/dj-rest-auth/user/");
+            if (!response.ok){
+                if(!response.status === 404){
+                    throw Error("Oops. Something went wrong!");
+                }
+                return;
+            }
+
+            const data = await response.json();
+            setProfile({...data});            
+        };
+        fetchUserProfile();
+    },[]);
+    
+    console.log('This logged user from profileform', {profile})
+    var {user} ={}
+    if (profile.id != undefined){
+        user = profile.id;
+        
+            const fetchUser= async () => {
+                const response = await fetch(`/api/v1/users/detail/${user ? "user/" : ""}`);
+                if (!response.ok){
+                    if(!response.status === 404){
+                        throw Error("Oops. Something went wrong!");
+                    }
+                    return;
+                }
+                const data = await response.json();
+                setViewDetail(...data);
+                console.log({data});
+                
+            };
+             
+    }
+    console.log('This is detailed user data', {viewDetail})
+    console.log("user",{user});
+     
+    function handleInput(e) {
+        const { name, value } = e.target;
+        setProfileDetail((profileDetail) => ({
+            ...profileDetail,
             [name]: value,
         }));
-    };
+    }
     const handleError = (err) => console.warn(err);
 
     const handleSubmit= async (e) => {
         e.preventDefault();
+        
         const options = {
-            method: "POST",
+            method: `${user ? "PUT" : "POST"}`,
             headers: {
                 "Content-Type": "application/json; charset=UTF-8 ",
+                "X-CSRFToken": Cookies.get('csrftoken'),   
+               
             },
             body: JSON.stringify(profileDetail),
         };
-        const response = await fetch("/api/v1/users/users/1/user/", options).catch(
+        const response = await fetch("/dj-rest-auth/user/", options).catch(
             handleError
           );
           if (!response.ok) {
             throw new Error("Oops. Something went wrong!");
           } else {
             const data = await response.json();
+            console.log("MY DATA",data);
             Cookies.set("Authorization", `Token ${data.key}`);
             props.setAuth(true);
           }
@@ -64,8 +138,21 @@ function ProviderForm(props){
     return (
 
         <>
+        <input type="time" step="18000" id="appt" name="appt"
+       min="09:00" max="18:00"  required/>
         <div>{<Profile />}</div>
         <Form onSubmit={handleSubmit}>
+
+            <Row className="mb-3">
+                <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Company Name</Form.Label>
+                <Form.Control type="text" placeholder="First name" 
+                name= "company_name"
+                value= {profileDetail.company_name}
+                onChange={handleInput}
+                required/>
+                </Form.Group>
+            </Row>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>First Name</Form.Label>

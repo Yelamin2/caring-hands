@@ -8,8 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 import App from "../App/App";
+import Registeration from "./Registration";
 
-function LoginForm() {
+function LoginForm(props) {
     const [user, setUser] = useState({
       username: "",
       email: "",
@@ -70,6 +71,7 @@ function LoginForm() {
           const data = await response2.json();
           Cookies.set("Authorization", `Token ${data.key}`);
           setIsAuth(true);
+          // props.loggedUser({...data});
           setNewUser({...data});
         } 
       
@@ -78,6 +80,8 @@ function LoginForm() {
     console.log("NEW USER FORM LOGIN",newUser);
 
     if (newUser != undefined){
+      
+      
       
       
             

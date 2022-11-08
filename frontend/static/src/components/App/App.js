@@ -7,16 +7,22 @@ import CustomerView from '../Screens/Customers/CustomerHome/CustomerView';
 import Spinner from "react-bootstrap/Spinner";
 import LoginForm from '../Auth/LoginForm';
 import Landing from '../Screens/Landing';
+
 // /import ProviderForm from '../Screens/Providers/ProviderForm';
 
 
 function App(props) {
   const [isAuth, setIsAuth] = useState(null);
   const navigate = useNavigate();
-  const [loggedUser, setLoggedUser]=useState();
+  const [user, setUser]=useState([]);
+
+  // const loggedUser = (item => {
+  //   setUser([...user, item]);
+
+  // })
   
 
-  console.log("NEWUSER FROM APP",loggedUser);
+  console.log("NEWUSER FROM APP",user);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -28,15 +34,16 @@ function App(props) {
         console.log("Not Auth");
       } else { 
         const data = await response.json();
-        setLoggedUser({...data}) ;  
+        setUser({...data}) ;  
         setIsAuth(true);
       }
     };
 
     setTimeout(checkAuth, 1000);
     
-  }, []);
-   console.log("Logged user from App.js",{loggedUser});
+  }, [isAuth]);
+
+   console.log("Logged user from App.js",user);
 
   if (isAuth === null) {
     return ( console.log("Waiting"),
@@ -52,16 +59,18 @@ function App(props) {
   const headerProps = {
     isAuth,
     setIsAuth,
-    navigate,  
+    navigate, 
+    user 
   };
 
 
   return (
     <>
     <Header {...headerProps} />
+    {/* <LoginForm loggedUser={loggedUser}/> */}
     
       <Container>
-        <Outlet context={{ setIsAuth, navigate, loggedUser}} />
+        <Outlet context={{ setIsAuth, navigate, user}} />
       </Container>
       <div className="App"></div>
 

@@ -7,33 +7,34 @@ import LoginForm from "../Auth/LoginForm";
 import { handleError } from "../../utils/errorHandler";
 import { useEffect, useState } from "react";
 
-function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
+function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
 
   const[loggedUser, setLoggedUser]= useState({username:""});
-   
-  const getUser = () => {
+ 
+  // const getUser = () => {
     
-    const checkUser = async () => {
-      console.log("Fetch request for Header");
-      const response2 = await fetch("/dj-rest-auth/user/");
-      if (!response2.ok) {
-        console.log("Not Auth");
-        return;
-      } else { 
-        const data = await response2.json();
-        setLoggedUser({...data}) ;  
-        console.log("Yes Auth");  
-      };
+  //   const checkUser = async () => {
+  //     console.log("Fetch request for Header");
+  //     const response2 = await fetch("/dj-rest-auth/user/");
+  //     if (!response2.ok) {
+  //       console.log("Not Auth");
+  //       return;
+  //     } else { 
+  //       const data = await response2.json();
+  //       setLoggedUser({...loggedUser, data}) ;  
+  //       console.log("Yes Auth");  
+  //     };
       
             
-    };
-    checkUser(); 
-  };  
-
-  useEffect(()=>{
+  //   };
+     
     
-    getUser();
-  }, [getUser]);
+  // };  
+
+  // useEffect(()=>{
+    
+  //   getUser();
+  // }, []);
     // const getLoggedUser = async() => { 
       
     //   const response2 = await fetch("/dj-rest-auth/user/").catch(
@@ -49,7 +50,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
     //   }; 
     // };
   
-  console.log("NewUSER FROM Header", isAuth,is_customer,"NEWUSER",newUser,loggedUser)
+  console.log("NewUSER FROM Header", isAuth,is_customer,"/n","NEWUSER",user,"/n","IS_CUSTOMER", user.is_customer)
 
   const handleLogout = async () => {
     const options = {
@@ -119,17 +120,20 @@ function Header({ isAuth, setIsAuth, navigate,is_customer},newUser) {
             Login
           </Link>
         )}
-        {loggedUser== undefined? (
+        {user == undefined? (
           <Link className="navbar-expand navbar-nav nav-link" to="/login/">
             CustomerFalse
           </Link>
-        ): loggedUser.is_customer ? (
-          <Button
-            variant="link"
-            className="navbar-expand navbar-nav nav-link border-0"
-          >
-            Customer
-          </Button>
+        ): user.is_customer ? (
+          <Link className="navbar-expand navbar-nav nav-link" to="/Customer/">
+          CustomerV
+        </Link>
+          // <Button
+          //   variant="link"
+          //   className="navbar-expand navbar-nav nav-link border-0"
+          // >
+          //   Customer
+          // </Button>
         ) : (
           <Link className="navbar-expand navbar-nav nav-link" to="/login/">
             Not Customer
