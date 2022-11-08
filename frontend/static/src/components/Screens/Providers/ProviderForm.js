@@ -138,6 +138,7 @@ function ProviderForm(props){
     return (
 
         <>
+       
         <input type="time" step="18000" id="appt" name="appt"
        min="09:00" max="18:00"  required/>
         <div>{<Profile />}</div>
@@ -146,7 +147,7 @@ function ProviderForm(props){
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Company Name</Form.Label>
-                <Form.Control type="text" placeholder="First name" 
+                <Form.Control type="text" placeholder={profile.company_name} 
                 name= "company_name"
                 value= {profileDetail.company_name}
                 onChange={handleInput}
@@ -156,7 +157,7 @@ function ProviderForm(props){
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" placeholder="First name" 
+                <Form.Control type="text" placeholder={profile.first_name} 
                 name= "first_name"
                 value= {profileDetail.first_name}
                 onChange={handleInput}
@@ -165,16 +166,16 @@ function ProviderForm(props){
 
                 <Form.Group as={Col} controlId="formGridPassword">
                 <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Last name" 
+                <Form.Control type="text" placeholder={profile.last_name} 
                 name= "last_name"
                 value= {profileDetail.last_name}
-                required/>
+                required />
                 </Form.Group>
             </Row>
 
             <Form.Group className="mb-3" controlId="formGridAddress1">
                 <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" 
+                <Form.Control placeholder={(profile.address1)=="" ? "1234 Main St":(profile.address1) }
                 name= "address1"
                 value= {profileDetail.address1}
                 onChange={handleInput}
@@ -183,7 +184,7 @@ function ProviderForm(props){
 
             <Form.Group className="mb-3" controlId="formGridAddress2">
                 <Form.Label>Address 2</Form.Label>
-                <Form.Control placeholder="Apartment, studio, or floor"
+                <Form.Control placeholder={(profile.address1)=="" ? "APT ":(profile.address2) }
                 name= "address2"
                 value= {profileDetail.address2}
                 onChange={handleInput}
@@ -194,6 +195,7 @@ function ProviderForm(props){
                 <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>City</Form.Label>
                 <Form.Control 
+                placeholder={(profile.city)=="" ? "":(profile.city) }
                 name= "city"
                 value= {profileDetail.city}
                 onChange={handleInput}/>
@@ -202,6 +204,7 @@ function ProviderForm(props){
                 <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>State</Form.Label>
                 <Form.Control 
+                placeholder={(profile.state)=="" ? "":(profile.state) }
                 name= "state"
                 value= {profileDetail.state}
                 onChange={handleInput}/>
@@ -210,6 +213,7 @@ function ProviderForm(props){
                 <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Zip</Form.Label>
                 <Form.Control 
+                placeholder={(profile.zip)=="" ? "":(profile.zip) }
                 name= "zip"
                 value= {profileDetail.zip}
                 onChange={handleInput}/>
@@ -220,14 +224,16 @@ function ProviderForm(props){
                 <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>License</Form.Label>
                 <Form.Control 
+                placeholder={(profile.license)=="" ? "":(profile.license) }
                 name= "license"
                 value= {profileDetail.license}
                 onChange={handleInput}/>
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Registeration</Form.Label>
-                <Form.Control 
+                <Form.Label>Expiration</Form.Label>
+                <Form.Control
+                placeholder={(profile.expiration)=="" ? "mm/dd/yyyy":(profile.expiration) }
                 name= "expiration"
                 value= {profileDetail.expiration}
                 onChange={handleInput}/>

@@ -77,7 +77,7 @@ function LoginForm(props) {
       
         };
       
-    console.log("NEW USER FORM LOGIN",newUser);
+    // console.log("NEW USER FORM LOGIN",newUser);
 
     if (newUser != undefined){
       

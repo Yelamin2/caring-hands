@@ -10,14 +10,15 @@ import Container from 'react-bootstrap/Container';
 
 
 
-const hours =['--','01','02','03','04','05','06','07','08','09','10','11','12'];
-const minutes =['--','00', '15','30' ,'45'];
+const hours =['Hr','01','02','03','04','05','06','07','08','09','10','11','12'];
+const minutes =['Min','00', '15','30' ,'45'];
 const amPm= ['--',"AM", 'PM'];
 const weekDays = ["Monday", 'Tuseday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
+const INIT_VISIT=[{Monday:{}, Tuseday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
 
 function CustomerView(){
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [justAthought, setJustAthought] = useState(INIT_VISIT);
+  const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
 
   const [schedule, setSchedule]= useState([]);
@@ -27,10 +28,7 @@ function CustomerView(){
     e.preventDefault();
     console.log({displayHTML},option );};
 
-  const handleChange = (e) => {
-    // getOptionLabel=(option) => option.year.toString();
-    console.log(e.target.name, e.target.value);
-  };
+
   
   const handleChecked = (e) => {
     if(e.target.checked){
@@ -41,6 +39,7 @@ function CustomerView(){
   const handleTime = (e) => {
 
   }
+  
 
   const handleDay = (e) => {
     const day = e.target.name; // e.g. 'Monday'
@@ -58,6 +57,20 @@ function CustomerView(){
     }
     setSchedule(scheduleCopy);
   }
+
+  const handleChange = (e) => {
+    // getOptionLabel=(option) => option.year.toString();
+    console.log(e.target.name, e.target.value);
+    const test = timeSelect;
+    const timeSelectCopy = [...timeSelect];
+    timeSelectCopy.push(e.target.value);
+    if(timeSelect == []){
+      console.log(timeSelect);
+    } else {
+      const json= test;
+      const timecheck = JSON.parse(json);
+      console.log("HERE ARE THE KEYS",Object.entries(json));}
+  };
 
   const displayHTML =  weekDays.map((day, index)=> (
     <Form.Group controlId="formGridState" key={index}>
@@ -82,14 +95,14 @@ function CustomerView(){
                 <Col lg={3} xs={3}>
                 <Form.Select defaultValue="Choose..." onChange={handleChange}>{
                 hours.map((hour, index)=> (
-                <option  key={(index+7)} value={hour} name="hour" onChange={handleChange}>{hour}</option>
+                <option  key={(index+7)} value={`${day}:{startHour:${hour}}`} name={'Hour'} onChange={handleChange}>{hour}</option>
                 ))}
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
                 <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 minutes.map((minutes, index)=> (
-                <option key={(index+25)} value={minutes} name="minute" onChange={handleChange}>{minutes}</option>
+                <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`} name="minute" onChange={handleChange}>{minutes}</option>
                 ))
                 }
                 </Form.Select>
@@ -97,7 +110,7 @@ function CustomerView(){
                 <Col lg={3} xs={3}>
                 <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 amPm.map((amPm, index)=> (
-                <option key={(index+36)}>{amPm}</option>
+                <option key={(index+36)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
                 
                 ))
                 }
@@ -113,14 +126,14 @@ function CustomerView(){
                 <Col lg={3} xs={3}>
                 <Form.Select onChange={handleChange} defaultValue="Choose...">{
                 hours.map((hour, index)=> (
-                <option key={(index+7)}>{hour}</option>
+                <option key={(index+7)} value={`${day}:{endtHour:${hour}}`}>{hour}</option>
                 ))}
                 </Form.Select>
                 </Col>
                 <Col lg={3} xs={3}>
                 <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 minutes.map((minutes, index)=> (
-                <option key={(index+25)}>{minutes}</option>
+                <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`}>{minutes}</option>
                 ))
                 }
                 </Form.Select>
@@ -128,7 +141,7 @@ function CustomerView(){
                 <Col lg={3} xs={3}>
                 <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
                 amPm.map((amPm, index)=> (
-                <option key={(index+32)}>{amPm}</option>
+                <option key={(index+32)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
                 ))
                 }
                 </Form.Select>
@@ -139,7 +152,7 @@ function CustomerView(){
         </Form.Group>
   ))
 // => minutes.map((minutes, index)=>(<p key={index}>{minutes}</p>))
-  console.log({displayHTML},schedule );
+  console.log({displayHTML},schedule, "Time", timeSelect );
 
 
 

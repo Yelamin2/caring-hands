@@ -22,7 +22,7 @@ function App(props) {
   // })
   
 
-  console.log("NEWUSER FROM APP",user);
+  // console.log("NEWUSER FROM APP",user);
 
   useEffect(() => {
     const checkAuth = async () => {
