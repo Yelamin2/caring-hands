@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
@@ -112,53 +112,39 @@ const INITIAL_PROVIDER=[{
     expiration:"03/31/2023  "
 
 }];
-function ProviderList(props){
+function ProviderList(addProvider){
 
     const[providerList, setProviderList] = useState(INITIAL_PROVIDER);
-    const [addProvider, setAddProvider]= useState();
     const[provider, setProvider]= useState([]);
 
-    const handleClick =(e)=> {
-        e.preventDefault();
-        setAddProvider((prevState) =>
-        ({
-            ...prevState,
-            name: providerList.name,
-        }));
-        console.log('working',addProvider)
+    function handleClick(provider) {
+        console.log("I clicked provider ", provider.name);
+        addProvider(
+            {
+               name: provider.name,
+            }
+        )
     }
     
-    // {
-    //     console.log("I clicked" ,provider)
-    //     // e.preventDefault();
-    //     setAddProvider((addProvider) => ({...addProvider,
-    //         name: provider.name,
-    //         address1:provider.address1,
-    //         address2:provider.address2,
-    //         city:provider.city,
-    //         state:provider.state,
-    //         zip:provider.zip,
-    //     }));
-    //     // setAddProvider({...addProvider,[e.target.name]:e.target.value});
-    //     console.log("Addprovider",addProvider);
-    // };
 
-    const providersHTML = providerList.map((provider,id) =>(
-        <Col>
-        <li key ={id}>
-            <p value={provider.name} name="name" >{provider.name}</p>
+    const providersHTML = providerList.map((provider, id) =>{
+        return (<Col lg = {4} key={id}>
+        <ul >
+            <p >{provider.name}</p>
             <p >{provider.address1} {provider.address2}</p>
             <p></p>
             <p>{provider.city}  {provider.zip}</p>
             <p></p>
-            <button onClick={handleClick} type="submit" as="input">Select</button>
-        </li></Col>
-    ))
+            <button onClick={()=>handleClick(provider)} type="submit" as="input">Select</button>
+        </ul></Col>);}
+    );
 
     return(
      
        <>
-         <ul >{providersHTML}</ul>
+       <Row>
+         {providersHTML},
+         </Row>
        </>
     
     )

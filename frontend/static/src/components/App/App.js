@@ -7,14 +7,24 @@ import CustomerView from '../Screens/Customers/CustomerHome/CustomerView';
 import Spinner from "react-bootstrap/Spinner";
 import LoginForm from '../Auth/LoginForm';
 import Landing from '../Screens/Landing';
+import ProviderList from '../Screens/Customers/ProviderList';
+import CustomerApp from '../Screens/Customers/CustomerHome/CustomerApp';
 
 // /import ProviderForm from '../Screens/Providers/ProviderForm';
 
 
-function App(props) {
+function App() {
   const [isAuth, setIsAuth] = useState(null);
   const navigate = useNavigate();
   const [user, setUser]=useState([]);
+  const [providerSelect, setProviderSelect] = useState([]);
+
+    // const addProvider = (item) =>{
+    //     setProviderSelect([...providerSelect, item]);
+        
+    // }
+
+    console.log("Selected Provides ::", providerSelect);
 
   // const loggedUser = (item => {
   //   setUser([...user, item]);
@@ -62,19 +72,23 @@ function App(props) {
     navigate, 
     user 
   };
-
+  
 
   return (
     <>
     <Header {...headerProps} />
+    
+    {/* <ProviderList addProvider={addProvider}/> */}
     {/* <LoginForm loggedUser={loggedUser}/> */}
+    
     
       <Container>
         <Outlet context={{ setIsAuth, navigate, user}} />
       </Container>
-      <div className="App"></div>
+    
 
       {/* {<ProviderForm loggedUser={loggedUser.id}/>} */}
+      
     </>
     
   );

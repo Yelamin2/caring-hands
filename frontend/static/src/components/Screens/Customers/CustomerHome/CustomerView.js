@@ -60,18 +60,20 @@ function CustomerView(){
 
   const handleChange = (e) => {
     // getOptionLabel=(option) => option.year.toString();
-    console.log(e.target.name, e.target.value);
-    const test = timeSelect;
+    // console.log(e.target.name, e.target.value);
+    // const test = timeSelect;
     const timeSelectCopy = [...timeSelect];
     timeSelectCopy.push(e.target.value);
-    if(timeSelect == []){
-      console.log(timeSelect);
-    } else {
-      const json= test;
-      const timecheck = JSON.parse(json);
-      console.log("HERE ARE THE KEYS",Object.entries(json));}
+    setTimeSelect(timeSelectCopy);
+    // if(timeSelect == []){
+    //   console.log(timeSelect);
+    // } else {
+      // const json= test;
+      // const timecheck = JSON.parse(json);
+      
+    console.log("HERE ARE THE KEYS",timeSelect);
   };
-
+  console.log(timeSelect)
   const displayHTML =  weekDays.map((day, index)=> (
     <Form.Group controlId="formGridState" key={index}>
         <Row lg={4} sm={4}>

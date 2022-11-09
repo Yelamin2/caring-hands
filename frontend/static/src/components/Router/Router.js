@@ -10,14 +10,14 @@ import ProfileForm from '../Screens/ProfileForm';
 import Profile from "../Screens/Profile";
 import ProviderView from "../Screens/Providers/ProviderHome/ProviderView";
 import ProviderForm from "../Screens/Providers/ProviderForm";
-import ProviderList from "../Screens/Customers/providerList";
+import ProviderList from "../Screens/Customers/ProviderList";
+import CustomerApp from "../Screens/Customers/CustomerHome/CustomerApp";
 
 function Router(){
     return(
         <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />}>
-                
                 <Route path='home' element={<Landing />}/>
                 <Route path='profile' element={<Profile />}/>
                 <Route path="login" element={<LoginForm />} />
@@ -26,7 +26,8 @@ function Router(){
                 <Route path='form' element={<ProfileForm />}/>
                 <Route path='providerForm' element ={<ProviderForm />}/>
                 <Route path='provider' element={<ProviderView />}/>
-                <Route path = 'list' element = {<ProviderList/>}/>
+                <Route path = 'list' element={<ProviderList addProvider/>}/>
+                <Route path = 'selection' element={<CustomerApp />}/>
             </Route>
             <Route
           path="*"

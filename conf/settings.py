@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
+    'visits.apps.VisitsConfig',
     
 ]
 REST_FRAMEWORK = {
@@ -151,7 +152,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'EST'
 
 USE_I18N = True
 

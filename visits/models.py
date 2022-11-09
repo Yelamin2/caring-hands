@@ -1,14 +1,29 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from .models import AbstractUser
 
-class Timesheet(models.Model):
-    customer=models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete= models.CASCADE, blank=True)
-    display_name = models.CharField(max_length=255, null=True)
-    weekday= models.DateField(auto_now=False)
+
+
+# class User(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
+
+#     def __str__(self):
+#         return self.user.username
+
+class VisitDay(models.Model):
+    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE )
+    weekday= models.CharField(max_length=16, null=True)
     start_time= models.TimeField(auto_now=False, auto_now_add=False, null=True)
     end_time=  models.TimeField(auto_now=False, auto_now_add=False, null=True)
-
+    # TotalTime=models.DurationField(start_time - end_time)
+    
     def __str__(self):
-        return self.customer.name
+        return self.weekday
+
+# class Timesheet(models.Model):
+#     user= models.ForeignKey(User, on_delete=models.CASCADE)
+#     weekday=models.ManyToOneRel(VisitDay,to=User, field_name=user, on_delete=models.CASCADE)
+   
+#     def __str__(self):
+#         return self.user
