@@ -36,12 +36,12 @@ function App() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      console.log("Fetch request for login")
+      // console.log("Fetch request for login")
       const response = await fetch("/dj-rest-auth/user/");
       if (!response.ok) {
         setIsAuth(false);
         navigate("/home/");
-        console.log("Not Auth");
+        // console.log("Not Auth");
       } else { 
         const data = await response.json();
         setUser({...data}) ;  
@@ -53,7 +53,7 @@ function App() {
     
   }, [isAuth]);
 
-   console.log("Logged user from App.js",user);
+  //  console.log("Logged user from App.js",user);
 
   if (isAuth === null) {
     return ( console.log("Waiting"),

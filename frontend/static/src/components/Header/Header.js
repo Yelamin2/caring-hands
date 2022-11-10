@@ -12,7 +12,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
   const[loggedUser, setLoggedUser]= useState({username:""});
  
   
-  console.log("NewUSER FROM Header", isAuth,is_customer,"/n","NEWUSER",user,"/n","IS_CUSTOMER", user.is_customer)
+  // console.log("NewUSER FROM Header", isAuth,is_customer,"/n","NEWUSER",user,"/n","IS_CUSTOMER", user.is_customer)
 // Check if the user is authorized with proper login token
   const handleLogout = async () => {
     const options = {
@@ -48,9 +48,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           to="/form/"
         >
           Profile
-        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/Customer/">
-          CustomerV
-        </Link><Link className="navbar-expand navbar-nav nav-link" to="/selection/">
+        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/selection/">
           Providers
         </Link> <Button
             variant="link"

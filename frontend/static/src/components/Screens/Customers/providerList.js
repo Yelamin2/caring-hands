@@ -152,8 +152,8 @@ function ProviderList(props){
         fetchUserList();
         
     },[]);
-    console.log("This is my ListView", mylistView);
-    console.log("This is my providerList", providerList);
+    // console.log("This is my ListView", mylistView);
+    // console.log("This is my providerList", providerList);
 
    
 
@@ -179,11 +179,8 @@ function ProviderList(props){
     console.log("Selected Provides ::", providerSelect);
 
 
-
-    
-    
-
     const providersHTML = providerList.map((provider, id) =>{
+        
         return (<Col lg = {4} key={id}>
         <ul >
             <p >{provider.company_name}</p>
@@ -191,12 +188,14 @@ function ProviderList(props){
             <p></p>
             <p>{provider.city}  {provider.zip}</p>
             <p></p>
-            <button onClick={()=> handleClick(provider)
-            } type="submit" as="input">Select</button>
+            <button onClick={()=> props.setSelectedProvider(provider)
+            
+            } type="button">Select</button>
         </ul></Col>);}
     );
     
     const  mylistViewHTML = mylistView.map((list,id) =>{
+        if (providerList.is_provider==true){
         return (<Col lg = {4} key={id}>
         <ul >
             <p >{list.username} {list.company_name}</p>
@@ -204,9 +203,9 @@ function ProviderList(props){
             <p></p>
             <p>{list.city}  {list.zip}</p>
             <p></p>
-            <button onClick={()=> handleClick(list)
-            } type="submit" as="input">Select</button>
-        </ul></Col>);
+            <button onClick={()=> props.setSelectedProvider(list)
+            } type="button">Select</button>
+        </ul></Col>);}
     });
 
     // if(listView != []){}

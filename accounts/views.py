@@ -29,8 +29,10 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         return get_object_or_404(Profile, user=self.request.user)
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def perform_update(self, serializer):
+        return super().perform_update(serializer) 
+        # self, serializer):
+        # serializer.save(user=self.request.user)
     
 
 class UserListAPIView(generics.ListCreateAPIView):
