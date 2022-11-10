@@ -26,7 +26,7 @@ function Router(){
                 <Route path='form' element={<ProfileForm />}/>
                 <Route path='providerForm' element ={<ProviderForm />}/>
                 <Route path='provider' element={<ProviderView />}/>
-                <Route path = 'list' element={<ProviderList addProvider/>}/>
+                <Route path = 'list' element={<ProviderList />}/>
                 <Route path = 'selection' element={<CustomerApp />}/>
             </Route>
             <Route

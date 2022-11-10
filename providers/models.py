@@ -5,7 +5,8 @@ from django.conf import settings
 
 
     
-
+# class Provider(models.Model):
+#     user =
 
 
 class Customer(models.Model):

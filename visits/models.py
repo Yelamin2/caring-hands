@@ -16,7 +16,7 @@ class VisitDay(models.Model):
     weekday= models.CharField(max_length=16, null=True)
     start_time= models.TimeField(auto_now=False, auto_now_add=False, null=True)
     end_time=  models.TimeField(auto_now=False, auto_now_add=False, null=True)
-    # TotalTime=models.DurationField(start_time - end_time)
+    company_name=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, null=True, related_name="visit_days")
     
     def __str__(self):
         return self.weekday

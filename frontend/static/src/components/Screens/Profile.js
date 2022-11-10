@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import defaultProfileImage from "../../images/profile.jpg"
+import defaultProfileImage from "../../images/profile.jpg";
+import './Profile.css';
 
 
 function Profile(){

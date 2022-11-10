@@ -17,14 +17,14 @@ function App() {
   const [isAuth, setIsAuth] = useState(null);
   const navigate = useNavigate();
   const [user, setUser]=useState([]);
-  const [providerSelect, setProviderSelect] = useState([]);
+  // const [providerSelect, setProviderSelect] = useState([]);
 
     // const addProvider = (item) =>{
     //     setProviderSelect([...providerSelect, item]);
         
     // }
 
-    console.log("Selected Provides ::", providerSelect);
+    // console.log("Selected Provides ::", providerSelect);
 
   // const loggedUser = (item => {
   //   setUser([...user, item]);
@@ -75,6 +75,7 @@ function App() {
   
 
   return (
+    
     <>
     <Header {...headerProps} />
     

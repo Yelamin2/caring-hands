@@ -11,47 +11,9 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
 
   const[loggedUser, setLoggedUser]= useState({username:""});
  
-  // const getUser = () => {
-    
-  //   const checkUser = async () => {
-  //     console.log("Fetch request for Header");
-  //     const response2 = await fetch("/dj-rest-auth/user/");
-  //     if (!response2.ok) {
-  //       console.log("Not Auth");
-  //       return;
-  //     } else { 
-  //       const data = await response2.json();
-  //       setLoggedUser({...loggedUser, data}) ;  
-  //       console.log("Yes Auth");  
-  //     };
-      
-            
-  //   };
-     
-    
-  // };  
-
-  // useEffect(()=>{
-    
-  //   getUser();
-  // }, []);
-    // const getLoggedUser = async() => { 
-      
-    //   const response2 = await fetch("/dj-rest-auth/user/").catch(
-    //   handleError
-    //   );
-    //   if (!response2.ok) {
-    //     console.log("fetch failed")
-    //     throw new Error("Network response was not OK.");
-    //   } else {
-    //     console.log("Login ok");
-    //     const data = await response2.json();
-    //     setLoggedUser({...data});
-    //   }; 
-    // };
   
   console.log("NewUSER FROM Header", isAuth,is_customer,"/n","NEWUSER",user,"/n","IS_CUSTOMER", user.is_customer)
-
+// Check if the user is authorized with proper login token
   const handleLogout = async () => {
     const options = {
       method: "POST",
@@ -75,16 +37,57 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
   };
 
  
-
- 
-  
-
   return (
     <Navbar bg="dark" variant="dark" className="mb-3 px-3">
       <Nav className="ml-auto flex-grow-1">
-        <Link className="navbar-expand navbar-nav nav-link" to="/home/">
+        
+        {isAuth && user.is_customer  ? ( <><Link className="navbar-expand navbar-nav nav-link" to="/home/">
           Home
-        </Link><Link className="navbar-expand navbar-nav nav-link" to="/profile/">
+        </Link><Link
+          className="navbar-expand navbar-nav nav-link ms-auto"
+          to="/form/"
+        >
+          Profile
+        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/Customer/">
+          CustomerV
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/selection/">
+          Providers
+        </Link> <Button
+            variant="link"
+            className="navbar-expand navbar-nav nav-link border-0"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button></>):
+        isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link" to="/home/">
+        Home
+      </Link><Link
+          className="navbar-expand navbar-nav nav-link ms-auto"
+          to="/providerform/"
+        >
+          Profile
+        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
+          ProviderView
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/form/">
+          Profile
+        </Link><Button
+            variant="link"
+            className="navbar-expand navbar-nav nav-link border-0"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button></>):
+        (<>
+        <Link className="navbar-expand navbar-nav nav-link" to="/home/">
+        Home
+        </Link>   
+        <Link className="navbar-expand navbar-nav nav-link " to="/login/">
+            Login
+          </Link></>)}
+
+
+
+        {/* <Link className="navbar-expand navbar-nav nav-link" to="/profile/">
           Profile
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/registeration/">
           Registeration
@@ -98,16 +101,19 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           ProviderForm
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/list/">
           list
-        </Link>
-        {isAuth ? ( <Link
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/selection/">
+          Selection
+        </Link> */}
+        
+        {/* {isAuth && user.is_customer  ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"
           to="/form/"
         >
           Profile
-        </Link>):(<Link className="navbar-expand navbar-nav nav-link ms-auto" to="/form/">Profile</Link>)}
+        </Link>):(<Link className="navbar-expand navbar-nav nav-link ms-auto" to="/form/">CustomerView</Link>)} */}
 
        
-        {isAuth ? (
+        {/* {isAuth ? (
           <Button
             variant="link"
             className="navbar-expand navbar-nav nav-link border-0"
@@ -119,8 +125,8 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           <Link className="navbar-expand navbar-nav nav-link" to="/login/">
             Login
           </Link>
-        )}
-        {user == undefined? (
+        )} */}
+        {/* {user == undefined? (
           <Link className="navbar-expand navbar-nav nav-link" to="/login/">
             CustomerFalse
           </Link>
@@ -140,7 +146,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           </Link>
         )
 
-        }
+        } */}
         
       </Nav>
     </Navbar>

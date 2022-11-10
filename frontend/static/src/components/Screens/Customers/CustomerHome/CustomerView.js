@@ -16,17 +16,18 @@ const amPm= ['--',"AM", 'PM'];
 const weekDays = ["Monday", 'Tuseday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
 const INIT_VISIT=[{Monday:{}, Tuseday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
 
-function CustomerView(){
+function CustomerView(user){
   const [justAthought, setJustAthought] = useState(INIT_VISIT);
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
+  console.log(user);
 
   const [schedule, setSchedule]= useState([]);
   // providerList.map((provider, index) =>(
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({displayHTML},option );};
+    console.log({displayHTML},"OPTIONS",option );};
 
 
   
@@ -51,12 +52,22 @@ function CustomerView(){
     } else {
       scheduleCopy.push({
         day: `${day}`,
-        start: null,
-        end: null,
+        start: "09:00",
+        end: "18:00",
       });
     }
     setSchedule(scheduleCopy);
   }
+  const handleChange2 = (e) => {
+    const start= e.target.value;
+    console.log("HandleChange2",e.target.value, start);
+    return start;
+  }
+  const handleChange1 = (e) => {
+    console.log(e.target.value);
+    return ;
+  }
+  console.log(handleChange1, {handleChange2})
 
   const handleChange = (e) => {
     // getOptionLabel=(option) => option.year.toString();
@@ -73,7 +84,8 @@ function CustomerView(){
       
     console.log("HERE ARE THE KEYS",timeSelect);
   };
-  console.log(timeSelect)
+  console.log("TIMESELECT",timeSelect)
+
   const displayHTML =  weekDays.map((day, index)=> (
     <Form.Group controlId="formGridState" key={index}>
         <Row lg={4} sm={4}>
@@ -89,72 +101,118 @@ function CustomerView(){
                 />
                 </Col>
 
-          <Col lg={5} sm={4} >
+          <Col lg={3} sm={4} >
             <Row lg={4} sm={12} >
-                <Col lg={3} xs={3}>
+                <Col lg={4} xs={3}>
                 <Form.Label>Start Time</Form.Label>
                 </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select defaultValue="Choose..." onChange={handleChange}>{
-                hours.map((hour, index)=> (
-                <option  key={(index+7)} value={`${day}:{startHour:${hour}}`} name={'Hour'} onChange={handleChange}>{hour}</option>
-                ))}
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
-                minutes.map((minutes, index)=> (
-                <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`} name="minute" onChange={handleChange}>{minutes}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
-                amPm.map((amPm, index)=> (
-                <option key={(index+36)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
-                
-                ))
-                }
-                </Form.Select>
+                <Col lg={3} xs={3}><input type="time" step='900' id="appt1" name="startTime"
+                  onChange={handleChange1} required/>
+            
                 </Col>
               </Row>
-            </Col>
-            <Col lg={5} sm={4}>
-            <Row lg={6} sm={12}>
-                <Col lg={3} xs={3}>
+          </Col>
+          <Col lg={3} sm={4}>
+            <Row lg={4} sm={12}>
+                <Col lg={4} xs={3}>
                 <Form.Label>End Time</Form.Label>
                 </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select onChange={handleChange} defaultValue="Choose...">{
-                hours.map((hour, index)=> (
-                <option key={(index+7)} value={`${day}:{endtHour:${hour}}`}>{hour}</option>
-                ))}
-                </Form.Select>
+                <Col lg={3} xs={3}><input type="time" step='900' id="appt2" name="endTime"
+                  onChange={handleChange2} required/>
+            
                 </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
-                minutes.map((minutes, index)=> (
-                <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`}>{minutes}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
-                <Col lg={3} xs={3}>
-                <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
-                amPm.map((amPm, index)=> (
-                <option key={(index+32)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
-                ))
-                }
-                </Form.Select>
-                </Col>
+                
+               
+                
+               
               </Row>
             </Col>
         </Row>
         </Form.Group>
+
+
+  // const displayHTML =  weekDays.map((day, index)=> (
+  //   <Form.Group controlId="formGridState" key={index}>
+  //       <Row lg={4} sm={4}>
+  //         <Col lg={2} sm={12}>
+  //               <Form.Check
+  //               label={day}
+  //               value={day}
+  //               name={day}
+  //               type="checkbox"
+  //               checked={schedule.findIndex(i => i.day === day) !== -1}
+  //               onChange={handleDay}
+  //               id={`2`}
+  //               />
+  //               </Col>
+
+  //         <Col lg={5} sm={4} >
+  //           <Row lg={4} sm={12} >
+  //               <Col lg={3} xs={3}>
+  //               <Form.Label>Start Time</Form.Label>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select defaultValue="Choose..." onChange={handleChange}>{
+  //               hours.map((hour, index)=> (
+  //               <option  key={(index+7)} value={`${day}:{startHour:${hour}}`} name={'Hour'} onChange={handleChange}>{hour}</option>
+  //               ))}
+  //               </Form.Select>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
+  //               minutes.map((minutes, index)=> (
+  //               <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`} name="minute" onChange={handleChange}>{minutes}</option>
+  //               ))
+  //               }
+  //               </Form.Select>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
+  //               amPm.map((amPm, index)=> (
+  //               <option key={(index+36)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
+                
+  //               ))
+  //               }
+  //               </Form.Select>
+  //               </Col>
+  //             </Row>
+  //           </Col>
+  //           <Col lg={5} sm={4}>
+  //           <Row lg={6} sm={12}>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Label>End Time</Form.Label>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select onChange={handleChange} defaultValue="Choose...">{
+  //               hours.map((hour, index)=> (
+  //               <option key={(index+7)} value={`${day}:{endtHour:${hour}}`}>{hour}</option>
+  //               ))}
+  //               </Form.Select>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
+  //               minutes.map((minutes, index)=> (
+  //               <option key={(index+25)} value={`${day}:{startMinutes:${minutes}}`}>{minutes}</option>
+  //               ))
+  //               }
+  //               </Form.Select>
+  //               </Col>
+  //               <Col lg={3} xs={3}>
+  //               <Form.Select onChange={handleChange} defaultValue="Choose...">{ 
+  //               amPm.map((amPm, index)=> (
+  //               <option key={(index+32)} value={`${day}:{startMeridiem:${amPm}}`}>{amPm}</option>
+  //               ))
+  //               }
+  //               </Form.Select>
+  //               </Col>
+  //             </Row>
+  //           </Col>
+  //       </Row>
+  //       </Form.Group>
   ))
 // => minutes.map((minutes, index)=>(<p key={index}>{minutes}</p>))
-  console.log({displayHTML},schedule, "Time", timeSelect );
+  
+  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",schedule, "Time", timeSelect );
 
 
 
@@ -167,6 +225,145 @@ function CustomerView(){
       <Form  onSubmit={handleSubmit}>
         <Row>
         {displayHTML}</Row>
+
+        {/* <Form.Group controlId="formGridState">
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Monday"
+              name="Monday"
+              type="checkbox"
+              checked={schedule.findIndex(i => i.day === day) !== -1}
+              onChange={handleDay}
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Tuseday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step="900"  id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Wednesday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Thrusday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Friday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Saturday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+        <Row lg={12} sm={4}>
+          <Col lg={6} sm={12}>
+              <Form.Check
+              label="Sunday"
+              name="group1"
+              type="checkbox"
+              id={`2`}
+              />
+          </Col>
+          <Col lg={3} sm={4}>
+            <Col lg={2} sm={4}>Start Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/></Col>
+          <Col lg={3} sm={4}>End Time</Col>
+            <Col lg={2} sm={4}><input type="time" step='900' id="appt" name="appt"
+            required/>
+          </Col>
+         </Col>
+        </Row>
+                </Form.Group> */}
+
       {/* <Form.Group controlId="formGridState">
         <Row lg={4} sm={4}>
           <Col lg={2} sm={12}>
