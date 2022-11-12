@@ -4,18 +4,29 @@ from django.conf import settings
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from .models import VisitDay
+from .models import  Timesheet
 from rest_framework.authtoken.models import Token
 
 
-class VisitDaySerializer(serializers.ModelSerializer):
+# class PersonCompanyDaySerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = VisitDay
+#     class Meta:
+#         model = PersonCompanyDay
 
-        fields= '__all__'
+#         fields= '__all__'
         
-        # read_only_fields = ('id','username')
+#         # read_only_fields = ('id','username')
+
+# class WeekdaySerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = PersonCompanyDay
+#         fields='__all__'
+
+class TimesheetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Timesheet
+        fields= '__all__'
 
 
     

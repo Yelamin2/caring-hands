@@ -59,14 +59,9 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           </Button></>):
         isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link" to="/home/">
         Home
-      </Link><Link
-          className="navbar-expand navbar-nav nav-link ms-auto"
-          to="/providerform/"
-        >
-          Profile
-        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
+      </Link> <Link className="navbar-expand navbar-nav nav-link" to="/provider/">
           ProviderView
-        </Link><Link className="navbar-expand navbar-nav nav-link" to="/form/">
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
           Profile
         </Link><Button
             variant="link"
@@ -85,7 +80,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
 
 
 
-        {/* <Link className="navbar-expand navbar-nav nav-link" to="/profile/">
+        <Link className="navbar-expand navbar-nav nav-link" to="/profile/">
           Profile
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/registeration/">
           Registeration
@@ -108,7 +103,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           to="/form/"
         >
           Profile
-        </Link>):(<Link className="navbar-expand navbar-nav nav-link ms-auto" to="/form/">CustomerView</Link>)} */}
+        </Link>):(<Link className="navbar-expand navbar-nav nav-link ms-auto" to="/form/">CustomerView</Link>)}
 
        
         {/* {isAuth ? (

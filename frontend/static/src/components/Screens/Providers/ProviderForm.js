@@ -139,8 +139,7 @@ function ProviderForm(props){
 
         <>
        
-        <input type="time" step="18000" id="appt" name="appt"
-       min="09:00" max="18:00"  required/>
+        
         <div>{<Profile />}</div>
         <Form onSubmit={handleSubmit}>
 

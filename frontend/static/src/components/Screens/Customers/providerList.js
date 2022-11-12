@@ -176,7 +176,7 @@ function ProviderList(props){
         //     }]);
         //     console.log("Selected Providers ::", providerSelect);
     }
-    console.log("Selected Provides ::", providerSelect);
+    console.log("Selected Provides ::", providerList);
 
 
     const providersHTML = providerList.map((provider, id) =>{
