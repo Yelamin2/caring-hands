@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import App from "../App/App";
-import CustomerProfile from "../Screens/Customers/ProfileCustomer";
+import CustomerProfile from "../Screens/Customers/CustomerProfile";
 import LoginForm from "../Auth/LoginForm";
 import Registeration from "../Auth/Registration";
 import CustomerView from "../Screens/Customers/CustomerHome/CustomerView";

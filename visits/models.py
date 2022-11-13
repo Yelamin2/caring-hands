@@ -1,9 +1,8 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
 from .models import AbstractUser
-
-
 
 # class Weekday(models.Model):
     # weekday= models.CharField(max_length=16, null=True)
@@ -25,8 +24,8 @@ WEEKDAYS= (
 )
 
 class Timesheet(models.Model):
-    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE )
-    company_name=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE,  related_name="time_sheet")
+    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='customer_name')
+    company_name=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE,  related_name='time_sheet')
     weekday=models.CharField(
         max_length = 20,
         choices = WEEKDAYS,

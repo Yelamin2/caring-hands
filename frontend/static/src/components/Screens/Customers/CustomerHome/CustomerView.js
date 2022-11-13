@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 import Row from "react-bootstrap/esm/Row";
@@ -7,11 +7,13 @@ import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import { format, compareAsc } from 'date-fns';
 import Button from "react-bootstrap/esm/Button";
 import Container from 'react-bootstrap/Container';
+import Cookies from "js-cookie";
+import { handleError } from "../../../../utils/errorHandler";
 
 const weekDays = ["Monday", 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
 const INIT_VISIT=[{Monday:{}, Tuesday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
 
-function CustomerView(props, user){
+function CustomerView({company_name}, user){
   
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
@@ -20,19 +22,33 @@ function CustomerView(props, user){
   const [schedule, setSchedule]= useState([]);
   // providerList.map((provider, index) =>(
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const options = {
+      // `${user ? "PUT" : "POST"}`
+      method:"POST" ,
+      headers: {
+          "Content-Type": "application/json; charset=UTF-8 ",
+          "X-CSRFToken": Cookies.get('csrftoken'),   
+         
+      },
+      body: JSON.stringify(schedule),
+    };
+    const response = await fetch("/api/v1/visits/visits/", options).catch(
+        handleError
+      );
+      if (!response.ok) {
+        throw new Error("Oops. Something went wrong!");
+      } else {
+        const data = await response.json();
+        console.log("MY DATA",data);
+        Cookies.set("Authorization", `Token ${data.key}`);
+        
+      }
+
     console.log(schedule,"OPTIONS",option );};
 
  
-
-
-  
-  const handleChecked = (e) => {
-    if(e.target.checked){
-      console.log(e.target.value );
-    
-  }}
 
   const handleTime = (e) => {
     const day = e.target.dataset.day;
@@ -40,10 +56,15 @@ function CustomerView(props, user){
     if(index !== -1) {
       const scheduleCopy = [...schedule];
       scheduleCopy[index][e.target.name] = e.target.value;
-      console.log(scheduleCopy);
+      console.log("ScheduleCopy ::",scheduleCopy);
     }
    
   }
+  const handleChecked = (e) => {
+    if(e.target.checked){
+      console.log(e.target.value );
+    
+  }}
   
   const handleDay = (e) => {
     const day = e.target.name; // e.g. 'Monday'
@@ -51,32 +72,39 @@ function CustomerView(props, user){
     const indexOfDay = schedule.findIndex(i => i.day === day);
     if(indexOfDay !== -1) {
       scheduleCopy.splice(indexOfDay, 1);
+       
     } else {
       scheduleCopy.push({
         day: `${day}`,
+        // company_name,
       });
     }
     setSchedule(scheduleCopy);
   }
+
+  // const timesheet = schedule.map((item, index) =>
+
   
+  // )
+
  
  
-  const handleChange = (e) => {
-    // getOptionLabel=(option) => option.year.toString();
-    // console.log(e.target.name, e.target.value);
-    // const test = timeSelect;
-    const timeSelectCopy = [...timeSelect];
-    timeSelectCopy.push(e.target.value);
-    setTimeSelect(timeSelectCopy);
-    // if(timeSelect == []){
-    //   console.log(timeSelect);
-    // } else {
-      // const json= test;
-      // const timecheck = JSON.parse(json);
+  // const handleChange = (e) => {
+  //   // getOptionLabel=(option) => option.year.toString();
+  //   // console.log(e.target.name, e.target.value);
+  //   // const test = timeSelect;
+  //   const timeSelectCopy = [...timeSelect];
+  //   timeSelectCopy.push(e.target.value);
+  //   setTimeSelect(timeSelectCopy);
+  //   // if(timeSelect == []){
+  //   //   console.log(timeSelect);
+  //   // } else {
+  //     // const json= test;
+  //     // const timecheck = JSON.parse(json);
       
-    console.log("HERE ARE THE KEYS",timeSelect);
-  };
-  console.log("TIMESELECT",timeSelect)
+  //   console.log("HERE ARE THE KEYS",timeSelect);
+  // };
+  // console.log("TIMESELECT",timeSelect)
 
   const displayHTML =  weekDays.map((day, index)=> (
     <Form.Group controlId="formGridState" key={index}>
@@ -122,7 +150,7 @@ function CustomerView(props, user){
   ))
 // => minutes.map((minutes, index)=>(<p key={index}>{minutes}</p>))
   
-  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",schedule, "Time", timeSelect );
+  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",typeof (schedule), "Provider_ID", company_name );
 
 
 

@@ -152,30 +152,30 @@ function ProviderList(props){
         fetchUserList();
         
     },[]);
-    // console.log("This is my ListView", mylistView);
+    console.log("This is my ListView", mylistView);
     // console.log("This is my providerList", providerList);
 
    
 
 
-    function handleClick(item) { 
-        // console.log("I clicked provider ", provider.name);
-        setProviderSelect([
+    // function handleClick(item) { 
+    //     // console.log("I clicked provider ", provider.name);
+    //     setProviderSelect([
             
-        {
-            name: item.company_name,
-            address1: item.address1,
-            is_provider: item.is_provider,
+    //     {
+    //         name: item.company_name,
+    //         address1: item.address1,
+    //         is_provider: item.is_provider,
             
-        }]);
-        console.log("Selected Provides ::", providerSelect);
-        // setProviderSelect([...providerSelect, 
-        //     {
-        //         //  name: list.company_name,
-        //         address1: list.address1,
-        //     }]);
-        //     console.log("Selected Providers ::", providerSelect);
-    }
+    //     }]);
+    //     console.log("Selected Provides ::", providerSelect);
+    //     // setProviderSelect([...providerSelect, 
+    //     //     {
+    //     //         //  name: list.company_name,
+    //     //         address1: list.address1,
+    //     //     }]);
+    //     //     console.log("Selected Providers ::", providerSelect);
+    // }
     console.log("Selected Provides ::", providerList);
 
 

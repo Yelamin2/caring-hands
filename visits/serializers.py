@@ -4,7 +4,7 @@ from django.conf import settings
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from .models import  Timesheet
+from .models import  Timesheet, AbstractUser
 from rest_framework.authtoken.models import Token
 
 
@@ -26,7 +26,8 @@ from rest_framework.authtoken.models import Token
 class TimesheetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Timesheet
+        id =serializers.PKOnlyObject
         fields= '__all__'
-
+       
 
     

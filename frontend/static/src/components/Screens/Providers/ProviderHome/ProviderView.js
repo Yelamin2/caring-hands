@@ -15,7 +15,7 @@ function ProviderView(){
  
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
+    const fetchTimesheet= async () => {
         const response = await fetch("/api/v1/visits/visits/");
         if (!response.ok){
             if(!response.status === 404){
@@ -28,7 +28,7 @@ function ProviderView(){
         setTimesheet([...data]);
                     
     };
-    fetchUserProfile();
+    fetchTimesheet();
   },[]);  
 
 
