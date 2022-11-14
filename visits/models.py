@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from datetime import datetime  
 
 from .models import AbstractUser
 
@@ -29,8 +30,8 @@ class Timesheet(models.Model):
         max_length = 20,
         choices = WEEKDAYS,
     )
-    start_time= models.TimeField(auto_now=False, auto_now_add=False)
-    end_time=  models.TimeField(auto_now=False, auto_now_add=False)
+    start_time= models.TimeField()
+    end_time=  models.TimeField()
    
     def __str__(self):
         return self.user.username
