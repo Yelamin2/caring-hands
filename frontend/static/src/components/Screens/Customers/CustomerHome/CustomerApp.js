@@ -44,10 +44,21 @@ function CustomerApp(props){
     console.log("Selected Providers ::", selectedProvider , "HTML provider_i:::", (company_name))
     return(
         <>
-        <Row>
+        <Row 
+        style={{ 
+            position: 'sticky',
+            backgroundColor: 'LightGoldenrodYellow', 
+            boxShadow: "10px 10px 9px SaddleBrown"
+        }}>
         <Col lg={8} xs={12}><CustomerView company_name={company_name}/></Col>
         <Col lg={4} xs={12}>{selectedProviderHTML}</Col>
         </Row>
+        <p> 
+
+        </p>
+        <p> 
+
+        </p>
         <Row>
         <ProviderList setSelectedProvider={setSelectedProvider}/></Row>
         

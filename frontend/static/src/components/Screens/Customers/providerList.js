@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
+import Button from "react-bootstrap/esm/Button";
+import Card from 'react-bootstrap/Card';
 
 const INITIAL_PROVIDER=[{
     id:1,
@@ -113,15 +114,15 @@ const INITIAL_PROVIDER=[{
 
 }];
 
-    const any= [{username:"",
-    address1:"",
-    company_name:"",
-    address2:"",
-    is_customer:"",
-    is_provider:"",
-    city:"",
-    zip:"",
-    }];
+    // const any= [{username:"",
+    // address1:"",
+    // company_name:"",
+    // address2:"",
+    // is_customer:"",
+    // is_provider:"",
+    // city:"",
+    // zip:"",
+    // }];
 function ProviderList(props){
 
     const[providerList, setProviderList] = useState(INITIAL_PROVIDER);
@@ -181,31 +182,60 @@ function ProviderList(props){
 
     const providersHTML = providerList.map((provider, id) =>{
         
-        return (<Col lg = {4} key={id}>
-        <ul >
+        return (<Col lg = {3} key={id}  >
+            <Card border="secondary"
+             style={{ width: '18rem' , 
+             backgroundColor: 'rgb(138, 208, 219)', 
+             boxShadow: "10px 10px 9px SaddleBrown"
+            }}
+             className=" text-center">
+                <p></p>
             <p >{provider.company_name}</p>
             <p >{provider.address1} {provider.address2}</p>
-            <p></p>
+            
             <p>{provider.city}  {provider.zip}</p>
             <p></p>
-            <button onClick={()=> props.setSelectedProvider(provider)
-            
-            } type="button">Select</button>
-        </ul></Col>);}
+            <Button variant="info"  
+            style={{ width: '5rem', 
+            alignSelf:"center", 
+            backgroundColor:""}} 
+            onClick={()=> props.setSelectedProvider(list)
+            } type="button">Select</Button>
+            <p> </p>
+            </Card>
+            <p></p>
+       </Col>);}
     );
     
     const  mylistViewHTML = mylistView.map((list,id) =>{
-        if (providerList.is_provider==true){
-        return (<Col lg = {4} key={id}>
-        <ul >
-            <p >{list.username} {list.company_name}</p>
+        if (list.is_provider==true && list.company_name != undefined){
+        return (<Col lg = {3} key={id} >
+            <Card border="secondary"
+             style={{ width: '18rem' , 
+             backgroundColor: 'LightGoldenrodYellow', 
+             boxShadow: "10px 10px 9px SaddleBrown"
+            }}
+             className=" text-center">
+                <p></p>
+            <p >{list.company_name}</p>
             <p >{list.address1} {list.address2}</p>
-            <p></p>
             <p>{list.city}  {list.zip}</p>
+            <p> </p>
+            <Button  
+            style={{ width: '5rem', 
+            alignSelf:"center", 
+            backgroundColor:"LightGreen"}} 
+            onClick={()=> props.setSelectedProvider(list)
+            } type="button">Select</Button >
+            <p> </p>
+    
+            </Card >
             <p></p>
-            <button onClick={()=> props.setSelectedProvider(list)
-            } type="button">Select</button>
-        </ul></Col>);}
+
+            
+            
+            
+       </Col>);}
     });
 
     // if(listView != []){}
@@ -221,7 +251,10 @@ function ProviderList(props){
     return(
      
        <>
-       {mylistViewHTML}
+       <Row>
+        {mylistViewHTML}
+        </Row>
+       
        <Row>
          {providersHTML},
          </Row>

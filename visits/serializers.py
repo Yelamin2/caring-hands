@@ -24,9 +24,11 @@ from rest_framework.authtoken.models import Token
 #         fields='__all__'
 
 class TimesheetSerializer(serializers.ModelSerializer):
+
+    company_name=serializers.ReadOnlyField(source="company_name.Company_name")
+
     class Meta:
         model = Timesheet
-        id =serializers.PKOnlyObject
         fields= '__all__'
        
 

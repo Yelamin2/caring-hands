@@ -76,10 +76,11 @@ function CustomerView({company_name}, user){
     } else {
       scheduleCopy.push({
         day: `${day}`,
-        // company_name,
+        company_name,
       });
     }
     setSchedule(scheduleCopy);
+   
   }
 
   // const timesheet = schedule.map((item, index) =>
@@ -141,7 +142,8 @@ function CustomerView({company_name}, user){
                 <Form.Label>End Time</Form.Label>
                 </Col>
                 <Col lg={4} xs={3}><input data-day={day} type="time" step='900' id="appt2" name="endTime"
-                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.day === day) === -1}/>          
+                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.day === day) === -1}/>
+                          
                 </Col>
              </Row>
             </Col>
@@ -164,9 +166,16 @@ function CustomerView({company_name}, user){
         <Row>
         {displayHTML}</Row>
         <Row></Row>
-          <Button variant="primary" type="submit">
+        <p>  </p>
+        <Button  
+            style={{ width: '6rem', 
+            alignItems: "center" , 
+            backgroundColor:"LightGreen"}} 
+            type="submit">
             Submit
           </Button>
+          <p> </p>
+          <p> </p>
       </Form>
        
    
