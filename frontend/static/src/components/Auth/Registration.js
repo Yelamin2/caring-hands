@@ -62,25 +62,25 @@ function Registeration() {
       const data = await response.json();
       Cookies.set("Authorization", `Token ${data.key}`);
       setIsAuth(true);
-      
+      navigate("/profile/");
     }
   };
   setTimeout(1000);
   console.log("now registered", {setIsAuth});
 
-  const fetchUserProfile = async () => {
-      const response = await fetch("/dj-rest-auth/user/");
-      if (!response.ok){
-          if(!response.status === 404){
-              throw Error("Oops. Something went wrong!");
-          }else {
-        const data = await response.json();
-        setNewUser({...data});
-        console.log(newUser);
-        navigate("/profile/"); 
-      }       
-  };}
-  fetchUserProfile();
+  // const fetchUserProfile = async () => {
+  //     const response = await fetch("/dj-rest-auth/user/");
+  //     if (!response.ok){
+  //         if(!response.status === 404){
+  //             throw Error("Oops. Something went wrong!");
+  //         }else {
+  //       const data = await response.json();
+  //       setNewUser({...data});
+  //       console.log(newUser);
+  //       navigate("/profile/"); 
+  //     }       
+  // };}
+  // fetchUserProfile();
  
   console.log("newUser",{newUser});
   

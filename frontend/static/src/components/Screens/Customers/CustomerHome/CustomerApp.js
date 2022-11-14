@@ -1,6 +1,6 @@
 import React from "react";
 import CustomerView from "./CustomerView";
-
+import { useOutletContext } from "react-router-dom";
 import ProviderList from "../ProviderList";
 import { useState, useEffect } from "react";
 import Col from 'react-bootstrap/Col';
@@ -13,6 +13,7 @@ let company_name;
 function CustomerApp(props){
     const [selectedProvider, setSelectedProvider] = useState(null);
     const [timesheet, setTimesheet]= useState([]);
+    const { user} = useOutletContext();
 
 
     if(selectedProvider == null){
@@ -51,7 +52,10 @@ function CustomerApp(props){
             boxShadow: "10px 10px 9px SaddleBrown"
         }}>
         <Col lg={8} xs={12}><CustomerView company_name={company_name}/></Col>
-        <Col lg={4} xs={12}>{selectedProviderHTML}</Col>
+        <Col lg={4} xs={12}>
+            <p></p>
+            {selectedProviderHTML}
+            </Col>
         </Row>
         <p> 
 

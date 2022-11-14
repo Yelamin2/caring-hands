@@ -3,6 +3,7 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Card from 'react-bootstrap/Card';
+import { useOutletContext } from "react-router-dom";
 
 const INITIAL_PROVIDER=[{
     id:1,
@@ -114,15 +115,7 @@ const INITIAL_PROVIDER=[{
 
 }];
 
-    // const any= [{username:"",
-    // address1:"",
-    // company_name:"",
-    // address2:"",
-    // is_customer:"",
-    // is_provider:"",
-    // city:"",
-    // zip:"",
-    // }];
+
 function ProviderList(props){
 
     const[providerList, setProviderList] = useState(INITIAL_PROVIDER);
@@ -132,11 +125,11 @@ function ProviderList(props){
     const [rawList, setRawList]= useState([]);
     const [mylistView, setMylistView]= useState([]);
 
+    const { user} = useOutletContext();
+    console.log(user.id, user.company_name);
 
-    // const addProvider = (item) =>{
-    //     setProviderSelect([...providerSelect, item]);
-        
-    // }
+
+ 
     useEffect(() => {
         const fetchUserList = async () => {
             const response = await fetch("/api/v1/users/list/");
@@ -153,30 +146,7 @@ function ProviderList(props){
         fetchUserList();
         
     },[]);
-    console.log("This is my ListView", mylistView);
-    // console.log("This is my providerList", providerList);
 
-   
-
-
-    // function handleClick(item) { 
-    //     // console.log("I clicked provider ", provider.name);
-    //     setProviderSelect([
-            
-    //     {
-    //         name: item.company_name,
-    //         address1: item.address1,
-    //         is_provider: item.is_provider,
-            
-    //     }]);
-    //     console.log("Selected Provides ::", providerSelect);
-    //     // setProviderSelect([...providerSelect, 
-    //     //     {
-    //     //         //  name: list.company_name,
-    //     //         address1: list.address1,
-    //     //     }]);
-    //     //     console.log("Selected Providers ::", providerSelect);
-    // }
     console.log("Selected Provides ::", providerList);
 
 
@@ -256,7 +226,7 @@ function ProviderList(props){
         </Row>
        
        <Row>
-         {providersHTML},
+         {/* {providersHTML}, */}
          </Row>
        </>
     

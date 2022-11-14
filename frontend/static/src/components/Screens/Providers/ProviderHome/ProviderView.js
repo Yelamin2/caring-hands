@@ -8,10 +8,14 @@ import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import enUS from 'date-fns/locale/en-US';
 import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
+import { useOutletContext } from 'react-router-dom';
 
 var timesheetHTML
 function ProviderView(){
   const [timesheet, setTimesheet] = useState([]);
+
+  const {user} =useOutletContext();
+  
  
 
   useEffect(() => {
@@ -37,12 +41,14 @@ function ProviderView(){
  {
     console.log("There is a time Sheet",timesheet);
     timesheetHTML = timesheet.map((timetable, id) =>{
+      if(timetable.company_name==user.id){
       return (<Col lg = {4} key={id}>
         <Row>
+          <Col>{timetable.user}</Col>
           <Col>{timetable.weekday}</Col>
           <Col>{timetable.start_time}</Col>
           <Col>{timetable.end_time}</Col>
-        </Row></Col>);}
+        </Row></Col>);};}
         );
   } else{
       timesheetHTML="";
@@ -50,45 +56,14 @@ function ProviderView(){
 
     }
   
-  
 
- 
-
-
-  // const [date,setDate]=useState(new Date());
-  // const onChange= date =>{
-  // setDate(date);
-  // setDefaultLocale('enUS');
-  // }
-  // const onSubmit = event => {
-  //   event.preventDefault();
-  //   alert(date)
-  // }
   return(
     <div className="calendarApp mt-5">
 
       <h1>Service provider main page</h1>
       <Col>{timesheetHTML}</Col>
        
-            {/* <DatePicker
-      selected={startTime}
-      onChange={(date) => setStartTime(date)}
-      showTimeSelect
-      showTimeSelectOnly
-      timeIntervals={15}
-      timeCaption="Time"
-      dateFormat="h:mm aa"
-    />
-     <DatePicker
-      selected={endTime}
-      onChange={(date) => setEndTime(date)}
-      showTimeSelect
-      showTimeSelectOnly
-      timeIntervals={15}
-      timeCaption="Time"
-      dateFormat="h:mm aa"
-    /> */}
-              
+   
       </div>
   );
 }

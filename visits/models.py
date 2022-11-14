@@ -13,11 +13,10 @@ from .models import AbstractUser
     #     return self.weekday
 
 WEEKDAYS= (
-    ("", ""),
     ("Monday", "Monday"),
     ("Tuesday", "Tuesday"),
     ("Wednesday", "Wednesday"),
-    ("Thrusday","Thrusday"),
+    ("Thursday","Thursday"),
     ("Friday", "Friday"),
     ("Saturday", "Saturday"),
     ("Sunday", "Sunday"),
@@ -29,10 +28,9 @@ class Timesheet(models.Model):
     weekday=models.CharField(
         max_length = 20,
         choices = WEEKDAYS,
-        default = ''
     )
-    start_time= models.TimeField(auto_now=False, auto_now_add=False, null=True)
-    end_time=  models.TimeField(auto_now=False, auto_now_add=False, null=True)
+    start_time= models.TimeField(auto_now=False, auto_now_add=False)
+    end_time=  models.TimeField(auto_now=False, auto_now_add=False)
    
     def __str__(self):
         return self.user.username

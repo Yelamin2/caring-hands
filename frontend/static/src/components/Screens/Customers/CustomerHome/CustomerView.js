@@ -9,15 +9,18 @@ import Button from "react-bootstrap/esm/Button";
 import Container from 'react-bootstrap/Container';
 import Cookies from "js-cookie";
 import { handleError } from "../../../../utils/errorHandler";
+import { useOutletContext } from "react-router-dom";
 
 const weekDays = ["Monday", 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
 const INIT_VISIT=[{Monday:{}, Tuesday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
 
-function CustomerView({company_name}, user){
+function CustomerView({company_name}){
   
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
-  // console.log(user);
+  const { user} = useOutletContext();
+  console.log(user);
+
 
   const [schedule, setSchedule]= useState([]);
   // providerList.map((provider, index) =>(
@@ -51,8 +54,8 @@ function CustomerView({company_name}, user){
  
 
   const handleTime = (e) => {
-    const day = e.target.dataset.day;
-    const index = schedule.findIndex(obj => obj.day === day);
+    const weekday = e.target.dataset.weekday;
+    const index = schedule.findIndex(obj => obj.weekday === weekday);
     if(index !== -1) {
       const scheduleCopy = [...schedule];
       scheduleCopy[index][e.target.name] = e.target.value;
@@ -67,16 +70,17 @@ function CustomerView({company_name}, user){
   }}
   
   const handleDay = (e) => {
-    const day = e.target.name; // e.g. 'Monday'
+    const weekday = e.target.name; // e.g. 'Monday'
     const scheduleCopy = [...schedule];
-    const indexOfDay = schedule.findIndex(i => i.day === day);
-    if(indexOfDay !== -1) {
-      scheduleCopy.splice(indexOfDay, 1);
+    const indexOfWeekday = schedule.findIndex(i => i.weekday === weekday);
+    if(indexOfWeekday !== -1) {
+      scheduleCopy.splice(indexOfWeekday, 1);
        
     } else {
       scheduleCopy.push({
-        day: `${day}`,
+        weekday: `${weekday}`,
         company_name,
+        user:user.id,
       });
     }
     setSchedule(scheduleCopy);
@@ -107,16 +111,16 @@ function CustomerView({company_name}, user){
   // };
   // console.log("TIMESELECT",timeSelect)
 
-  const displayHTML =  weekDays.map((day, index)=> (
+  const displayHTML =  weekDays.map((weekday, index)=> (
     <Form.Group controlId="formGridState" key={index}>
         <Row lg={6} sm={12}>
           <Col lg={2} sm={3}>
                 <Form.Check
-                label={day}
-                value={day}
-                name={day}
+                label={weekday}
+                value={weekday}
+                name={weekday}
                 type="checkbox"
-                checked={schedule.findIndex(i => i.day === day) !== -1}
+                checked={schedule.findIndex(i => i.weekday === weekday) !== -1}
                 onChange={handleDay}
                 id={`2`}
                 />
@@ -127,8 +131,8 @@ function CustomerView({company_name}, user){
                 <Col lg={6} xs={3}>
                 <Form.Label>Start Time</Form.Label>
                 </Col>
-                <Col lg={4} xs={3}><input data-day={day} type="time" step='900' id="appt1" name="startTime"
-                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.day === day) === -1}
+                <Col lg={4} xs={3}><input data-weekday={weekday} type="time" step='900' id="appt1" name="start_time"
+                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.weekday === weekday) === -1}
                   /*{schedule.findIndex(obj => obj.day === day) === -1}*/
                   />
             
@@ -141,8 +145,8 @@ function CustomerView({company_name}, user){
                 <Col lg={6} xs={3}>
                 <Form.Label>End Time</Form.Label>
                 </Col>
-                <Col lg={4} xs={3}><input data-day={day} type="time" step='900' id="appt2" name="endTime"
-                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.day === day) === -1}/>
+                <Col lg={4} xs={3}><input data-weekday={weekday} type="time" step='900' id="appt2" name="end_time"
+                  onChange={handleTime} required disabled={schedule.findIndex(obj => obj.weekday === weekday) === -1}/>
                           
                 </Col>
              </Row>
@@ -152,18 +156,22 @@ function CustomerView({company_name}, user){
   ))
 // => minutes.map((minutes, index)=>(<p key={index}>{minutes}</p>))
   
-  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",typeof (schedule), "Provider_ID", company_name );
+  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",schedule, "Provider_ID", company_name );
 
 
 
   return(
   
-    <> Here is the Customer View 
+    <> 
+    <p></p>
       <ThemeProvider breakpoints={['lg',' md','xs']} miniBreakpoint="sm">
       <Container fluid >
         
       <Form  onSubmit={handleSubmit}>
-        <Row>
+        <Row 
+        style={{ 
+        backgroundColor: 'LightGoldenrodYellow'
+       }}>
         {displayHTML}</Row>
         <Row></Row>
         <p>  </p>
