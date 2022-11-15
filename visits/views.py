@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
-from .models import  AbstractUser, Timesheet
-from .serializers import TimesheetSerializer
+from .models import  AbstractUser, Timesheet, VisitLog
+from .serializers import TimesheetSerializer, VisitLogSerializer
 from .permissions import TimesheetPermissions
 
 from django.shortcuts import render, get_object_or_404
@@ -46,11 +46,19 @@ class CustomerTimesheetDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
         customer = self.request.user
         return Timesheet.objects.filter(customer=customer).order_by('weekday')
         
-       
-        
-
-
     def perform_create(self, serializer):
         # import pdb 
         # pdb.set_trace()
         serializer.save(user=self.request.user)
+
+class VisitLogListAPIView(generics.ListCreateAPIView):
+    serializer_class=VisitLogSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        # import pdb 
+        # pdb.set_trace()
+        user = self.request.user
+        return VisitLog.objects.filter(user=user).order_by('start_visit')

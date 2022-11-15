@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime  
+from django.core.exceptions import ValidationError
 
 from .models import AbstractUser
 
@@ -35,3 +36,22 @@ class Timesheet(models.Model):
    
     def __str__(self):
         return self.user.username
+
+
+class VisitLog(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='provider_visits')
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='client_visits')
+    start_visit=models.DateTimeField()
+    end_visit= models.DateTimeField()
+    notes= models.TextField(null=True, blank=True)
+
+    def check_time(self):
+        if self.start_visit > self.end_visit:
+            raise ValidationError('Start time should be before end time!')
+        return 
+
+    def __str__(self):
+        return self.user.company_name
+
+
+    

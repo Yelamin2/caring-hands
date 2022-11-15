@@ -12,6 +12,7 @@ import ProviderView from "../Screens/Providers/ProviderHome/ProviderView";
 import ProviderForm from "../Screens/Providers/ProviderForm";
 import ProviderList from "../Screens/Customers/ProviderList";
 import CustomerApp from "../Screens/Customers/CustomerHome/CustomerApp";
+import LoggedVisits from "../Screens/Providers/ProviderHome/LoggedVisits";
 
 function Router(){
     return(
@@ -28,6 +29,7 @@ function Router(){
                 <Route path='provider' element={<ProviderView />}/>
                 <Route path = 'list' element={<ProviderList />}/>
                 <Route path = 'selection' element={<CustomerApp />}/>
+                <Route path ='logedvisits' element={<LoggedVisits />}/>
             </Route>
             <Route
           path="*"

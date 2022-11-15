@@ -5,7 +5,7 @@ from django.conf import settings
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from dj_rest_auth.registration.serializers import RegisterSerializer
-from .models import  Timesheet, AbstractUser
+from .models import  Timesheet, AbstractUser, VisitLog
 from rest_framework.authtoken.models import Token
 
 User = get_user_model()
@@ -41,6 +41,17 @@ class TimesheetSerializer(serializers.ModelSerializer):
         model = Timesheet
         fields= '__all__'
         depth=2
-       
+
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username')
+
+class VisitLogSerializer(serializers.ModelSerializer):
+    client_details = ClientSerializer(source='client', read_only=True)
+    class Meta:
+        model = VisitLog
+        fields= '__all__'
 
     

@@ -95,8 +95,10 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/list/">
           list
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/selection/">
-          Selection
-        </Link> 
+          Selection 
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/logedvisits/">
+        LoggedVisit
+      </Link>  
         
         {/* {isAuth && user.is_customer  ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"
