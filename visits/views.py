@@ -20,11 +20,10 @@ class TimesheetDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Timesheet.objects.all()
     serializer_class=TimesheetSerializer
     # permission_classes=TimesheetPermissions
-    def get_object(self):
-        return get_object_or_404(Timesheet, user=self.request.user)
+    # def get_object(self):
+    #     return get_object_or_404(Timesheet, user=self.request.user)
     def perform_update(self, serializer):
-        
-        serializer.save(user=self.request.user)
+        serializer.save(customer=self.request.user)
 
 class TimesheetListAPIVIEW(generics.ListCreateAPIView):
     queryset = Timesheet.objects.all()
@@ -39,6 +38,13 @@ class TimesheetListAPIVIEW(generics.ListCreateAPIView):
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+class CustomerTimesheetDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class=TimesheetSerializer
+
+    def get_queryset(self):
+        customer = self.request.user
+        return Timesheet.objects.filter(customer=customer).order_by('weekday')
         
        
         

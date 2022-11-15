@@ -1,4 +1,5 @@
 from dj_rest_auth.serializers import UserDetailsSerializer
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from django.conf import settings
 from allauth.account.adapter import get_adapter
@@ -7,7 +8,7 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from .models import  Timesheet, AbstractUser
 from rest_framework.authtoken.models import Token
 
-
+User = get_user_model()
 # class PersonCompanyDaySerializer(serializers.ModelSerializer):
 
 #     class Meta:
@@ -24,12 +25,22 @@ from rest_framework.authtoken.models import Token
 #         fields='__all__'
 
 class TimesheetSerializer(serializers.ModelSerializer):
+    # user= serializers.SlugRelatedField(
+    #      many=False,
+    #     queryset=User.objects.all(),
+    #     read_only=False,
+    #     slug_field='username',
+    #     allow_null=True
+     
+
+    # )
 
     # company_name=serializers.ReadOnlyField(source="company_name.Company_name")
 
     class Meta:
         model = Timesheet
         fields= '__all__'
+        depth=2
        
 
     

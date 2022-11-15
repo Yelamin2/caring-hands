@@ -20,37 +20,7 @@ const INITIAL_USER=[{
     expiration:Date,
     }]
 function ProviderForm(props){
-    // const [profileDetail, setProfileDetail]=useState([INITIAL_USER]);
 
-    // const handleInput = (e) => {
-    //     const {name, value} = e.target;
-    //     setProfileDetail((prevProfileDetail) => ({
-    //         ...prevProfileDetail, 
-    //         [name]: value,
-    //     }));
-    // };
-    // const handleError = (err) => console.warn(err);
-
-    // const handleSubmit= async (e) => {
-    //     e.preventDefault();
-    //     const options = {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json; charset=UTF-8 ",
-    //         },
-    //         body: JSON.stringify(profileDetail),
-    //     };
-    //     const response = await fetch("/dj-rest-auth/user/", options).catch(
-    //         handleError
-    //       );
-    //       if (!response.ok) {
-    //         throw new Error("Oops. Something went wrong!");
-    //       } else {
-    //         const data = await response.json();
-    //         Cookies.set("Authorization", `Token ${data.key}`);
-    //         props.setAuth(true);
-    //       }
-    //     };
     const [viewDetail, setViewDetail]=useState({INITIAL_USER});
     const[profile , setProfile]= useState({});
     const [profileDetail, setProfileDetail]=useState(INITIAL_USER);
@@ -128,18 +98,12 @@ function ProviderForm(props){
           }
         };
         
-    
-
-
-
-
 
 
     return (
 
         <>
-       
-        
+
         <div>{<Profile />}</div>
         <Form onSubmit={handleSubmit}>
 

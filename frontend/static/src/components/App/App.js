@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import CaringHands from './../../images/CaringHands.jpg'
 import { useNavigate, Outlet,useOutletContext } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Header from '../Header/Header';
@@ -49,7 +50,7 @@ function App() {
       }
     };
 
-    setTimeout(checkAuth, 1000);
+    setTimeout(checkAuth, 100);
     
   }, [isAuth]);
 
@@ -76,7 +77,8 @@ function App() {
 
   return (
     
-    <>
+    < >
+    
     <Header {...headerProps} />
     
     {/* <ProviderList addProvider={addProvider}/> */}

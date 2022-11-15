@@ -1,9 +1,9 @@
 from django.urls import include, path
-from .views import TimesheetListAPIVIEW, TimesheetDetailAPIView
+from .views import TimesheetListAPIVIEW, TimesheetDetailAPIView, CustomerTimesheetDetailAPIView
 
 urlpatterns = [
     path('visits/',TimesheetListAPIVIEW.as_view(), name= 'Visits_list'),
-    path('visits/user/', TimesheetDetailAPIView.as_view(), name="time_sheet"),
-    # path('sheet/', TimesheetLISTAPIVIEW.as_view()),
+    path('visits/customer/<int:pk>/', TimesheetDetailAPIView.as_view(), name="time_sheet"),
+    path('sheet/<int:pk>/', CustomerTimesheetDetailAPIView.as_view(), name="details_customer" ),
    
 ]

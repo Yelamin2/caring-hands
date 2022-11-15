@@ -13,13 +13,14 @@ import { useOutletContext } from "react-router-dom";
 
 const weekDays = ["Monday", 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturday', 'Sunday'];
 const INIT_VISIT=[{Monday:{}, Tuesday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
+var timesheetHTML;
 
 function CustomerView({company_name}){
   
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
   const { user} = useOutletContext();
-  console.log(user);
+  const [timesheet, setTimesheet] = useState([]);
 
 
   const [schedule, setSchedule]= useState([]);
@@ -29,7 +30,7 @@ function CustomerView({company_name}){
     e.preventDefault();
     const options = {
       // `${user ? "PUT" : "POST"}`
-      method:"POST" ,
+      method: "POST" ,
       headers: {
           "Content-Type": "application/json; charset=UTF-8 ",
           "X-CSRFToken": Cookies.get('csrftoken'),   
@@ -80,36 +81,48 @@ function CustomerView({company_name}){
       scheduleCopy.push({
         weekday: `${weekday}`,
         company_name,
-        user:user.id,
+        customer:user.id,
       });
     }
     setSchedule(scheduleCopy);
    
   }
 
-  // const timesheet = schedule.map((item, index) =>
+  useEffect(() => {
+    const fetchTimesheet= async () => {
+        const response = await fetch("/api/v1/visits/visits/");
+        if (!response.ok){
+            if(!response.status === 404){
+                throw Error("Oops. Something went wrong!");
+            }
+            return;
+        }
 
-  
-  // )
+        const data = await response.json();
+        setTimesheet([...data]);
+                    
+    };
+    fetchTimesheet();
+  },[]); 
+  if(timesheet.length != 0)
+ {
+    // console.log("There is a time Sheet",timesheet);
+    timesheetHTML = timesheet.map((timetable, id) =>{
+      if(timetable.user.id==user.id){
+      return (<Col lg = {12} key={id}>
+        <Row>
+          <Col>{timetable.company_name.company_name}</Col>
+          <Col>{timetable.weekday}</Col>
+          <Col>Start : {timetable.start_time}</Col>
+          <Col>End : {timetable.end_time}</Col>
+        </Row></Col>);};}
+        );
+  } else{
+      timesheetHTML="";
+      // console.log("No time Sheet",timesheet)
 
- 
- 
-  // const handleChange = (e) => {
-  //   // getOptionLabel=(option) => option.year.toString();
-  //   // console.log(e.target.name, e.target.value);
-  //   // const test = timeSelect;
-  //   const timeSelectCopy = [...timeSelect];
-  //   timeSelectCopy.push(e.target.value);
-  //   setTimeSelect(timeSelectCopy);
-  //   // if(timeSelect == []){
-  //   //   console.log(timeSelect);
-  //   // } else {
-  //     // const json= test;
-  //     // const timecheck = JSON.parse(json);
-      
-  //   console.log("HERE ARE THE KEYS",timeSelect);
-  // };
-  // console.log("TIMESELECT",timeSelect)
+    } 
+
 
   const displayHTML =  weekDays.map((weekday, index)=> (
     <Form.Group controlId="formGridState" key={index}>
@@ -185,6 +198,9 @@ function CustomerView({company_name}){
           <p> </p>
           <p> </p>
       </Form>
+      <Row>
+        {timesheetHTML}
+      </Row>
        
    
       </Container>

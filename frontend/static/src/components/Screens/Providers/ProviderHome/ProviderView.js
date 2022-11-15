@@ -39,20 +39,20 @@ function ProviderView(){
 
  if(timesheet.length != 0)
  {
-    console.log("There is a time Sheet",timesheet);
+    // console.log("There is a time Sheet",timesheet);
     timesheetHTML = timesheet.map((timetable, id) =>{
-      if(timetable.company_name==user.id){
-      return (<Col lg = {4} key={id}>
+      if(timetable.company_name.id==user.id){
+      return (<Col lg = {6} key={id}>
         <Row>
-          <Col>{timetable.user}</Col>
+          <Col>{timetable.user.first_name} {timetable.user.last_name}</Col>
           <Col>{timetable.weekday}</Col>
-          <Col>{timetable.start_time}</Col>
-          <Col>{timetable.end_time}</Col>
+          <Col>Start : {timetable.start_time}</Col>
+          <Col>End : {timetable.end_time}</Col>
         </Row></Col>);};}
         );
   } else{
       timesheetHTML="";
-      console.log("No time Sheet",timesheet)
+      // console.log("No time Sheet",timesheet)
 
     }
   

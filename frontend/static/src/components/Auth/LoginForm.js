@@ -50,7 +50,7 @@ function LoginForm(props) {
         setIsAuth(true);
       }
      
-      setTimeout(500);      
+      // setTimeout(500);      
         // const options2 = {
         //   method: "GET",
         //   headers: {

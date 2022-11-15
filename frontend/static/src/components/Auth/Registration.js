@@ -65,7 +65,7 @@ function Registeration() {
       navigate("/profile/");
     }
   };
-  setTimeout(1000);
+  // setTimeout(1000);
   console.log("now registered", {setIsAuth});
 
   // const fetchUserProfile = async () => {
