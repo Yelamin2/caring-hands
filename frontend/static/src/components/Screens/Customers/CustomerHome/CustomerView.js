@@ -15,12 +15,13 @@ const weekDays = ["Monday", 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturd
 const INIT_VISIT=[{Monday:{}, Tuesday:{}, Wednesday:{}, Thursday:{},Friday:{}, Saturday:{}, Sunday:{}}]
 var timesheetHTML;
 
-function CustomerView({company_name}){
+function CustomerView({company_name, notes}){
   
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
   const { user} = useOutletContext();
   const [timesheet, setTimesheet] = useState([]);
+  const [customerMessage, setCustomerMessage]=useState([]);
 
 
   const [schedule, setSchedule]= useState([]);
@@ -28,6 +29,13 @@ function CustomerView({company_name}){
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCustomerMessage((customerMessage) => ({
+      ...customerMessage,
+      notes: notes,
+      client: user.id,
+      user:(company_name)
+  }));
+    
     const options = {
       // `${user ? "PUT" : "POST"}`
       method: "POST" ,
@@ -39,18 +47,39 @@ function CustomerView({company_name}){
       body: JSON.stringify(schedule),
     };
     const response = await fetch("/api/v1/visits/visits/", options).catch(
+      handleError
+    );
+    if (!response.ok) {
+      throw new Error("Oops. Something went wrong!");
+    } else {
+      const data = await response.json();
+      console.log("MY DATA",data);
+      Cookies.set("Authorization", `Token ${data.key}`);
+      
+    };
+    const options2 = {
+      // `${user ? "PUT" : "POST"}`
+      method: "POST" ,
+      headers: {
+          "Content-Type": "application/json; charset=UTF-8 ",
+          "X-CSRFToken": Cookies.get('csrftoken'),   
+         
+      },
+      body: JSON.stringify(customerMessage),
+    };
+    const response2 = await fetch("/api/v1/provider/messages/", options2).catch(
         handleError
       );
       if (!response.ok) {
         throw new Error("Oops. Something went wrong!");
       } else {
-        const data = await response.json();
-        console.log("MY DATA",data);
-        Cookies.set("Authorization", `Token ${data.key}`);
+        const data2 = await response2.json();
+        console.log("MY DATA",data2);
+        Cookies.set("Authorization", `Token ${data2.key}`);
         
       }
 
-    console.log(schedule,"OPTIONS",option );};
+    console.log(schedule,"OPTIONS",option ,options2);};
 
  
 
@@ -81,10 +110,12 @@ function CustomerView({company_name}){
       scheduleCopy.push({
         weekday: `${weekday}`,
         company_name,
-        customer:user.id,
+        user:user.id,
+   
       });
     }
     setSchedule(scheduleCopy);
+   
    
   }
 
@@ -122,6 +153,7 @@ function CustomerView({company_name}){
       // console.log("No time Sheet",timesheet)
 
     } 
+    console.log(notes);
 
 
   const displayHTML =  weekDays.map((weekday, index)=> (

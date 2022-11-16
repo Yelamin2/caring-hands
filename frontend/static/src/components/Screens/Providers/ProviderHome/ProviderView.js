@@ -41,10 +41,10 @@ function ProviderView(){
  {
     // console.log("There is a time Sheet",timesheet);
     timesheetHTML = timesheet.map((timetable, id) =>{
-      if(timetable.company_name.id==user.id){
+      if(timetable.company_name_details.id==user.id){
       return (<Col lg = {6} key={id}>
         <Row>
-          <Col>{timetable.user.first_name} {timetable.user.last_name}</Col>
+          <Col>{timetable.user_details.first_name} {timetable.user_details.last_name}</Col>
           <Col>{timetable.weekday}</Col>
           <Col>Start : {timetable.start_time}</Col>
           <Col>End : {timetable.end_time}</Col>

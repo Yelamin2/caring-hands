@@ -92,8 +92,8 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           ProfileForm
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
           ProviderForm
-        </Link><Link className="navbar-expand navbar-nav nav-link" to="/list/">
-          list
+        </Link><Link className="navbar-expand navbar-nav nav-link" to="/invoice/">
+          Invoice
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/selection/">
           Selection 
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/logedvisits/">

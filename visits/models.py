@@ -33,6 +33,7 @@ class Timesheet(models.Model):
     )
     start_time= models.TimeField()
     end_time=  models.TimeField()
+    # notes= models.TextField(null=True, blank=True)
    
     def __str__(self):
         return self.user.username

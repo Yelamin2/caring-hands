@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'frontend.apps.FrontendConfig',
     'visits.apps.VisitsConfig',
+    'providers.apps.ProvidersConfig',
     
 ]
 REST_FRAMEWORK = {

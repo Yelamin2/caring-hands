@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.36deb30b.css",
-    "main.js": "/static/js/main.b18cd2f3.js",
+    "main.js": "/static/js/main.ae41ae38.js",
     "static/js/787.9661e67c.chunk.js": "/static/js/787.9661e67c.chunk.js",
     "static/media/CaringHands.jpg": "/static/media/CaringHands.7739cde93131542de448.jpg",
     "static/media/profile.jpg": "/static/media/profile.ffa4a6e0e52f9dc54e07.jpg",
@@ -10,11 +10,11 @@
     "static/media/nurse2.png": "/static/media/nurse2.b00b5e4cbfe553a3324e.png",
     "index.html": "/index.html",
     "main.36deb30b.css.map": "/static/css/main.36deb30b.css.map",
-    "main.b18cd2f3.js.map": "/static/js/main.b18cd2f3.js.map",
+    "main.ae41ae38.js.map": "/static/js/main.ae41ae38.js.map",
     "787.9661e67c.chunk.js.map": "/static/js/787.9661e67c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.36deb30b.css",
-    "static/js/main.b18cd2f3.js"
+    "static/js/main.ae41ae38.js"
   ]
 }

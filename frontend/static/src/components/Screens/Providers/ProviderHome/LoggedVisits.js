@@ -16,10 +16,8 @@ let visitsLogHTML;
 function LoggedVisits(){
     const {user} = useOutletContext();
     const [timesheet, setTimesheet] = useState([]);
-
     const [visitsLog, setVisitsLog]= useState();
     const [addVisitLog, setAddVisitLog ] = useState([]);
-
     const [userOptions, setUserOptions] = useState([]);
 
     useEffect(() => {
@@ -33,7 +31,7 @@ function LoggedVisits(){
             }
     
             const data = await response.json();
-            const users = data.map(obj => obj.user);
+            const users = data.map(obj => obj.user_details);
             const filteredUsers = users.filter((value, index, self) => {
                 return self.findIndex(v => v.id === value.id) === index;
             });
@@ -69,7 +67,11 @@ function LoggedVisits(){
            return  <p key={id}>{logs.start_visit}</p>
         })
       }
+    // 
+    // 
 
+    // 
+    //  Submit a log with the time in and time out values, customer information requiered.
       const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("click submit")
@@ -139,7 +141,8 @@ function LoggedVisits(){
                  </Row>
                 </Col>
                 <Col>
-                <Form.Select onChange={handleTime} name="client">
+                <Form.Select onChange={handleTime} name="client" required>
+                    <option>Select customer</option>
                         {userOptions.map((timetable, id) =>( < option key={id}  value={timetable.id} name="client" >{timetable.first_name}
                         </option>))}
                         

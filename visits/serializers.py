@@ -23,35 +23,37 @@ User = get_user_model()
 #     class Meta:
 #         model = PersonCompanyDay
 #         fields='__all__'
-
-class TimesheetSerializer(serializers.ModelSerializer):
-    # user= serializers.SlugRelatedField(
-    #      many=False,
-    #     queryset=User.objects.all(),
-    #     read_only=False,
-    #     slug_field='username',
-    #     allow_null=True
-     
-
-    # )
-
-    # company_name=serializers.ReadOnlyField(source="company_name.Company_name")
-
+class CompanySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Timesheet
-        fields= '__all__'
-        depth=2
+        model =User
+        fields = ('id', 'username', 'company_name', 'address1', 'address2', 'city', 'state','zip')
 
 
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username')
+        fields = ('id', 'username', 'first_name', 'last_name', 'address1', 'address2', 'city', 'state','zip')
+
+class TimesheetSerializer(serializers.ModelSerializer):
+    company_name_details=CompanySerializer(source='company_name', read_only=True)
+    user_details=ClientSerializer(source='user', read_only=True)
+  
+
+    class Meta:
+        model = Timesheet
+        fields= '__all__'
+       
+        
+
+
 
 class VisitLogSerializer(serializers.ModelSerializer):
     client_details = ClientSerializer(source='client', read_only=True)
     class Meta:
         model = VisitLog
         fields= '__all__'
+
+
+
 
     
