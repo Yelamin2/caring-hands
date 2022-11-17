@@ -33,30 +33,12 @@ function CustomerView({company_name, notes}){
       ...customerMessage,
       notes: notes,
       client: user.id,
-      user:(company_name)
+      sender:0,
+      user:(company_name),
+      message_from:(user.first_name +" "+ user.last_name),
   }));
     
-    const options = {
-      // `${user ? "PUT" : "POST"}`
-      method: "POST" ,
-      headers: {
-          "Content-Type": "application/json; charset=UTF-8 ",
-          "X-CSRFToken": Cookies.get('csrftoken'),   
-         
-      },
-      body: JSON.stringify(schedule),
-    };
-    const response = await fetch("/api/v1/visits/visits/", options).catch(
-      handleError
-    );
-    if (!response.ok) {
-      throw new Error("Oops. Something went wrong!");
-    } else {
-      const data = await response.json();
-      console.log("MY DATA",data);
-      Cookies.set("Authorization", `Token ${data.key}`);
-      
-    };
+  
     const options2 = {
       // `${user ? "PUT" : "POST"}`
       method: "POST" ,
@@ -78,6 +60,27 @@ function CustomerView({company_name, notes}){
         Cookies.set("Authorization", `Token ${data2.key}`);
         
       }
+      const options = {
+        // `${user ? "PUT" : "POST"}`
+        method: "POST" ,
+        headers: {
+            "Content-Type": "application/json; charset=UTF-8 ",
+            "X-CSRFToken": Cookies.get('csrftoken'),   
+           
+        },
+        body: JSON.stringify(schedule),
+      };
+      const response = await fetch("/api/v1/visits/visits/", options).catch(
+        handleError
+      );
+      if (!response.ok) {
+        throw new Error("Oops. Something went wrong!");
+      } else {
+        const data = await response.json();
+        console.log("MY DATA",data);
+        Cookies.set("Authorization", `Token ${data.key}`);
+        
+      };
 
     console.log(schedule,"OPTIONS",option ,options2);};
 

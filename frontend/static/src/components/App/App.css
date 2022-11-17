@@ -35,8 +35,8 @@
   to {
     transform: rotate(360deg);
   }
-} */
-
-header{
-  background-image: url(../images/CaringHands.jpg);
 }
+
+.App{
+  background-image: url(../images/CaringHands.jpg);
+} */

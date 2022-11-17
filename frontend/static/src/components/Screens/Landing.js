@@ -3,6 +3,7 @@ import React from 'react';
 import ball3 from "./../../images/ball3.jpg"
 import nurse2 from "./../../images/nurse2.png"
 import people1 from "./../../images/people1.jpg"
+import caring from "./../../images/CaringHands.jpg"
 
 function Landing(){
     
@@ -19,7 +20,7 @@ function Landing(){
             />
             <Carousel.Caption>
             <h3>We get you company</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <p>If want to have someone to talk to and do activites.</p>
             </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -30,7 +31,7 @@ function Landing(){
             />
             <Carousel.Caption>
             <h3>Caring hands</h3>
-            <p> </p>
+            <p>Help you and your loved ones with everyday life tasks</p>
             </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -42,7 +43,20 @@ function Landing(){
             <Carousel.Caption>
             <h3>Keep you active</h3>
             <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                When yoou need someone to support you to stay active and healthy.
+            </p>
+            </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+            <img
+            className="d-block w-100"
+            src={caring}
+            alt="Forth slide"
+            />
+            <Carousel.Caption>
+            <h3>Gentle and Caring</h3>
+            <p>
+                Gentle and caring staff.
             </p>
             </Carousel.Caption>
         </Carousel.Item>

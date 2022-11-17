@@ -8,6 +8,7 @@ import Button from "react-bootstrap/esm/Button";
 import Container from 'react-bootstrap/Container';
 import Cookies from "js-cookie";
 import { handleError } from "../../../../utils/errorHandler";
+import getTime from "date-fns/getTime";
 
 
 var visitsLogHTML;
@@ -32,10 +33,12 @@ function Invoice(){
     };
     fetchTimesheet();
   },[]); 
+
+  console.log(visitsLog);
   
   if (visitsLog != undefined){
     visitsLogHTML = visitsLog.map((logs, id) => {
-       return  <p key={id}>{logs.end_visit}-{logs.end_visit}</p>
+       return  <p key={id}>{logs.client_details.first_name}</p>
     })
   }else {
     visitsLogHTML='';

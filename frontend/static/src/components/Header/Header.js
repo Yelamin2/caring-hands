@@ -40,47 +40,36 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
   return (
     <Navbar bg="dark" variant="dark" className="mb-3 px-3">
       <Nav className="ml-auto flex-grow-1">
+      <Link className="navbar-expand navbar-nav nav-link" to="/home/">
+        Home
+        </Link> 
         
-        {isAuth && user.is_customer  ? ( <><Link className="navbar-expand navbar-nav nav-link" to="/home/">
-          Home
-        </Link><Link
+        {isAuth && user.is_customer  ? ( <><Link
           className="navbar-expand navbar-nav nav-link ms-auto"
           to="/form/"
         >
           Profile
-        </Link> <Link className="navbar-expand navbar-nav nav-link" to="/selection/">
+        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/selection/">
           Providers
-        </Link> <Button
-            variant="link"
-            className="navbar-expand navbar-nav nav-link border-0"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button></>):
-        isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link" to="/home/">
-        Home
-      </Link> <Link className="navbar-expand navbar-nav nav-link" to="/provider/">
+        </Link> </>):
+        isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/logedvisits/">
+        LoggedVisit
+      </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/provider/">
           ProviderView
-        </Link><Link className="navbar-expand navbar-nav nav-link" to="/providerform/">
+        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/invoice/">
+          Invoice
+        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/providerform/">
           Profile
-        </Link><Button
-            variant="link"
-            className="navbar-expand navbar-nav nav-link border-0"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button></>):
+        </Link></>)
+          :
         (<>
-        <Link className="navbar-expand navbar-nav nav-link" to="/home/">
-        Home
-        </Link>   
-        <Link className="navbar-expand navbar-nav nav-link " to="/login/">
-            Login
-          </Link></>)}
+         
+        </>)
+          }
 
 
 
-        <Link className="navbar-expand navbar-nav nav-link" to="/profile/">
+        {/* <Link className="navbar-expand navbar-nav nav-link" to="/profile/">
           Profile
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/registeration/">
           Registeration
@@ -98,7 +87,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           Selection 
         </Link><Link className="navbar-expand navbar-nav nav-link" to="/logedvisits/">
         LoggedVisit
-      </Link>  
+      </Link>   */}
         
         {/* {isAuth && user.is_customer  ? ( <Link
           className="navbar-expand navbar-nav nav-link ms-auto"
@@ -142,6 +131,19 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
         )
 
         } */}
+        {isAuth ? (
+          <Button
+            variant="link"
+            className="navbar-expand navbar-nav nav-link ms-auto border-0"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/login/">
+            Login
+          </Link>
+        )}
         
       </Nav>
     </Navbar>

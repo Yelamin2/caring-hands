@@ -18,6 +18,8 @@ class Messages(models.Model):
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='client_message')
     message= models.TextField(null=True, blank=True)
     time=models.TimeField(auto_now=True)
+    message_from=models.CharField(max_length=100)
+    sender=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='sender_message')
 
     def __str__(self):
         return" %s %s " % (self.user.first_name, self.user.last_name)
@@ -25,8 +27,8 @@ class Messages(models.Model):
 class Invoice(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='provider_invoice')
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE, related_name='client_invoice')
-    start_visit=models.OneToOneField(VisitLog, on_delete = models.CASCADE,  related_name='invoice_start_visit')
-    end_visit=models.OneToOneField(VisitLog, on_delete = models.CASCADE, related_name='invoice_end_visit' )
+    # start_visit=models.OneToOneField(VisitLog, on_delete = models.CASCADE,  related_name='invoice_start_visit')
+    # end_visit=models.OneToOneField(VisitLog, on_delete = models.CASCADE, related_name='invoice_end_visit' )
     # visit_duration=models.TimeField()
 
     def __str__(self):
