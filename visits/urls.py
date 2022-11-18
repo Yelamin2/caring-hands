@@ -3,7 +3,7 @@ from .views import TimesheetListAPIVIEW, TimesheetDetailAPIView, CustomerTimeshe
 
 urlpatterns = [
     path('visits/',TimesheetListAPIVIEW.as_view(), name= 'Visits_list'),
-    path('visits/customer/<int:pk>/', TimesheetDetailAPIView.as_view(), name="time_sheet"),
+    path('visits/<int:pk>/', TimesheetDetailAPIView.as_view(), name="time_sheet"),
     path('visitlog/', VisitLogListAPIView.as_view(), name="visits_list" ),
    
 ]

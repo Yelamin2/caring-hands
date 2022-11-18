@@ -31,7 +31,7 @@ function LoggedVisits(){
             }
     
             const data = await response.json();
-            const users = data.map(obj => obj.user_details);
+            const users = data.map(obj => obj.client_details);
             const filteredUsers = users.filter((value, index, self) => {
                 return self.findIndex(v => v.id === value.id) === index;
             });
@@ -74,7 +74,7 @@ function LoggedVisits(){
     //  Submit a log with the time in and time out values, customer information requiered.
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("click submit")
+        // console.log("click submit")
         const options = {
           // `${user ? "PUT" : "POST"}`
           method: "POST" ,
@@ -92,7 +92,7 @@ function LoggedVisits(){
             throw new Error("Oops. Something went wrong!");
           } else {
             const data = await response.json();
-            console.log("MY DATA",data);
+            // console.log("MY DATA",data);
             Cookies.set("Authorization", `Token ${data.key}`);
             
           }
@@ -118,40 +118,41 @@ function LoggedVisits(){
     
       const displayHTML = (
         <Form.Group controlId="formGridState">
-            <Row lg={6} sm={12}>
-            <Col lg={4} sm={4}>
-                <Row lg={12} sm={12}>
-                    <Col lg={2} xs={3}>
-                    <Form.Label>Start Time</Form.Label>
-                    </Col>
-                    <Col lg={4} xs={3}><input type="datetime-local" step='900' id="appt1" name="start_visit"
-                      onChange={handleTime} />
-                    </Col>
-                 </Row>
-                </Col>
+            <Row lg={6} sm={12} style={{
+              marginTop:30,
+              marginBottom: 20}}>
+              <Col lg={4} sm={4}>
+                  <Row lg={12} sm={12}>
+                      <Col lg={3} xs={3}>
+                      <Form.Label>Start Time</Form.Label>
+                      </Col>
+                      <Col lg={2} xs={3}><input type="datetime-local" step='900' id="appt1" name="start_visit"
+                        onChange={handleTime} />
+                      </Col>
+                  </Row>
+              </Col>
               <Col lg={1} sm={1}></Col>
-              <Col lg={3} sm={4}>
+              <Col lg={4} sm={4}>
                 <Row lg={12} sm={12}>
-                    <Col lg={2} xs={3}>
-                    <Form.Label>End Time</Form.Label>
-                    </Col>
-                    <Col lg={4} xs={3}><input type="datetime-local" step='900' id="appt2" name="end_visit"
-                      onChange={handleTime} />
-                    </Col>
-                 </Row>
-                </Col>
-                <Col>
+                      <Col lg={4} xs={3}>
+                      <Form.Label>End Time</Form.Label>
+                      </Col>
+                      <Col lg={4} xs={3}><input type="datetime-local" step='900' id="appt2" name="end_visit"
+                        onChange={handleTime} />
+                      </Col>
+                </Row>
+              </Col>
+              <Col lg={1}></Col>
+              <Col lg={2}>
                 <Form.Select onChange={handleTime} name="client" required>
-                    <option>Select customer</option>
-                        {userOptions.map((timetable, id) =>( < option key={id}  value={timetable.id} name="client" >{timetable.first_name}
-                        </option>))}
-                        
-                    
+                  <option>Select customer</option>
+                    {userOptions.map((timetable, id) =>( < option key={id}  value={timetable.id} name="client" >{timetable.first_name}
+                  </option>))}
                 </Form.Select>
-               
-                </Col>
+                
+              </Col>
             </Row>
-            <Form.Control type="text" placeholder="Normal text" name="notes"
+            <Form.Control style={{marginBottom:15, padding:10}} type="text" placeholder="Normal text" name="notes"
                       onChange={handleTime}/>
             <Row>
 
@@ -162,10 +163,11 @@ function LoggedVisits(){
 
     return(
         <>
-        <div>{visitsLogHTML}</div>
+        {/* <div>{visitsLogHTML}</div> */}
         <Form  onSubmit={handleSubmit}>
         <Row 
-        style={{ 
+        style={{
+        marginTop:60, 
         backgroundColor: 'LightGoldenrodYellow'
        }}>
         {displayHTML}</Row>
@@ -174,7 +176,8 @@ function LoggedVisits(){
         <Button  
             style={{ width: '6rem', 
             alignItems: "center" , 
-            backgroundColor:"LightGreen"}} 
+            backgroundColor:'PaleTurquoise', 
+            color:'black'}}
             type="submit">
             Submit
           </Button>

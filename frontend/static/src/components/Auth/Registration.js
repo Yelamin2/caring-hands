@@ -170,7 +170,7 @@ function Registeration() {
       <span className="d-block text-end mb-3">
         Already have an account? <Link to="/login/">Login</Link> today!
       </span>
-      <Button variant="primary" type="submit">
+      <Button style={{backgroundColor:'PaleTurquoise', color:'black'}} type="submit">
         Submit
       </Button>
     </Form>

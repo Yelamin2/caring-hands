@@ -98,8 +98,8 @@ function ProfileForm(props){
 
         <>
         <div>{<Profile />}</div>
-        <Form onSubmit={handleSubmit}>
-            <Row className="mb-3">
+        <Form style={{marginTop:20}} onSubmit={handleSubmit} >
+            <Row className="mb-3" lg={4}>
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control type="text" placeholder={profile.first_name== undefined ? "First name":(profile.first_name) }
@@ -119,8 +119,9 @@ function ProfileForm(props){
                 required/>
                 </Form.Group>
             </Row>
+            <Row lg={2}>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Group className="mb-3 " controlId="formGridAddress1">
                 <Form.Label>Address</Form.Label>
                 <Form.Control placeholder={(profile.address1)== undefined ? "123 ABC St":(profile.address1) }
                 name= "address1"
@@ -128,6 +129,8 @@ function ProfileForm(props){
                 onChange={handleInput}
                 required/>
             </Form.Group>
+            </Row>
+            <Row lg={2}>
 
             <Form.Group className="mb-3" controlId="formGridAddress2">
                 <Form.Label>Address 2</Form.Label>
@@ -137,8 +140,9 @@ function ProfileForm(props){
                 onChange={handleInput}
                 />
             </Form.Group>
+            </Row>
 
-            <Row className="mb-3">
+            <Row className="mb-3" lg={6}>
                 <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>City</Form.Label>
                 <Form.Control
@@ -168,7 +172,7 @@ function ProfileForm(props){
             </Row>
 
 
-            <Button variant="primary" type="submit">
+            <Button style={{backgroundColor:'PaleTurquoise', color:'black'}} type="submit">
                 Submit
             </Button>
         </Form>

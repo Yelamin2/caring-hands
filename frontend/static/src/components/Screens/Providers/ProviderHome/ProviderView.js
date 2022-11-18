@@ -10,9 +10,11 @@ import Col from 'react-bootstrap/esm/Col';
 import Row from 'react-bootstrap/esm/Row';
 import { useOutletContext } from 'react-router-dom';
 
-var timesheetHTML
+var timesheetHTML;
+let customersMessagesHTML;
 function ProviderView(){
   const [timesheet, setTimesheet] = useState([]);
+  const [customersMessages, setCustomersMessages] = useState([])
 
   const {user} =useOutletContext();
   
@@ -33,6 +35,21 @@ function ProviderView(){
                     
     };
     fetchTimesheet();
+    
+    const fetchMessages= async () => {
+      const response2 = await fetch("/api/v1/provider/messages/");
+      if (!response2.ok){
+          if(!response2.status === 404){
+              throw Error("Oops. Something went wrong!");
+          }
+          return;
+      }
+
+      const data = await response2.json();
+      setCustomersMessages([...data]);
+                  
+  };
+  fetchMessages();
   },[]);  
 
 
@@ -41,20 +58,40 @@ function ProviderView(){
  {
     // console.log("There is a time Sheet",timesheet);
     timesheetHTML = timesheet.map((timetable, id) =>{
-      if(timetable.company_name_details.id==user.id){
+      // if(timetable.company_name_details.id==user.id){
       return (<Col lg = {6} key={id}>
         <Row>
           <Col>{timetable.user_details.first_name} {timetable.user_details.last_name}</Col>
           <Col>{timetable.weekday}</Col>
           <Col>Start : {timetable.start_time}</Col>
           <Col>End : {timetable.end_time}</Col>
-        </Row></Col>);};}
+        </Row></Col>);}
+        // }
         );
   } else{
       timesheetHTML="";
       // console.log("No time Sheet",timesheet)
 
     }
+    if(timesheet.length != 0)
+    {
+       // console.log("There is a time Sheet",timesheet);
+       customersMessagesHTML = customersMessages.map((messages, id) =>{
+         // if(timetable.company_name_details.id==user.id){
+         return (<Col lg = {6} key={id}>
+           <Row>
+             <Col>{messages.client_details.first_name} {messages.client_details.last_name}</Col>
+             <Col>{messages.time}</Col>
+             <Col>{messages.message}</Col>
+            
+           </Row></Col>);}
+           // }
+           );
+     } else{
+         timesheetHTML="";
+         // console.log("No time Sheet",timesheet)
+   
+       }
   
 
   return(
@@ -62,6 +99,7 @@ function ProviderView(){
 
       <h1>Service provider main page</h1>
       <Col>{timesheetHTML}</Col>
+      <Col>{customersMessagesHTML}</Col>
        
    
       </div>

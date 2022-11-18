@@ -19,7 +19,7 @@ function CustomerView({company_name, notes}){
   
   const [timeSelect, setTimeSelect] = useState([]);
   const option= [];
-  const { user} = useOutletContext();
+  const { user } = useOutletContext();
   const [timesheet, setTimesheet] = useState([]);
   const [customerMessage, setCustomerMessage]=useState([]);
 
@@ -27,16 +27,19 @@ function CustomerView({company_name, notes}){
   const [schedule, setSchedule]= useState([]);
   // providerList.map((provider, index) =>(
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCustomerMessage((customerMessage) => ({
       ...customerMessage,
-      notes: notes,
+      notes,
       client: user.id,
-      sender:0,
+      sender:1,
       user:(company_name),
       message_from:(user.first_name +" "+ user.last_name),
   }));
+
+    console.log(customerMessage);
     
   
     const options2 = {
@@ -226,7 +229,8 @@ function CustomerView({company_name, notes}){
         <Button  
             style={{ width: '6rem', 
             alignItems: "center" , 
-            backgroundColor:"LightGreen"}} 
+            backgroundColor:'PaleTurquoise', 
+            color:'black'}}
             type="submit">
             Submit
           </Button>

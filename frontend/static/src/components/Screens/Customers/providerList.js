@@ -159,7 +159,7 @@ function ProviderList(props){
              boxShadow: "10px 10px 9px SaddleBrown"
             }}
              className=" text-center">
-                <p></p>
+                <p ></p>
             <p >{provider.company_name}</p>
             <p >{provider.address1} {provider.address2}</p>
             
@@ -179,22 +179,24 @@ function ProviderList(props){
     
     const  mylistViewHTML = mylistView.map((list,id) =>{
         if (list.is_provider==true && list.company_name != undefined){
-        return (<Col lg = {3} key={id} >
+        return (<Col lg = {4} key={id} >
             <Card border="secondary"
-             style={{ width: '18rem' , 
+             style={{ width: '20rem' , 
              backgroundColor: 'LightGoldenrodYellow', 
-             boxShadow: "10px 10px 9px SaddleBrown"
+             boxShadow: "10px 10px 9px SaddleBrown",
+             marginTop:20
             }}
              className=" text-center">
                 <p></p>
-            <p >{list.company_name}</p>
-            <p >{list.address1} {list.address2}</p>
-            <p>{list.city}  {list.zip}</p>
-            <p> </p>
+            <p style={{fontWeight:"bold"}}>{list.company_name}</p>
+            <p style={{marginBottom:5}}>{list.address1} {list.address2}</p>
+            <p style={{marginBottom:15}}>{list.city}  {list.zip}</p>
+            
             <Button  
             style={{ width: '5rem', 
             alignSelf:"center", 
-            backgroundColor:"LightGreen"}} 
+            backgroundColor:'PaleTurquoise', 
+            color:'black'}} 
             onClick={()=> props.setSelectedProvider(list)
             } type="button">Select</Button >
             <p> </p>

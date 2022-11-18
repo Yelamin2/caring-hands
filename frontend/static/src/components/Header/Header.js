@@ -51,7 +51,9 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
           Profile
         </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/selection/">
           Providers
-        </Link> </>):
+        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/schedule/">
+          Schedule
+        </Link></>):
         isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/logedvisits/">
         LoggedVisit
       </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/provider/">

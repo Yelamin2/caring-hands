@@ -103,10 +103,11 @@ function LoginForm(props) {
   
     return (
       <>     
-      <Form onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
+      <Form  onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control
+           
             type="text"
             placeholder="Enter username"
             name="username"
@@ -139,7 +140,7 @@ function LoginForm(props) {
         <span className="d-block text-end mb-3">
           Need an account? <Link to="/registeration/">Register</Link> today!
         </span>
-        <Button variant="primary" type="submit">
+        <Button style={{backgroundColor:'PaleTurquoise', color:'black'}} type="submit">
           Submit
         </Button>
       </Form>

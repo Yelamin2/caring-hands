@@ -10,6 +10,7 @@ import LoginForm from '../Auth/LoginForm';
 import Landing from '../Screens/Landing';
 import ProviderList from '../Screens/Customers/ProviderList';
 import CustomerApp from '../Screens/Customers/CustomerHome/CustomerApp';
+import '../../App.css'
 
 // /import ProviderForm from '../Screens/Providers/ProviderForm';
 
@@ -77,22 +78,23 @@ function App() {
 
   return (
     
-    < >
+    <>
     
-    <Header {...headerProps} />
+    <section className="bg-img" >
+    <Header  {...headerProps} />
     
     {/* <ProviderList addProvider={addProvider}/> */}
     {/* <LoginForm loggedUser={loggedUser}/> */}
     
     
-      <Container>
+      <Container className='container'  >
         <Outlet context={{ setIsAuth, navigate, user}} />
       </Container>
     
 
       {/* {<ProviderForm loggedUser={loggedUser.id}/>} */}
-      
-    </>
+    </section>  
+   </>
     
   );
 }

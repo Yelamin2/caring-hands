@@ -104,8 +104,8 @@ function ProviderForm(props){
 
         <>
 
-        <div>{<Profile />}</div>
-        <Form onSubmit={handleSubmit}>
+        <div style={{marginTop:40}}>{<Profile />}</div>
+        <Form style={{marginTop:30}} onSubmit={handleSubmit}>
 
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="formGridEmail">
@@ -205,7 +205,7 @@ function ProviderForm(props){
 
            
 
-            <Button variant="primary" type="submit">
+            <Button style={{backgroundColor:'PaleTurquoise', color:'black', marginTop:20}} type="submit">
                 Submit
             </Button>
         </Form>

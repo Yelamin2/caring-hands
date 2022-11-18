@@ -21,7 +21,7 @@ function CustomerApp(props){
 
     if(selectedProvider == null){
         
-        selectedProviderHTML = "Make a selection for your care provider.";
+        selectedProviderHTML = "Select your care provider.";
         console.log("Provider Empty", selectedProviderHTML);
     } else {
         console.log("Provider Value =", selectedProvider);
@@ -50,36 +50,32 @@ const handleChange = (e) => {
      
       
     }));
-    notes=addNote.note;
+    // notes=addNote.note;
     
   };
 
-  console.log(notes)
+  console.log("From Customer App :  ",notes);
 
- 
-
-
-
-   
 
     console.log("Selected Providers ::", selectedProvider , "HTML provider_i:::", (company_name))
     return(
         <>
         <Row 
         style={{ 
+            marginTop:30,
             position: 'sticky',
             backgroundColor: 'LightGoldenrodYellow', 
             boxShadow: "10px 10px 9px SaddleBrown"
         }}>
-        <Col lg={8} xs={12}  ><CustomerView company_name={company_name} notes={notes}/></Col>
+        <Col lg={8} xs={12}  ><CustomerView company_name={company_name} notes={addNote}/></Col>
         <Col lg={3} xs={12}>
-            <Row style={{ height: '20vh' }}>{selectedProviderHTML}</Row>
+            <Row style={{minHeight: 120, marginTop:20, textAlign:'center' }}>{selectedProviderHTML}</Row>
             <Row><Form.Control
           as="textarea"
           onChange={handleChange}
-          name='note'
+          name='notes'
           placeholder="Leave a comment here"
-          style={{ height: '20vh' }}
+          style={{ minHeight: 120 }}
         /></Row>
             <p></p>
             
@@ -91,7 +87,7 @@ const handleChange = (e) => {
         <p> 
 
         </p>
-        <Row>
+        <Row style={{ marginTop: 40 }}>
         <ProviderList setSelectedProvider={setSelectedProvider}/></Row>
         
         </>

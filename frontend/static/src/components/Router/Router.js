@@ -14,6 +14,7 @@ import ProviderList from "../Screens/Customers/ProviderList";
 import CustomerApp from "../Screens/Customers/CustomerHome/CustomerApp";
 import LoggedVisits from "../Screens/Providers/ProviderHome/LoggedVisits";
 import Invoice from "../Screens/Providers/ProviderHome/Invoice";
+import CustomerVisits from "../Screens/Customers/CustomerHome/CustomerVisits";
 
 function Router(){
     return(
@@ -32,6 +33,7 @@ function Router(){
                 <Route path = 'selection' element={<CustomerApp />}/>
                 <Route path ='logedvisits' element={<LoggedVisits />}/>
                 <Route path ='invoice' element={<Invoice />}/>
+                <Route path ='schedule' element={<CustomerVisits />}/>
             </Route>
             <Route
           path="*"

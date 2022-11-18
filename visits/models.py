@@ -15,13 +15,13 @@ from .models import AbstractUser
     #     return self.weekday
 
 WEEKDAYS= (
-    ("Monday", "Monday"),
-    ("Tuesday", "Tuesday"),
-    ("Wednesday", "Wednesday"),
-    ("Thursday","Thursday"),
-    ("Friday", "Friday"),
-    ("Saturday", "Saturday"),
-    ("Sunday", "Sunday"),
+    ("1", "Monday"),
+    ("2", "Tuesday"),
+    ("3", "Wednesday"),
+    ("4","Thursday"),
+    ("5", "Friday"),
+    ("6", "Saturday"),
+    ("7", "Sunday"),
 )
 
 class Timesheet(models.Model):

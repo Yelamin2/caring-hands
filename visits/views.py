@@ -39,19 +39,23 @@ class TimesheetListAPIVIEW(generics.ListCreateAPIView):
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+    def get_queryset(self):
+        user = self.request.user
+        return Timesheet.objects.filter(user=user).order_by('company_name') or Timesheet.objects.filter(company_name=user).order_by('user')
+
     
 
 class CustomerTimesheetDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=TimesheetSerializer
 
-    def get_queryset(self):
-        customer = self.request.user
-        return Timesheet.objects.filter(customer=customer).order_by('weekday')
-        
     def perform_create(self, serializer):
         # import pdb 
         # pdb.set_trace()
         serializer.save(user=self.request.user)
+    
+    def get_queryset(self):
+        user = self.request.user
+        return Timesheet.objects.filter(user=user).order_by('weekday')
 
 class VisitLogListAPIView(generics.ListCreateAPIView):
     serializer_class=VisitLogSerializer

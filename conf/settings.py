@@ -196,7 +196,7 @@ MEDIA_URL = '/media/'
 # Email backend
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Static file directories
 # https://docs.djangoproject.com/en/3.1/ref/settings/#staticfiles-dirs
@@ -205,3 +205,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 
 DATE_FORMAT = "mm/dd/YYYY"
+
+EMAIL_HOST = 'smtp.sparkpostmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'SMTP_Injection'
+EMAIL_HOST_PASSWORD = os.environ.get('SPARK_SECRET_KEY',)
+EMAIL_USE_TLS = True
