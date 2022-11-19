@@ -89,7 +89,7 @@ function LoginForm(props) {
         navigate('/provider/');        
       }
       else if(newUser.is_customer==true){
-        navigate('/customer/');
+        navigate('/selection/');
       } else {
         navigate('/home/');
       }
@@ -103,7 +103,7 @@ function LoginForm(props) {
   
     return (
       <>     
-      <Form  onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
+      <Form style={{marginTop:100}} onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
         <Form.Group className="mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <Form.Control

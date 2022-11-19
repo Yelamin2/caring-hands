@@ -2,7 +2,10 @@
 .bg-img {
   
   width: 100%;
-  height: 100vh;
+  /* height:60vmax;
+   */
+   min-height: 100vh;
+   padding-bottom: 20px;
   /* background: url('./images/background.jpg') center center no-repeat; */
   background: linear-gradient(#f69d3c, #3f87a6);
   

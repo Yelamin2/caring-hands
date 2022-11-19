@@ -85,7 +85,7 @@ function Registeration() {
   console.log("newUser",{newUser});
   
   return (
-    <Form onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
+    <Form style={{marginTop:100}} onSubmit={handleSubmit} className="col-10 col-md-6 col-lg-4 mx-auto">
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control

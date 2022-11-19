@@ -21,7 +21,7 @@ function CustomerApp(props){
 
     if(selectedProvider == null){
         
-        selectedProviderHTML = "Select your care provider.";
+        selectedProviderHTML = "Select your care provider";
         console.log("Provider Empty", selectedProviderHTML);
     } else {
         console.log("Provider Value =", selectedProvider);
@@ -38,7 +38,7 @@ function CustomerApp(props){
             </ul>
         </Col>
     ); 
-        console.log("Provider Value =", selectedProvider, "HTML from useEffect:: ", {selectedProviderHTML});
+        // console.log("Provider Value =", selectedProvider, "HTML from useEffect:: ", {selectedProviderHTML});
         company_name= selectedProvider.id;
 };
     
@@ -62,7 +62,7 @@ const handleChange = (e) => {
         <>
         <Row 
         style={{ 
-            marginTop:30,
+            marginTop:60,
             position: 'sticky',
             backgroundColor: 'LightGoldenrodYellow', 
             boxShadow: "10px 10px 9px SaddleBrown"

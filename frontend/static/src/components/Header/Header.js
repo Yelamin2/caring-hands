@@ -38,7 +38,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
 
  
   return (
-    <Navbar bg="dark" variant="dark" className="mb-3 px-3">
+    <Navbar bg="dark" variant="dark" className="mb-2 px-3">
       <Nav className="ml-auto flex-grow-1">
       <Link className="navbar-expand navbar-nav nav-link" to="/home/">
         Home

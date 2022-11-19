@@ -1,7 +1,7 @@
 import { format, compareAsc } from 'date-fns'
 import React from 'react';
 import { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
+import { getDate } from 'date-fns';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
@@ -63,7 +63,7 @@ function ProviderView(){
         <Row>
           <Col>{timetable.user_details.first_name} {timetable.user_details.last_name}</Col>
           <Col>{timetable.weekday}</Col>
-          <Col>Start : {timetable.start_time}</Col>
+          <Col>Start : {getDate(timetable.start_time)}</Col>
           <Col>End : {timetable.end_time}</Col>
         </Row></Col>);}
         // }
@@ -73,16 +73,16 @@ function ProviderView(){
       // console.log("No time Sheet",timesheet)
 
     }
-    if(timesheet.length != 0)
+    if(customersMessages.length != 0)
     {
        // console.log("There is a time Sheet",timesheet);
        customersMessagesHTML = customersMessages.map((messages, id) =>{
          // if(timetable.company_name_details.id==user.id){
          return (<Col lg = {6} key={id}>
-           <Row>
-             <Col>{messages.client_details.first_name} {messages.client_details.last_name}</Col>
-             <Col>{messages.time}</Col>
-             <Col>{messages.message}</Col>
+           <Row style={{minHeight:80, marginTop:40, backgroundColor:'AliceBlue'}}>
+             <Row lg={4} >Message from : {messages.client_details.first_name} {messages.client_details.last_name}</Row>
+             <Row lg={4}>Received on: {messages.time}</Row>
+             <Row lg={4}>{messages.message}</Row>
             
            </Row></Col>);}
            // }
