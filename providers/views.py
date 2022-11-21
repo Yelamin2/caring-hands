@@ -44,7 +44,7 @@ class InvoiceListAPIView(generics.GenericAPIView):
         serializer = InvoiceSerializer(self.request.user, context={'client_id': self.kwargs['client'], 'provider_id': self.request.user.id})
         return Response(serializer.data)
     
-    print((Invoice.user.provider_invoice), 5+7, 'here is the user')
+    
     message = Mail(
         from_email="yelamin2@gmail.com",
         to_emails='yelamin2@yahoo.com',
