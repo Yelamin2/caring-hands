@@ -8,6 +8,7 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from .models import  Timesheet, AbstractUser, VisitLog
 from rest_framework.authtoken.models import Token
 
+
 User = get_user_model()
 # class PersonCompanyDaySerializer(serializers.ModelSerializer):
 
