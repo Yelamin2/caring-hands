@@ -38,28 +38,34 @@ class InvoiceListAPIView(generics.GenericAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+       
+
     def get(self, request, *args, **kwargs):
         # import pdb 
         # pdb.set_trace()
         serializer = InvoiceSerializer(self.request.user, context={'client_id': self.kwargs['client'], 'provider_id': self.request.user.id})
+
+        message = Mail(
+            from_email="yelamin2@gmail.com",
+            to_emails='yelamin2@yahoo.com',
+            subject='Your invoice is ready',
+            html_content=f"\
+            Hi {User.username},\
+            <br><br>Please find below your billable hours for  our services from {self.request.user.company_name} for {serializer.data['hours']} hrs \
+            "
+            )
+
+        try:
+            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+            response = sg.send(message)
+
+            # return Response( status=200)
+
+        except Exception as e:
+            print("ERROR", e)
+       
+
         return Response(serializer.data)
     
     
-    message = Mail(
-        from_email="yelamin2@gmail.com",
-        to_emails='yelamin2@yahoo.com',
-        subject='Your invoice is ready',
-        html_content=f"\
-        Hi {User.username},\
-        <br><br>Please find below your billable hours for  our services for {Invoice} hrs \
-        "
-        )
-
-    try:
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sg.send(message)
-
-        # return Response( status=200)
-
-    except Exception as e:
-        print("ERROR", e)
+ 
