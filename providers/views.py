@@ -51,7 +51,7 @@ class InvoiceListAPIView(generics.GenericAPIView):
         subject='Your invoice is ready',
         html_content=f"\
         Hi {User.username},\
-        <br><br>Please find below your billable hours for  our services for {Invoice.hours} hrs \
+        <br><br>Please find below your billable hours for  our services for {Invoice} hrs \
         "
         )
 
