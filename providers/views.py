@@ -50,7 +50,7 @@ class InvoiceListAPIView(generics.GenericAPIView):
         to_emails='yelamin2@yahoo.com',
         subject='Your invoice is ready',
         html_content=f"\
-        Hi {User.user_name},\
+        Hi {User.username},\
         <br><br>Please find below your billable hours for  our services for {Invoice.hours} hrs \
         "
         )
