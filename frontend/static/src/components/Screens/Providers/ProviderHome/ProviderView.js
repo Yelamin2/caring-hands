@@ -63,7 +63,7 @@ function ProviderView(){
         <Row>
           <Col>{timetable.user_details.first_name} {timetable.user_details.last_name}</Col>
           <Col>{timetable.weekday}</Col>
-          <Col>Start : {getDate(timetable.start_time)}</Col>
+          <Col>Start : {timetable.start_time}</Col>
           <Col>End : {timetable.end_time}</Col>
         </Row></Col>);}
         // }

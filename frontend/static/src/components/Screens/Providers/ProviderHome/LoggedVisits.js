@@ -31,7 +31,7 @@ function LoggedVisits(){
             }
     
             const data = await response.json();
-            const users = data.map(obj => obj.client_details);
+            const users = data.map(obj => obj.user_details);
             const filteredUsers = users.filter((value, index, self) => {
                 return self.findIndex(v => v.id === value.id) === index;
             });

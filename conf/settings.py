@@ -13,6 +13,7 @@ import os
 # import dj_database_url
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY',)
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -196,18 +198,19 @@ MEDIA_URL = '/media/'
 # Email backend
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static file directories
 # https://docs.djangoproject.com/en/3.1/ref/settings/#staticfiles-dirs
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
-REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
+
 
 DATE_FORMAT = "mm/dd/YYYY"
 
-EMAIL_HOST = 'smtp.sparkpostmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'SMTP_Injection'
-EMAIL_HOST_PASSWORD = os.environ.get('SPARK_SECRET_KEY',)
+
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 25, 587
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_USE_TLS = True

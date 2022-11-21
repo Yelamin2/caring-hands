@@ -55,5 +55,4 @@ class VisitLogSerializer(serializers.ModelSerializer):
 
 
 
-
     

@@ -8,6 +8,7 @@ from dj_rest_auth.registration.serializers import RegisterSerializer
 from .models import  Messages, AbstractUser, Invoice
 from rest_framework.authtoken.models import Token
 from visits.models import VisitLog
+# from mail_send import Mail
 
 
 User = get_user_model()
@@ -54,5 +55,12 @@ class InvoiceSerializer(serializers.ModelSerializer):
             billable_hours = billable_hours + tdelta.total_seconds() / 3600
 
         return billable_hours
+
+    # Mail(
+    #     from_email='yelamin2@gmail.com',
+    #     to_emails='yelamin2@yahoo.com',
+    #     subject='Your invoice is ready ',
+    #     html_content='<strong>Your invoice is ready. Your total billable hours are [billable_hours]</strong>')
+   
 
 

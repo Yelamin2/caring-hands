@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import TimesheetListAPIVIEW, TimesheetDetailAPIView, CustomerTimesheetDetailAPIView,VisitLogListAPIView
+from .views import TimesheetListAPIVIEW, TimesheetDetailAPIView, VisitLogListAPIView
 
 urlpatterns = [
     path('visits/',TimesheetListAPIVIEW.as_view(), name= 'Visits_list'),
