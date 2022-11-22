@@ -35,18 +35,25 @@ class MessagesSerializer(serializers.ModelSerializer):
 class InvoiceSerializer(serializers.ModelSerializer):
     hours = serializers.SerializerMethodField()
     # client_details = ClientSerializer(source='client', read_only=True)
+    # client_details = serializers.SerializerMethodField()
     # user_details= CompanySerializer(source='', read_only=True )
     
     class Meta:
         model= User
         fields= ('id','username','hours')
 
+    # def get_client_details(self, obj):
+    #     client_id = self.context['client_id']
+    #     client = User.objects.get(id=client_id)
+    #     return client
+
+
     def get_hours(self, obj):
         
         client_id = self.context['client_id']
         provider_id = self.context['provider_id']
         timesheets = VisitLog.objects.filter(client=client_id, user=provider_id)
-
+        
         billable_hours = 0
         for timesheet in timesheets:
             start_time = timesheet.start_visit

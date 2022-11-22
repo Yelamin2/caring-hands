@@ -44,13 +44,14 @@ class InvoiceListAPIView(generics.GenericAPIView):
         # import pdb 
         # pdb.set_trace()
         serializer = InvoiceSerializer(self.request.user, context={'client_id': self.kwargs['client'], 'provider_id': self.request.user.id})
-
+        customer = User.objects.get(id=self.kwargs['client']);
+        # print(customer.first_name, customer.last_name);
         message = Mail(
             from_email="yelamin2@gmail.com",
             to_emails='yelamin2@yahoo.com',
             subject='Your invoice is ready',
             html_content=f"\
-            Hi {User.username},\
+            Hi {customer.first_name} {customer.last_name},\
             <br><br>Please find below your billable hours for  our services from {self.request.user.company_name} for {serializer.data['hours']} hrs \
             "
             )
