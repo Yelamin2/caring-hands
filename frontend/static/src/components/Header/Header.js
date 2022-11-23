@@ -42,7 +42,7 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
       <Nav className="ml-auto flex-grow-1">
       <Link className="navbar-expand navbar-nav nav-link" to="/home/">
         Home
-        </Link> 
+        </Link> <p style={{color:'silver', textJustify:'auto', marginLeft: 30, padding:10, textAlign:"center", fontFamily:'cursive', fontWeight:900, fontSize:30}}>Caring Hands</p>
         
         {isAuth && user.is_customer  ? ( <><Link
           className="navbar-expand navbar-nav nav-link ms-auto"

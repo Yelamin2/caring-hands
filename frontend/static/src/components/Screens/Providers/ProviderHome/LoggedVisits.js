@@ -152,9 +152,11 @@ function LoggedVisits(){
                 
               </Col>
             </Row>
-            <Form.Control style={{marginBottom:15, padding:10}} type="text" placeholder="Normal text" name="notes"
+            <Form.Control style={{marginBottom:15, padding:10, width:'60%', justifySelf:'center'}} type="text" placeholder="Enter comments" name="notes"
                       onChange={handleTime}/>
-            <Row>
+            
+            <Row lg={2}>
+              
 
             </Row>
             </Form.Group>
@@ -168,7 +170,10 @@ function LoggedVisits(){
         <Row 
         style={{
         marginTop:60, 
-        backgroundColor: 'LightGoldenrodYellow'
+        backgroundColor: 'LightGoldenrodYellow',
+        alignSelf:'center',
+        justifySelf:'center',
+        width:"80%"
        }}>
         {displayHTML}</Row>
         <Row></Row>
