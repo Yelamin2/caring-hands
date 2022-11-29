@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/esm/Form';
 
 
 
-let zip=[], ziplist=[], city=[], citylist=[];
+let zip=[], ziplist=[], city=[], citylist=[], filtered, mylistViewHTML;
 function ProviderList(props){
 
     
@@ -17,6 +17,9 @@ function ProviderList(props){
     const [list, setList]= useState([]);
     const [rawList, setRawList]= useState([]);
     const [mylistView, setMylistView]= useState([]);
+    const [filter, setFilter] =useState(null)
+    
+
 
     const { user} = useOutletContext();
     console.log(user.id, user.company_name);
@@ -39,59 +42,102 @@ function ProviderList(props){
         fetchUserList();
         
     },[]);
+    setTimeout(100);
+    console.log(mylistView);
 
+    useEffect(() => {
+        const createlist = ()=>{
+        console.log("FILTER",filter);
 
-   
-    const  mylistViewHTML = mylistView.map((list,id) =>{
-        <Form.Select name="client" required>
-                  <option>Select customer</option>
-                  <option>Select customer</option>
-                  <option>{zip}r</option></Form.Select>
-        if (list.is_provider===true && list.company_name != undefined){
-            zip.push(list.zip);
-            city.push(list.city);
-            // <Form.Select name="client" required>
-            // <option>Select customer</option>
-            // <option>Select customer</option>
-            // <option>{list.zip}r</option></Form.Select>
-        return (<Col lg = {4} key={id} >
-            <Card border="secondary"
-             style={{ width: '20rem' , 
-             backgroundColor: 'LightGoldenrodYellow', 
-             boxShadow: "10px 10px 9px SaddleBrown",
-             marginTop:20
-            }}
-             className=" text-center">
-                <p></p>
-            <p style={{fontWeight:"bold"}}>{list.company_name}</p>
-            <p style={{marginBottom:5}}>{list.address1} {list.address2}</p>
-            <p style={{marginBottom:15}}>{list.city}  {list.zip}</p>
-            
-            <Button  
-            style={{ width: '5rem', 
-            alignSelf:"center", 
-            backgroundColor:'PaleTurquoise', 
-            color:'black'}} 
-            onClick={()=> props.setSelectedProvider(list)
-            } type="button">Select</Button >
-            <p> </p>
-    
-            </Card >
-            <p></p>
-
-            
-            
+        if (filter===null){
+            console.log("NO FILTER APPLIED");
+        mylistViewHTML = mylistView.map((list,id) =>{
            
-       </Col>);}
+            if (list.is_provider===true && list.company_name != undefined){
+                zip.push(list.zip);
+                city.push(list.city);
+                // <Form.Select name="client" required>
+                // <option>Select customer</option>
+                // <option>Select customer</option>
+                // <option>{list.zip}r</option></Form.Select>
+            return (<Col lg = {4} key={id} >
+                <Card border="secondary"
+                style={{ width: '20rem' , 
+                backgroundColor: 'LightGoldenrodYellow', 
+                boxShadow: "10px 10px 9px SaddleBrown",
+                marginTop:20
+                }}
+                className=" text-center">
+                    <p></p>
+                <p style={{fontWeight:"bold"}}>{list.company_name}</p>
+                <p style={{marginBottom:5}}>{list.address1} {list.address2}</p>
+                <p style={{marginBottom:15}}>{list.city}  {list.zip}</p>
+                
+                <Button  
+                style={{ width: '5rem', 
+                alignSelf:"center", 
+                backgroundColor:'PaleTurquoise', 
+                color:'black'}} 
+                onClick={()=> props.setSelectedProvider(list)
+                } type="button">Select</Button >
+                <p> </p>
+        
+                </Card >
+                <p></p>
+        
+            </Col>);}
+        
+            
        
-       console.log("ZIP",new Set(zip)) ;
-       
-    });
+        });}
+        
+        if(filter==="Active"){  mylistViewHTML = filtered.map((filter,id) =>{
+            
+            if (filter.is_provider===true && filter.company_name != undefined){
+                console.log("FILTERED LIST", filter.company_name);
+                
+            
+            return (<Col lg = {4} key={id} >
+                <Card border="secondary"
+                style={{ width: '20rem' , 
+                backgroundColor: 'LightGoldenrodYellow', 
+                boxShadow: "10px 10px 9px SaddleBrown",
+                marginTop:20
+                }}
+                className=" text-center">
+                    <p></p>
+                <p style={{fontWeight:"bold"}}>{filter.company_name}</p>
+                <p style={{marginBottom:5}}>{filter.address1} {filter.address2}</p>
+                <p style={{marginBottom:15}}>{filter.city}  {filter.zip}</p>
+                
+                <Button  
+                style={{ width: '5rem', 
+                alignSelf:"center", 
+                backgroundColor:'PaleTurquoise', 
+                color:'black'}} 
+                onClick={()=> props.setSelectedProvider(filter)
+                } type="button">Select</Button >
+                <p> </p>
+        
+                </Card >
+                <p></p>
+
+                
+                
+            
+        </Col>);}
+        
+            ;
+        
+        });}}
+        setTimeout(createlist(), 1000);;},
+            [filtered,mylistView]);
 
     if (zip > []){
         
         ziplist= new Set(zip);
         ziplist =Array.from(ziplist);
+        console.log("ZIP", ziplist);
        
     } 
     if (city > []){
@@ -101,22 +147,45 @@ function ProviderList(props){
        
     } 
     const sortByCity= (e) => {
-        // console.log(e.target.value);
-        let filtered= Object.values(mylistView).filter(city => 
-            e.target.value.includes(city)).reduce((obj, city) =>
-            {obj[city] = mylistView[city];
-            return obj;
-        }, {}
-            );
-        console.log("Filtered",filtered,Object.values(mylistView));
+        setFilter(null);
+        
+        if (e.target.value==="Sort by City"){
+            setFilter(null);
+            filtered= mylistView;
+        } else{ 
+            setFilter("Active")
+            filtered= mylistView.filter(city => {
+            return city.city === e.target.value;
+        })};
+           
+       
+        console.log("CITY Filtered",filter,Object.values(mylistView),e.target.value);
         
       };
 
 
     const sortByZip=(e) => {
         console.log(e.target.value);
+        setFilter(null);
+        
+        if (e.target.value==="Sort by Zip Code"){
+            setFilter(null)
+            filtered= mylistView;
+        } else {
+            setFilter("Active")
+            filtered= mylistView.filter(city => {
+            return city.zip === e.target.value;
+        });
+        // setFiltered(listedzip);
+        console.log("ZIP FILTERED",filtered);
+    }
+           
+       
+        console.log("ZIP Filtered",filtered,Object.values(mylistView),e.target.value, list);
         
       };
+        
+     
 
  
 
