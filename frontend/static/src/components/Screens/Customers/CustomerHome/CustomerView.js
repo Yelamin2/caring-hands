@@ -91,7 +91,7 @@ function CustomerView({company_name, notes}){
     console.log(schedule,"OPTIONS",option ,options);};
 
  
-
+// Get the time input by customer for the selected visits days
   const handleTime = (e) => {
     const weekday = e.target.dataset.weekday;
     const index = schedule.findIndex(obj => obj.weekday === weekday);
@@ -210,7 +210,7 @@ function CustomerView({company_name, notes}){
   ))
 // => minutes.map((minutes, index)=>(<p key={index}>{minutes}</p>))
   
-  console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",schedule, "Provider_ID", company_name );
+  // console.log("DISPLAY TIME",{displayHTML},"SCHEDULE",schedule, "Provider_ID", company_name );
 
 
 

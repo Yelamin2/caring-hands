@@ -41,7 +41,7 @@ function CustomerApp(props){
         // console.log("Provider Value =", selectedProvider, "HTML from useEffect:: ", {selectedProviderHTML});
         company_name= selectedProvider.id;
 };
-    
+    //  
 const handleChange = (e) => {
     const { name, value } = e.target;
     setAddNote((prevState) => ({

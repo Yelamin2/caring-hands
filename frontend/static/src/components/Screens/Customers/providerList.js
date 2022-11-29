@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/esm/Form';
 
 
 
-let zip=[];
+let zip=[], ziplist=[], city=[], citylist=[];
 function ProviderList(props){
 
     
@@ -49,10 +49,11 @@ function ProviderList(props){
                   <option>{zip}r</option></Form.Select>
         if (list.is_provider===true && list.company_name != undefined){
             zip.push(list.zip);
-            <Form.Select name="client" required>
-            <option>Select customer</option>
-            <option>Select customer</option>
-            <option>{list.zip}r</option></Form.Select>
+            city.push(list.city);
+            // <Form.Select name="client" required>
+            // <option>Select customer</option>
+            // <option>Select customer</option>
+            // <option>{list.zip}r</option></Form.Select>
         return (<Col lg = {4} key={id} >
             <Card border="secondary"
              style={{ width: '20rem' , 
@@ -82,9 +83,40 @@ function ProviderList(props){
             
            
        </Col>);}
+       
        console.log("ZIP",new Set(zip)) ;
        
     });
+
+    if (zip > []){
+        
+        ziplist= new Set(zip);
+        ziplist =Array.from(ziplist);
+       
+    } 
+    if (city > []){
+        
+        citylist= new Set(city);
+        citylist =Array.from(citylist);
+       
+    } 
+    const sortByCity= (e) => {
+        // console.log(e.target.value);
+        let filtered= Object.values(mylistView).filter(city => 
+            e.target.value.includes(city)).reduce((obj, city) =>
+            {obj[city] = mylistView[city];
+            return obj;
+        }, {}
+            );
+        console.log("Filtered",filtered,Object.values(mylistView));
+        
+      };
+
+
+    const sortByZip=(e) => {
+        console.log(e.target.value);
+        
+      };
 
  
 
@@ -93,6 +125,28 @@ function ProviderList(props){
     return(
      
        <>
+      
+        
+        <Form> <Row>
+            <Col lg={2}></Col>
+        <Col lg={4}>
+            <Form.Select onChange={sortByZip} name="zip" aria-label="Default select example">
+                <option>Sort by Zip Code</option>
+                {ziplist>[]? (ziplist.map((zip, index) =>( < option key={index}  value={zip} name="zip" >{zip}
+                  </option>))):<option>No list</option>}
+            </Form.Select>
+            </Col> Or 
+            <Col lg={4}>
+            <Form.Select onChange={sortByCity} name="city" aria-label="Default select example">
+                <option>Sort by City</option>
+                {citylist>[]? (citylist.map((city, index) =>( < option key={index}  value={city} name="zip" >{city}
+                  </option>))):<option>No list</option>}
+            </Form.Select> </Col>
+            <Col lg={2}></Col></Row>
+
+        </Form>
+       
+       
        <Row>
         {mylistViewHTML}
         </Row>
