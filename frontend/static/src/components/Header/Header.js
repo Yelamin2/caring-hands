@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import LoginForm from "../Auth/LoginForm";
 import { handleError } from "../../utils/errorHandler";
 import { useEffect, useState } from "react";
+import "../Header/Header.css"
 
 function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
 
@@ -40,27 +41,26 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
   return (
     <Navbar bg="dark" variant="dark" className="mb-2 px-3">
       <Nav className="ml-auto flex-grow-1">
-      <Link className="navbar-expand navbar-nav nav-link" to="/home/">
-        Home
-        </Link> <p style={{color:'silver', textJustify:'auto', marginLeft: 30, padding:10, textAlign:"center", fontFamily:'cursive', fontWeight:900, fontSize:30}}>Caring Hands</p>
-        
+      <Link className="navbar-expand navbar-nav nav-link tabhome"  to="/home/">
+         Caring Hands
+        </Link>
         {isAuth && user.is_customer  ? ( <><Link
-          className="navbar-expand navbar-nav nav-link ms-auto"
+          className="navbar-expand navbar-nav nav-link ms-auto tab"
           to="/form/"
         >
           Profile
-        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/selection/">
+        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/selection/">
           Providers
-        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/schedule/">
+        </Link> <Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/schedule/">
           Schedule
         </Link></>):
-        isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/logedvisits/">
+        isAuth && user.is_provider  ? ( <><Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/logedvisits/">
         LoggedVisit
-      </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/provider/">
+      </Link><Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/provider/">
           ProviderView
-        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/invoice/">
+        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/invoice/">
           Invoice
-        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto" to="/providerform/">
+        </Link><Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/providerform/">
           Profile
         </Link></>)
           :
@@ -136,13 +136,13 @@ function Header({ isAuth, setIsAuth, navigate,is_customer,user}) {
         {isAuth ? (
           <Button
             variant="link"
-            className="navbar-expand navbar-nav nav-link ms-auto border-0"
+            className="navbar-expand navbar-nav nav-link ms-auto border-0 tab"
             onClick={handleLogout}
           >
             Logout
           </Button>
         ) : (
-          <Link className="navbar-expand navbar-nav nav-link ms-auto" to="/login/">
+          <Link className="navbar-expand navbar-nav nav-link ms-auto tab" to="/login/">
             Login
           </Link>
         )}

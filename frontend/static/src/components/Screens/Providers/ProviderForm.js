@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/esm/Container";
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -45,7 +46,6 @@ function ProviderForm(props){
     var {user} ={}
     if (profile.id != undefined){
         user = profile.id;
-        
             const fetchUser= async () => {
                 const response = await fetch(`/api/v1/users/detail/${user ? "user/" : ""}`);
                 if (!response.ok){
@@ -56,10 +56,8 @@ function ProviderForm(props){
                 }
                 const data = await response.json();
                 setViewDetail(...data);
-                console.log({data});
-                
+                console.log({data});   
             };
-             
     }
     console.log('This is detailed user data', {viewDetail})
     console.log("user",{user});
@@ -75,9 +73,8 @@ function ProviderForm(props){
 
     const handleSubmit= async (e) => {
         e.preventDefault();
-        
         const options = {
-            method: `${user ? "PUT" : "POST"}`,
+            method: `${user ? "PATCH" : "POST"}`,
             headers: {
                 "Content-Type": "application/json; charset=UTF-8 ",
                 "X-CSRFToken": Cookies.get('csrftoken'),   
@@ -103,8 +100,14 @@ function ProviderForm(props){
     return (
 
         <>
+        <Container>
+            <Row>
+                <Col><div style={{marginTop:40}}>{<Profile />}</div>
+                </Col>
+                <Col>
 
-        <div style={{marginTop:40}}>{<Profile />}</div>
+
+        
         <Form style={{marginTop:30}} onSubmit={handleSubmit}>
 
             <Row className="mb-3">
@@ -114,7 +117,7 @@ function ProviderForm(props){
                 name= "company_name"
                 value= {profileDetail.company_name}
                 onChange={handleInput}
-                required/>
+                required={profile.company_name==[]}/>
                 </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -124,7 +127,7 @@ function ProviderForm(props){
                 name= "first_name"
                 value= {profileDetail.first_name}
                 onChange={handleInput}
-                required/>
+                required={profile.first_name==[]} />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridPassword">
@@ -132,7 +135,7 @@ function ProviderForm(props){
                 <Form.Control type="text" placeholder={profile.last_name} 
                 name= "last_name"
                 value= {profileDetail.last_name}
-                required />
+                required={profile.last_name==[]} />
                 </Form.Group>
             </Row>
 
@@ -142,7 +145,7 @@ function ProviderForm(props){
                 name= "address1"
                 value= {profileDetail.address1}
                 onChange={handleInput}
-                required/>
+                required={profile.address1==[]}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formGridAddress2">
@@ -202,13 +205,14 @@ function ProviderForm(props){
                 onChange={handleInput}/>
                 </Form.Group>
             </Row>
-
-           
-
-            <Button style={{backgroundColor:'PaleTurquoise', color:'black', marginTop:20}} type="submit">
+            <Row style={{marginTop:30,justifyContent:'center', alignContent:'center'}}>
+            <Button style={{width:'6rem',backgroundColor:'PaleTurquoise', color:'black', marginTop:20}} type="submit">
                 Submit
-            </Button>
+            </Button></Row>
         </Form>
+                </Col>
+            </Row>
+        </Container>
         </>
     );
 }

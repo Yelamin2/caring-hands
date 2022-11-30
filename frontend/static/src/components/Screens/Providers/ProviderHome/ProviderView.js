@@ -14,12 +14,13 @@ var timesheetHTML;
 let customersMessagesHTML;
 function ProviderView(){
   const [timesheet, setTimesheet] = useState([]);
-  const [customersMessages, setCustomersMessages] = useState([])
+  const [customersMessages, setCustomersMessages] = useState([]);
+  // Get looged user information
 
   const {user} =useOutletContext();
   
  
-
+//  Get timesheets for all customers.
   useEffect(() => {
     const fetchTimesheet= async () => {
         const response = await fetch("/api/v1/visits/visits/");
@@ -35,7 +36,7 @@ function ProviderView(){
                     
     };
     fetchTimesheet();
-    
+    // Fetch text messages received from customers
     const fetchMessages= async () => {
       const response2 = await fetch("/api/v1/provider/messages/");
       if (!response2.ok){
@@ -59,7 +60,7 @@ function ProviderView(){
     // console.log("There is a time Sheet",timesheet);
     timesheetHTML = timesheet.map((timetable, id) =>{
       // if(timetable.company_name_details.id==user.id){
-      return (<Col lg = {6} key={id}>
+      return (<Col lg = {12} key={id}>
         <Row>
           <Col>{timetable.user_details.first_name} {timetable.user_details.last_name}</Col>
           <Col>{timetable.weekday}</Col>
@@ -78,10 +79,10 @@ function ProviderView(){
        // console.log("There is a time Sheet",timesheet);
        customersMessagesHTML = customersMessages.map((messages, id) =>{
          // if(timetable.company_name_details.id==user.id){
-         return (<Col lg = {6} key={id}>
+         return (<Col lg = {12} key={id}>
            <Row style={{minHeight:80, marginTop:40, backgroundColor:'AliceBlue'}}>
-             <Row lg={4} >Message from : {messages.client_details.first_name} {messages.client_details.last_name}</Row>
-             <Row lg={4}>Received on: {messages.time}</Row>
+             <Row lg={4} > Message from : {messages.client_details.first_name} {messages.client_details.last_name}</Row>
+             <Row lg={4}> Received on: {messages.time}</Row>
              <Row lg={4}>{messages.message}</Row>
             
            </Row></Col>);}
@@ -97,10 +98,11 @@ function ProviderView(){
   return(
     <div className="calendarApp mt-5">
 
-      <h1>Service provider main page</h1>
-      <Col>{timesheetHTML}</Col>
+      <Row ><h1 style={{marginBottom:30,textJustify:'center', alignContent:'center'}}>Service provider main page</h1></Row>
+      <Row lg={12}>
+      <Col >{timesheetHTML}</Col>
       <Col>{customersMessagesHTML}</Col>
-       
+       </Row>
    
       </div>
   );

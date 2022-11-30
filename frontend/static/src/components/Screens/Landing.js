@@ -10,7 +10,7 @@ function Landing(){
 
     return (
         <div style={{marginTop:50}}>
-            <h1 style={{textAlign:"center", color:'MintCream', fontSize:50, padding:20}}>Caring Hands</h1>
+            {/* <h1 style={{textAlign:"center", color:'MintCream', fontSize:50, padding:20}}>Caring Hands</h1> */}
             
         <Carousel>
         <Carousel.Item>

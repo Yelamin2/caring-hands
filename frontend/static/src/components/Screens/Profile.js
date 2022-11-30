@@ -2,6 +2,7 @@ import React from "react"
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Button from 'react-bootstrap/Button';
+import Row from "react-bootstrap/esm/Row";
 import Card from 'react-bootstrap/Card';
 import defaultProfileImage from "../../images/profile.jpg";
 import './Profile.css';
@@ -58,19 +59,22 @@ function Profile(){
             throw Error('Oops. Something went wrong!');
         }
     };
+    console.log(profile)
 
     return(
-        <> 
-        <Card style={{ width: '18rem' }}>
+        <> <Row style={{marginTop:20,justifyContent:'center', alignContent:'center'}}>
+        <Card style={{ width: '30rem' }}>
             <div className= "image-container">
             <Card.Img variant="top" src={preview} />
-            <input type="file" name="avatar" onChange={handleImage} />
+            <input type="file" name="avatar" onChange={handleImage} hidden />
             </div>
         <Card.Body>
-            <Card.Title>{profile.username?.toUpperCase()}</Card.Title>
+            <Card.Title>{profile.display_name?.toUpperCase()}</Card.Title>
             
         </Card.Body>
-    </Card></>
+    </Card></Row><Row style={{marginTop:30,justifyContent:'center', alignContent:'center'}}>
+    <Button style={{width:'6rem',backgroundColor:'PaleTurquoise', color:'black'}}>Edit</Button></Row>
+    </>
     )
 }
 

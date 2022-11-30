@@ -17,7 +17,7 @@ function ProviderList(props){
     // const [list, setList]= useState([]);
     // const [rawList, setRawList]= useState([]);
     const [mylistView, setMylistView]= useState([]);
-    const [filter, setFilter] =useState(null)
+    const [action, setAction] =useState(null)
     
     const { user} = useOutletContext();
     
@@ -82,27 +82,30 @@ function ProviderList(props){
         citylist= new Set(city);
         citylist =Array.from(citylist);  
     } 
+    
+    console.log("expect Results it ran ", sample);
+    return mylistViewHTML;
     };
 
     useEffect(() => {
         const createlist = ()=>{
             console.log("NO FILTER APPLIED");
-            listproviders(mylistView);
-                
-    }
+            listproviders(mylistView);             
+        }
         setTimeout(createlist(), 1000);;},
-            [mylistView]);
+            [mylistView]
+    );
 
 
     const sortByCity= (e) => {
-        setFilter(null);
+        // setFilter(null);
         
         if (e.target.value==="Sort by City"){
-            setFilter(null);
+            // setFilter(null);
             filtered= mylistView;
             listproviders(filtered);
         } else{ 
-            setFilter("Active");
+            // setFilter("Active");
             filtered= mylistView.filter(city => {
             return city.city === e.target.value; 
         });
@@ -113,22 +116,23 @@ function ProviderList(props){
 
     const sortByZip=(e) => {
         console.log(e.target.value);
-        setFilter(null);
+        // setFilter("Active");
         if (e.target.value==="Sort by Zip Code"){
-            setFilter(null);
+            setAction(null);
             filtered= mylistView;
             listproviders(filtered);
         } else {
-            setFilter("Active");
+            setAction("Active");
             filtered= mylistView.filter(city => {
             return city.zip === e.target.value;
         });
         let checker=document.getElementsByClassName('zipOption');
-        console.log("ZIP FILTERED",filtered);
+        // console.log("ZIP FILTERED",filtered);
         listproviders(filtered);
-        console.log("ZIP Filtered",filtered,checker)
+        console.log("ZIP Filtered",filtered,checker);
+        
         }
-        // console.log("ZIP Filtered",filtered,checker);
+        
       };
         
      

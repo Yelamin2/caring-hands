@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/esm/Container";
 import Row from 'react-bootstrap/Row';
 import Cookies from "js-cookie";
 import Profile from "./Profile";
@@ -97,9 +98,13 @@ function ProfileForm(props){
     return (
 
         <>
-        <div>{<Profile />}</div>
+        <Container>
+            <Row>
+                <Col><div style={{marginTop:40}}>{<Profile />}</div>
+                </Col>
+                <Col>
         <Form style={{marginTop:20}} onSubmit={handleSubmit} >
-            <Row className="mb-3" lg={4}>
+            <Row className="mb-3" lg={2}>
                 <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control type="text" placeholder={profile.first_name== undefined ? "First name":(profile.first_name) }
@@ -119,7 +124,7 @@ function ProfileForm(props){
                 required/>
                 </Form.Group>
             </Row>
-            <Row lg={2}>
+            <Row lg={1}>
 
             <Form.Group className="mb-3 " controlId="formGridAddress1">
                 <Form.Label>Address</Form.Label>
@@ -130,7 +135,7 @@ function ProfileForm(props){
                 required/>
             </Form.Group>
             </Row>
-            <Row lg={2}>
+            <Row lg={1}>
 
             <Form.Group className="mb-3" controlId="formGridAddress2">
                 <Form.Label>Address 2</Form.Label>
@@ -142,7 +147,7 @@ function ProfileForm(props){
             </Form.Group>
             </Row>
 
-            <Row className="mb-3" lg={6}>
+            <Row className="mb-3" lg={3}>
                 <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>City</Form.Label>
                 <Form.Control
@@ -170,12 +175,13 @@ function ProfileForm(props){
                 onChange={handleInput}/>
                 </Form.Group>
             </Row>
-
-
-            <Button style={{backgroundColor:'PaleTurquoise', color:'black'}} type="submit">
+            <Row style={{marginTop:30,justifyContent:'center', alignContent:'center'}}>
+            <Button style={{width:'6rem',backgroundColor:'PaleTurquoise', color:'black'}} type="submit">
                 Submit
-            </Button>
-        </Form>
+            </Button></Row>
+        </Form>    </Col>
+            </Row>
+        </Container>
         </>
     );
 }
