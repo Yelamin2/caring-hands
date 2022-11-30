@@ -116,7 +116,7 @@ function LoginForm(props) {
           />
         </Form.Group>
   
-        <Form.Group className="mb-3" controlId="email">
+        {/* <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -125,7 +125,7 @@ function LoginForm(props) {
             value={user.email}
             onChange={handleInput}
           />
-        </Form.Group>
+        </Form.Group> */}
   
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
