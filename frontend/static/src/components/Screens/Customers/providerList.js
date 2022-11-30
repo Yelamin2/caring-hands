@@ -40,8 +40,8 @@ function ProviderList(props){
     );
 
     function listproviders(sample){
-        zip=[];
-        city=[];
+        // zip=[];
+        // city=[];
         console.log("My Sample",sample);
         mylistViewHTML = sample.map((sorted,id) =>{
         if (sorted.is_provider===true && sorted.company_name != undefined){

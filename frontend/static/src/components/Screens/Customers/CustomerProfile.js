@@ -173,7 +173,7 @@ function CustomerProfile(props){
 
 
             <Button variant="primary" type="submit">
-                Submit
+                Edit
             </Button>
         </Form>
         </>

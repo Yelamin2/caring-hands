@@ -207,7 +207,7 @@ function ProviderForm(props){
             </Row>
             <Row style={{marginTop:30,justifyContent:'center', alignContent:'center'}}>
             <Button style={{width:'6rem',backgroundColor:'PaleTurquoise', color:'black', marginTop:20}} type="submit">
-                Submit
+                Edit
             </Button></Row>
         </Form>
                 </Col>

@@ -108,7 +108,7 @@ function Invoice(){
                     </option>))}
             </Form.Select>
             </Col>
-            <Button type="submit">Generate Invoice</Button>
+            <Button style={{backgroundColor:'PaleTurquoise', color:'black'}} type="submit">Generate Invoice</Button>
             <Col lg={3}></Col>
         </Row>
         <Row>
