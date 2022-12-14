@@ -101,11 +101,11 @@ function ProviderList(props){
         // setFilter(null);
         
         if (e.target.value==="Sort by City"){
-            // setFilter(null);
+            setAction(null);
             filtered= mylistView;
             listproviders(filtered);
         } else{ 
-            // setFilter("Active");
+            setAction("Active");
             filtered= mylistView.filter(city => {
             return city.city === e.target.value; 
         });

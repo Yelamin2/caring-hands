@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'ccs-final-yelamin2.herokuapp.com',]
+    'caringhands.herokuapp.com',]
 
 
 # Application definition
